@@ -32,6 +32,11 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
     this.recipe = this.recipeService.getRecipe(this.id);
   }
 
+  deleteRecipe(id: string) {
+    this.recipeService.deleteRecipe(id);
+    this.router.navigate(['.']);
+  }
+
   ngOnDestroy() {
     this.recipeSub.unsubscribe();
   }
