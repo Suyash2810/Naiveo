@@ -44,11 +44,9 @@ export class RecipesService {
   }
 
   getRecipe(id: string) {
-
+    let recipe = this.recipes.find(recipe => recipe.id == id);
     return {
-      ...this.recipes.find(recipe => {
-        recipe.id === id;
-      })
-    };
+      ...recipe
+    }
   }
 }
