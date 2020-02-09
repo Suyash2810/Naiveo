@@ -3,6 +3,7 @@ import { Recipe } from '../recipes.model';
 import { RecipesService } from '../recipes.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -15,7 +16,7 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
   id: string;
   recipeSub: Subscription;
 
-  constructor(private recipeService: RecipesService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private recipeService: RecipesService, private route: ActivatedRoute, private router: Router, private AlertCtrl: AlertController) { }
 
   ngOnInit() {
 
@@ -33,8 +34,27 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
   }
 
   deleteRecipe(id: string) {
-    this.recipeService.deleteRecipe(id);
-    this.router.navigate(['.']);
+
+    this.AlertCtrl.create({
+      header: 'Are you sure?', message: "Do you really want to delete the recipe?", buttons: [
+        {
+          text: "Cancel",
+          role: "cancel"
+        },
+        {
+          text: "Delete",
+          handler: () => {
+            this.recipeService.deleteRecipe(id);
+            this.router.navigate(['.']);
+          }
+        }
+      ]
+    })
+      .then(
+        (ctrlElement) => {
+          ctrlElement.present();
+        }
+      )
   }
 
   ngOnDestroy() {
