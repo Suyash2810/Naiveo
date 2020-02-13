@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from './recipes.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,8 @@ export class RecipesService {
     }
   ];
 
+  recipesListener = new Subject<Array<Recipe>>();
+
   constructor() { }
 
   getRecipes() {
@@ -50,8 +53,12 @@ export class RecipesService {
     }
   }
 
+  getRecipeListener() {
+    return this.recipesListener.asObservable();
+  }
+
   deleteRecipe(id: string) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== id);
-    console.log(this.recipes);
+    this.recipesListener.next(this.recipes);
   }
 }
