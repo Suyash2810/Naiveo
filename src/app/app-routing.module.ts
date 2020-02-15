@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'places',
-    loadChildren: () => import('./places/places.module').then( m => m.PlacesPageModule)
+    loadChildren: () => import('./places/places.module').then(m => m.PlacesPageModule)
   },
   {
     path: 'bookings',
-    loadChildren: () => import('./bookings/bookings.module').then( m => m.BookingsPageModule)
+    loadChildren: () => import('./bookings/bookings.module').then(m => m.BookingsPageModule)
   },
 ];
 
