@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>discover</ion-title>
+    <ion-title>Dsicover Places</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card *ngFor="let place of fetchedPlaces">
+          <img src="{{place.imageUrl}}" />
+          <ion-card-header>
+            <ion-card-subtitle>{{place.price | currency}}</ion-card-subtitle>
+            <ion-card-title>{{place.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{place.description}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
