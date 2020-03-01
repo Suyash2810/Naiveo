@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Dsicover Places</ion-title>
+    <ion-title>Discover Places</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,11 +24,12 @@
         </ion-card>
       </ion-col>
     </ion-row>
-
+    <!-- routerDirection can be used to specifically assign the navigation direction. -->
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of fetchedPlaces.slice(1)">
+          <ion-item *ngFor="let place of fetchedPlaces.slice(1)"
+            [routerLink]="['/','places','tabs','discover', place.id]" detail>
             <ion-avatar slot="start">
               <img src="{{place.imageUrl}}">
             </ion-avatar>
