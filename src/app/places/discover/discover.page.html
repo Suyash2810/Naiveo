@@ -8,16 +8,37 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card *ngFor="let place of fetchedPlaces">
-          <img src="{{place.imageUrl}}" />
+        <ion-card>
+          <img src="{{fetchedPlaces[0].imageUrl}}" />
           <ion-card-header>
-            <ion-card-subtitle>{{place.price | currency}}</ion-card-subtitle>
-            <ion-card-title>{{place.title}}</ion-card-title>
+            <ion-card-subtitle>{{fetchedPlaces[0].price | currency}}</ion-card-subtitle>
+            <ion-card-title>{{fetchedPlaces[0].title}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            {{place.description}}
+            {{fetchedPlaces[0].description}}
           </ion-card-content>
+          <div text-right padding>
+            <ion-button fill="clear" color="primary"
+              [routerLink]="['/','places','tabs','discover', fetchedPlaces[0].id]">Visit</ion-button>
+          </div>
         </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let place of fetchedPlaces.slice(1)">
+            <ion-avatar slot="start">
+              <img src="{{place.imageUrl}}">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{place.title}}</h2>
+              <h3>{{place.price}}</h3>
+              <p>{{place.description}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
