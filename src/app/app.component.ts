@@ -24,4 +24,8 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  onLogOut() {
+    console.log("Functionality for logging out the user.");
+  }
 }
