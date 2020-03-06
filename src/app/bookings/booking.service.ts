@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Bookable } from './booking.model';
+import { Bookable, Booking } from './booking.model';
 
 @Injectable({ providedIn: 'root' })
 
 export class BookingService {
 
     private bookings: Array<Bookable> = [
-        {
-            id: '1',
-            placeId: 'p1',
-            userId: 'u1',
-            placeTitle: 'Manhattan',
-            guestNumber: 12
-        }
+        new Booking('1', 'p1', 'u1', 'Manhattan', 12)
     ];
 
     constructor() {
