@@ -9,7 +9,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="text-center padding">
-  {{selectedPlace.description}}
+<ion-content text-center padding>
+  <ion-note>{{selectedPlace.description}}</ion-note>
+  <br>
   <ion-button (click)="onBookPlace()">Book!</ion-button>
 </ion-content>
