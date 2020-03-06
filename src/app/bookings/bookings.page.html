@@ -12,7 +12,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item-sliding *ngFor="let booking of fetchedBookings">
+          <ion-item-sliding *ngFor="let booking of fetchedBookings" #slidBooking>
             <ion-item>
               <ion-label>
                 <h5>{{booking.placeTitle}}</h5>

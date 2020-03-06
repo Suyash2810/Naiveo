@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from './booking.service';
 import { Bookable } from './booking.model';
+import { IonItemSliding } from '@ionic/angular';
 
 @Component({
   selector: 'app-bookings',
@@ -18,7 +19,8 @@ export class BookingsPage implements OnInit {
     this.fetchedBookings = this.bookingService.getBookings();
   }
 
-  onDelete(id: String) {
+  onDelete(id: String, slidBooking: IonItemSliding) {
+    slidBooking.close();
     console.log("The item is being deleted: " + id);
   }
 }
