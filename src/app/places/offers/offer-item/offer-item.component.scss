@@ -1,0 +1,52 @@
+$light-grey: lighten($color: #383a3e, $amount: 40);
+
+:root {
+    font-size: 10px;
+}
+
+ion-card {
+    box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.16), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.23);
+
+    ion-item {
+        ion-avatar {
+            img {
+                border: 0.2rem solid var(--ion-color-tertiary);
+            }
+        }
+
+        ion-label {
+            .offer-item-label {
+                &__title {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    color: lighten($color: #222428, $amount: 10);
+                }
+
+                &__price {
+                    font-size: 0.7rem;
+                    color: var(--ion-color-medium);
+                }
+            }
+
+            .offer-item-details {
+
+                &:not(ion-icon) {
+                    color: $light-grey;
+                }
+
+                &__valid {
+                    font-size: 0.7rem;
+                }
+
+                ion-icon {
+                    margin-top: 0.1rem;
+                }
+
+                &__validTillDate {
+                    margin-left: 0.3rem;
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+}
