@@ -1,3 +1,16 @@
-<p>
-  offer-item works!
-</p>
+<ion-item [routerLink]="['/', 'places', 'tabs', 'offers', 'offer-bookings', offer.id]">
+  <ion-avatar slot="start">
+    <img src="{{offer.imageUrl}}">
+  </ion-avatar>
+  <ion-label>
+    <h2>{{offer.title}}</h2>
+    <h5>{{offer.price | currency}}</h5>
+    <div>
+      <ion-icon name="calendar"></ion-icon>
+      <ion-text>{{getDate() | date}}</ion-text>
+      <span>to</span>
+      <ion-icon name="calendar"></ion-icon>
+      <ion-text>{{getDate() | date}}</ion-text>
+    </div>
+  </ion-label>
+</ion-item>
