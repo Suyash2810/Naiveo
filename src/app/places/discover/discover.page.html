@@ -36,7 +36,7 @@
       <ion-col>
         <ion-list>
           <ion-item *ngFor="let place of fetchedPlaces.slice(1)"
-            [routerLink]="['/','places','tabs','discover', place.id]" detail>
+            [routerLink]="['/','places','tabs','discover', place.id]" detail lines="none">
             <ion-avatar slot="start">
               <img src="{{place.imageUrl}}">
             </ion-avatar>
