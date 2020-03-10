@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
+import { SegmentChangeEventDetail } from '@ionic/core';
 
 @Component({
   selector: 'app-auth',
@@ -12,6 +13,7 @@ import { NgForm } from '@angular/forms';
 export class AuthPage implements OnInit {
 
   @ViewChild('f', { static: false }) form: NgForm;
+  isLogin: boolean = true;
 
   constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController) { }
 
@@ -27,6 +29,14 @@ export class AuthPage implements OnInit {
         this.router.navigateByUrl('/places');
       }, 2000);
     });
+  }
+
+  changeSignMode(event: CustomEvent<SegmentChangeEventDetail>) {
+    if (event.detail.value === "sign-in") {
+      this.isLogin = true
+    } else if (event.detail.value === "sign-up") {
+      this.isLogin = false;
+    }
   }
 
   onSubmit() {

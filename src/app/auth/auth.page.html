@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content text-center>
-  <form (ngSubmit)="onSubmit()" #f="ngForm">
+  <ion-segment value="sign-in" (ionChange)="changeSignMode($event)">
+    <ion-segment-button value="sign-in">Sign In</ion-segment-button>
+    <ion-segment-button value="sign-up">Sign Up</ion-segment-button>
+  </ion-segment>
+  <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="isLogin">
     <ion-grid>
       <ion-row>
         <ion-col size-md="8" offset-md="2">
@@ -21,8 +25,29 @@
             </ion-item>
             <ion-text *ngIf="!pwd.valid && pwd.touched" color="danger">Please enter a valid password.</ion-text>
           </ion-list>
-          <ion-button type="button" color="secondary" expand="full">Switch to Sign Up.</ion-button>
           <ion-button type="submit" color="primary" (click)="login()" [disabled]="!f.valid">Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLogin">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="8" offset-md="2">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" id="email" name="email" ngModel #email="ngModel" required email></ion-input>
+            </ion-item>
+            <ion-text *ngIf="!email.valid && email.touched" color="danger">Please enter a valid email.</ion-text>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" id="password" name="password" ngModel #pwd="ngModel" required></ion-input>
+            </ion-item>
+            <ion-text *ngIf="!pwd.valid && pwd.touched" color="danger">Please enter a valid password.</ion-text>
+          </ion-list>
+          <ion-button type="submit" color="primary" (click)="login()" [disabled]="!f.valid">Sign Up</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
