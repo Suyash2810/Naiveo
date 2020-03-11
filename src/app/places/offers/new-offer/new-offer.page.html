@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="places/tabs/offers"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="primary">
-      <ion-button>
+      <ion-button type="submit" (click)="onSubmit()" [disabled]="!form.valid">
         <ion-icon slot="icon-only" name="checkmark"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -21,6 +21,9 @@
             <ion-label position="floating">Title</ion-label>
             <ion-input type="text" autocomplete autocorrect formControlName="title"></ion-input>
           </ion-item>
+          <ion-text *ngIf="!form.get('title').valid && form.get('title').touched" color="danger">
+            Please enter a valid title.
+          </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -29,6 +32,9 @@
             <ion-label position="floating">Description</ion-label>
             <ion-textarea rows="3" autocorrect autocomplete formControlName="description"></ion-textarea>
           </ion-item>
+          <ion-text *ngIf="!form.get('description').valid && form.get('description').touched" color="danger">
+            Please enter the description.
+          </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -37,6 +43,9 @@
             <ion-label position="floating">Price</ion-label>
             <ion-input type="number" formControlName="price"></ion-input>
           </ion-item>
+          <ion-text *ngIf="!form.get('price').valid && form.get('price').touched" color="danger">
+            Please enter the price.
+          </ion-text>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -45,18 +54,20 @@
             <ion-label position="floating">Available From</ion-label>
             <ion-datetime min="2017-01-01" max="2019-12-31" formControlName="dateFrom"></ion-datetime>
           </ion-item>
+          <ion-text *ngIf="!form.get('dateFrom').valid && form.get('dateFrom').touched" color="danger">
+            Please enter the date from which the offer is valid.
+          </ion-text>
         </ion-col>
         <ion-col size-sm="6">
           <ion-item>
             <ion-label position="floating">Available Till</ion-label>
             <ion-datetime min="2017-01-02" max="2019-12-31" formControlName="dateTill"></ion-datetime>
           </ion-item>
+          <ion-text *ngIf="!form.get('dateTill').valid && form.get('dateTill').touched" color="danger">
+            Please enter the date till which the offer is valid.
+          </ion-text>
         </ion-col>
       </ion-row>
-
-      <div text-center>
-        <ion-button color="tertiary" type="submit">Create</ion-button>
-      </div>
     </ion-grid>
   </form>
 </ion-content>
