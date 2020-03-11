@@ -1,16 +1,13 @@
-<ion-card>
-  <ion-item [routerLink]="['/', 'places', 'tabs', 'offers', 'offer-bookings', offer.id]">
-    <ion-avatar slot="start">
-      <img src="{{offer.imageUrl}}">
-    </ion-avatar>
-    <ion-label class="offer-item-label">
-      <h2 class="offer-item-label__title">{{offer.title}}</h2>
-      <h5 class="offer-item-label__price">{{offer.price | currency}}</h5>
-      <div class="offer-item-details">
-        <ion-text class="offer-item-details__valid">Valid till - </ion-text>
-        <ion-icon name="calendar"></ion-icon>
-        <ion-text class="offer-item-details__validTillDate">{{getDate() | date}}</ion-text>
-      </div>
-    </ion-label>
-  </ion-item>
-</ion-card>
+<ion-item [routerLink]="['/', 'places', 'tabs', 'offers', 'offer-bookings', offer.id]" lines="none">
+  <ion-avatar slot="start">
+    <img src="{{offer.imageUrl}}">
+  </ion-avatar>
+  <ion-label class="offer-item-label">
+    <h2 class="offer-item-label__title">{{offer.title}}</h2>
+    <h5 class="offer-item-label__price">{{offer.price | currency}}</h5>
+    <div class="offer-item-details">
+      <ion-text class="offer-item-details__valid">Valid till - </ion-text>
+      <ion-text class="offer-item-details__validTillDate">{{getDate() | date}}</ion-text>
+    </div>
+  </ion-label>
+</ion-item>
