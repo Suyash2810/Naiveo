@@ -23,14 +23,13 @@ export class EditOfferPage implements OnInit {
       (params: Params) => {
         this.id = params['offerID'];
         this.offer = this.placeService.getPlaceById(this.id);
+        this.form = new FormGroup({
+          title: new FormControl(this.offer.title, { validators: Validators.required }),
+          description: new FormControl(this.offer.description, { validators: Validators.maxLength(180) }),
+          price: new FormControl(this.offer.price, { validators: Validators.required })
+        });
       }
     );
-
-    this.form = new FormGroup({
-      title: new FormControl(this.offer.title, { validators: Validators.required }),
-      description: new FormControl(this.offer.description, { validators: Validators.maxLength(180) }),
-      price: new FormControl(this.offer.price, { validators: Validators.required })
-    });
   }
 
   onSubmit() {
