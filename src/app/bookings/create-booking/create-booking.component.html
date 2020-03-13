@@ -62,7 +62,7 @@
     </ion-grid>
 
     <div class="ion-text-center">
-      <ion-button type="submit">Book!</ion-button>
+      <ion-button type="submit" [disabled]="!f.valid || !checkValidDates()">Book!</ion-button>
     </div>
   </form>
 </ion-content>

@@ -13,6 +13,8 @@ export class CreateBookingComponent implements OnInit {
   @Input() selectedPlace: Place;
   @Input() selectedMode: 'select' | 'random';
   @ViewChild('f', { static: false }) form: NgForm;
+  @ViewChild('fromDate', { static: true }) fromDateCheck;
+  @ViewChild('tillDate', { static: true }) tillDateCheck;
   startDate: string;
   endDate: string;
 
@@ -26,7 +28,7 @@ export class CreateBookingComponent implements OnInit {
 
       this.startDate = new Date(availableFrom.getTime() + Math.random() * (availableTill.getTime() - (7 * 24 * 60 * 60 * 1000) - availableFrom.getTime())).toISOString();
       this.endDate = new Date(new Date(this.startDate).getTime() + (Math.random() * (20 * 24 * 60 * 60 * 1000))).toISOString();
-      console.log(this.startDate, this.endDate);
+
     }
   }
 
@@ -35,7 +37,18 @@ export class CreateBookingComponent implements OnInit {
   }
 
   onSubmit() {
-    this.modalController.dismiss({ message: "This is just a dummy message." }, 'confirm');
-    console.log(this.form.value);
+    this.modalController.dismiss({
+      message: {
+        first_name: this.form.value.firstName,
+        last_name: this.form.value.lastName,
+        guests: this.form.value.guests,
+        fromDate: this.form.value.fromDate,
+        tillDate: this.form.value.tillDate
+      }
+    }, 'confirm');
+  }
+
+  checkValidDates() {
+    return new Date(this.tillDateCheck.value) > new Date(this.fromDateCheck.value);
   }
 }
