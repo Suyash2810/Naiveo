@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Place } from '../../places.model';
 import { PlacesService } from '../../places.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-offer',
   templateUrl: './edit-offer.page.html',
   styleUrls: ['./edit-offer.page.scss'],
 })
-export class EditOfferPage implements OnInit {
+export class EditOfferPage implements OnInit, OnDestroy {
 
   offer: Place;
   id: string;
   form: FormGroup;
+  offerSub: Subscription;
 
   constructor(private placeService: PlacesService, private route: ActivatedRoute) { }
 
@@ -35,5 +37,11 @@ export class EditOfferPage implements OnInit {
 
   onSubmit() {
     console.log(this.form.value);
+  }
+
+  ngOnDestroy() {
+    if (this.offerSub) {
+      this.offerSub.unsubscribe();
+    }
   }
 }
