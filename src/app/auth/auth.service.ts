@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   private isAuthenticated: boolean = true;
+  private userID: string = 'abc';
 
   constructor(private router: Router) { }
 
@@ -21,5 +22,9 @@ export class AuthService {
 
   getAuthenticated() {
     return this.isAuthenticated;
+  }
+
+  getUserId() {
+    return this.userID;
   }
 }

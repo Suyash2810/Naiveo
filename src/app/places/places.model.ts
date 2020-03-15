@@ -6,14 +6,15 @@ export interface Place {
     price: number;
     availableFrom: Date;
     availableTill: Date;
+    userID: string;
 }
 
 export class Place implements Place {
 
     id: string; title: string; description: string; imageUrl: string; price: number; availableFrom: Date;
-    availableTill: Date;
+    availableTill: Date; userID: string
 
-    constructor(id, title, description, imageUrl, price, availableFrom, availableTill) {
+    constructor(id, title, description, imageUrl, price, availableFrom, availableTill, userID) {
         this.id = id;
         this.title = title;
         this.description = description;
