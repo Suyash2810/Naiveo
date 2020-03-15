@@ -22,5 +22,6 @@ export class Place implements Place {
         this.price = price;
         this.availableFrom = availableFrom;
         this.availableTill = availableTill;
+        this.userID = userID;
     }
 }

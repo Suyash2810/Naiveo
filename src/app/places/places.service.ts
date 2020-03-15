@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Place } from './places.model';
 import { AuthService } from '../auth/auth.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,22 +21,36 @@ export class PlacesService {
       'https://images.pexels.com/photos/126292/pexels-photo-126292.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 137.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc')
   ];
 
+  private _places = new Subject<Place[]>();
+  private _place = new Subject<Place>();
+
   constructor(private authService: AuthService) { }
 
   getPlaces() {
+    this._places.next(this.places);
     return [...this.places];
+  }
+
+  get_places() {
+    return this._places.asObservable();
   }
 
   getPlaceById(id: string) {
     let place = this.places.find(p => p.id == id);
+    this._place.next(place);
     return {
       ...place
     }
+  }
+
+  get_placeById() {
+    return this._place.asObservable();
   }
 
   addPlace(title, description, price, dateFrom, dateTill) {
 
     const place: Place = new Place(Math.random().toString(), title, description, 'https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&h=640&w=426', price, dateFrom, dateTill, this.authService.getUserId());
     this.places.push(place);
+    this._places.next(this.places);
   }
 }
