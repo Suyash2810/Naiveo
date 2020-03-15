@@ -25,6 +25,7 @@ export class OfferBookingsPage implements OnInit {
           this.nvCtrl.navigateBack('/places/tabs/offers');
         } else {
           this.place = this.placeService.getPlaceById(id);
+          this.placeService.get_placeById().subscribe(offer => this.place = offer);
           console.log(this.place);
         }
       }

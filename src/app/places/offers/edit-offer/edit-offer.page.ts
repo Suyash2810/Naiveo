@@ -23,6 +23,7 @@ export class EditOfferPage implements OnInit {
       (params: Params) => {
         this.id = params['offerID'];
         this.offer = this.placeService.getPlaceById(this.id);
+        this.placeService.get_placeById().subscribe(offer => this.offer = offer);
         this.form = new FormGroup({
           title: new FormControl(this.offer.title, { validators: Validators.required }),
           description: new FormControl(this.offer.description, { validators: Validators.maxLength(180) }),

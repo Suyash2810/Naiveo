@@ -26,6 +26,7 @@ export class PlaceDetailPage implements OnInit {
           this.nvCntrl.navigateBack('/places/tabs/discover');
         } else {
           this.place = this.placeService.getPlaceById(id);
+          this.placeService.get_placeById().subscribe(place => this.place = place)
         }
       }
     )

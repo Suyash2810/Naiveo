@@ -26,7 +26,7 @@ export class PlacesService {
 
   constructor(private authService: AuthService) { }
 
-  getPlaces() {
+  fetchPlaces() {
     this._places.next(this.places);
     return [...this.places];
   }

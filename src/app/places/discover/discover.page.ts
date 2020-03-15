@@ -15,11 +15,17 @@ export class DiscoverPage implements OnInit {
   constructor(private placesService: PlacesService) { }
 
   ngOnInit() {
-    this.fetchedPlaces = this.placesService.getPlaces();
+    this.fetchedPlaces = this.placesService.fetchPlaces();
+    this.placesService.get_places().subscribe(
+      (places) => {
+        this.fetchedPlaces = places;
+        console.log(this.fetchedPlaces);
+      }
+    )
   }
 
-  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>){
+  onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail>) {
 
-      console.log(event.detail);
+    console.log(event.detail);
   }
 }
