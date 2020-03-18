@@ -16,9 +16,9 @@ export class PlacesService {
     new Place(3, "Amsterdam", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
       'https://images.pexels.com/photos/1187911/pexels-photo-1187911.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 124.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc'),
     new Place(4, "Czech", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/1269788/pexels-photo-1269788.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 147.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc'),
+      'https://images.pexels.com/photos/1269788/pexels-photo-1269788.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 147.58, new Date('2019-01-01'), new Date('2019-12-31'), 'bcd'),
     new Place(5, "Prague", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/126292/pexels-photo-126292.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 137.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc')
+      'https://images.pexels.com/photos/126292/pexels-photo-126292.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 137.58, new Date('2019-01-01'), new Date('2019-12-31'), 'efg')
   ];
 
   private _places = new Subject<Place[]>();
@@ -54,7 +54,7 @@ export class PlacesService {
     this._places.next(this.places);
   }
 
-  updatePlace(id: string, title: string, description: string, price: number ) {
+  updatePlace(id: string, title: string, description: string, price: number) {
 
     let offer = this.places.find(place => place.id == id);
     offer = {
@@ -63,7 +63,6 @@ export class PlacesService {
       description: description,
       price: price
     }
-    console.log(offer);
 
     this.places = this.places.filter(place => place.id != id);
 

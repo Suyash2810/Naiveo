@@ -16,17 +16,17 @@
     <ion-row>
       <ion-col>
         <ion-card>
-          <img src="{{fetchedPlaces[0].imageUrl}}" />
+          <img src="{{filterPlaces[0].imageUrl}}" />
           <ion-card-header>
-            <ion-card-subtitle>{{fetchedPlaces[0].price | currency}}</ion-card-subtitle>
-            <ion-card-title>{{fetchedPlaces[0].title}}</ion-card-title>
+            <ion-card-subtitle>{{filterPlaces[0].price | currency}}</ion-card-subtitle>
+            <ion-card-title>{{filterPlaces[0].title}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            {{fetchedPlaces[0].description}}
+            {{filterPlaces[0].description}}
           </ion-card-content>
           <div text-right padding>
             <ion-button fill="clear" color="primary"
-              [routerLink]="['/','places','tabs','discover', fetchedPlaces[0].id]">Visit</ion-button>
+              [routerLink]="['/','places','tabs','discover', filterPlaces[0].id]">Visit</ion-button>
           </div>
         </ion-card>
       </ion-col>
@@ -35,8 +35,8 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of fetchedPlaces.slice(1)"
-            [routerLink]="['/','places','tabs','discover', place.id]" detail lines="none">
+          <ion-item *ngFor="let place of filterPlaces" [routerLink]="['/','places','tabs','discover', place.id]" detail
+            lines="none">
             <ion-avatar slot="start">
               <img src="{{place.imageUrl}}">
             </ion-avatar>
