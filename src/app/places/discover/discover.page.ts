@@ -36,7 +36,6 @@ export class DiscoverPage implements OnInit, OnDestroy {
     }
     else {
       this.filterPlaces = this.fetchedPlaces.filter(place => place.userID != this.authService.getUserId());
-      console.log(this.filterPlaces);
     }
   }
 
