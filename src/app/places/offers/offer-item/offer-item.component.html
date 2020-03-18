@@ -7,7 +7,7 @@
     <h5 class="offer-item-label__price">{{offer.price | currency}}</h5>
     <div class="offer-item-details">
       <ion-text class="offer-item-details__valid">Valid till - </ion-text>
-      <ion-text class="offer-item-details__validTillDate">{{getDate() | date}}</ion-text>
+      <ion-text class="offer-item-details__validTillDate">{{offer.availableTill | date}}</ion-text>
     </div>
   </ion-label>
 </ion-item>

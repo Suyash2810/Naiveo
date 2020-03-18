@@ -36,7 +36,7 @@ export class EditOfferPage implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.placeService.updatePlace(this.id, this.form.value.title, this.form.value.description, this.form.value.price);
   }
 
   ngOnDestroy() {

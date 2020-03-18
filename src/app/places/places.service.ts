@@ -53,4 +53,21 @@ export class PlacesService {
     this.places.push(place);
     this._places.next(this.places);
   }
+
+  updatePlace(id: string, title: string, description: string, price: number ) {
+
+    let offer = this.places.find(place => place.id == id);
+    offer = {
+      ...offer,
+      title: title,
+      description: description,
+      price: price
+    }
+    console.log(offer);
+
+    this.places = this.places.filter(place => place.id != id);
+
+    this.places.push(offer);
+    this._places.next(this.places);
+  }
 }
