@@ -2,17 +2,27 @@ export interface Bookable {
     id: string;
     placeId: string;
     userId: string;
-    placeTitle: string;
+    title: string;
+    description: string;
+    price: number;
+    bookedFrom: Date;
+    bookedTill: Date;
     guestNumber: number;
 }
 
-export class Booking {
+export class Booking implements Bookable {
 
-    constructor(public id: string, public placeId: string, public userId: string, public placeTitle: string, public guestNumber: number) {
+    constructor(public id: string,
+        public placeId: string, public userId: string, public title: string,
+        public description: string, public price: number, public bookedFrom: Date, public bookedTill: Date,
+        public guestNumber: number) {
         this.id = id;
         this.placeId = placeId;
         this.userId = userId;
-        this.placeTitle = placeTitle;
+        this.title = title;
+        this.description = description;
+        this.bookedFrom = bookedFrom;
+        this.bookedTill = bookedTill;
         this.guestNumber = guestNumber;
     }
 }
