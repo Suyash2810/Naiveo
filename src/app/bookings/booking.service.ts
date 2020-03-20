@@ -28,7 +28,8 @@ export class BookingService {
         this._bookings.next(this.bookings);
     }
 
-    cancelBooking() {
-
+    cancelBooking(id: string) {
+        this.bookings = this.bookings.filter(b => b.id != id);
+        this._bookings.next(this.bookings);
     }
 }
