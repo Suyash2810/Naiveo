@@ -19,6 +19,6 @@
     </ion-card-content>
   </ion-card>
   <div text-center>
-    <ion-button color="primary" (click)="bookPlace()">Book</ion-button>
+    <ion-button color="primary" [disabled]="!isBookable" (click)="bookPlace()">Book</ion-button>
   </div>
 </ion-content>

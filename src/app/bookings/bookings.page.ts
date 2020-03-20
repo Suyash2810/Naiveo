@@ -17,7 +17,6 @@ export class BookingsPage implements OnInit {
   constructor(private bookingService: BookingService) { }
 
   ngOnInit() {
-
     this.fetchedBookings = this.bookingService.getBookings();
     this.bookingSub = this.bookingService._getBookings().subscribe(
       bookings => {

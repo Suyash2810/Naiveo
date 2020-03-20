@@ -10,7 +10,12 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col>
+      <ion-col *ngIf="!fetchedBookings || fetchedBookings.length <= 0" class="ion-text-center">
+        <ion-text color="danger" class="ion-text-center">
+          There are currently no bookings available.
+        </ion-text>
+      </ion-col>
+      <ion-col *ngIf="fetchedBookings && fetchedBookings.length > 0">
         <ion-list>
           <ion-item-sliding *ngFor="let booking of fetchedBookings" #slidBooking>
             <ion-item>
