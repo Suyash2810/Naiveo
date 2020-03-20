@@ -5,6 +5,7 @@ import { Place } from '../../places.model';
 import { PlacesService } from '../../places.service';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 import { Subscription } from 'rxjs';
+import { BookingService } from 'src/app/bookings/booking.service';
 
 @Component({
   selector: 'app-place-detail',
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs';
 export class PlaceDetailPage implements OnInit, OnDestroy {
 
   constructor(private nvCntrl: NavController, private route: ActivatedRoute, private placeService: PlacesService,
-    private modalCntrl: ModalController, private actionSheetCntrl: ActionSheetController) { }
+    private modalCntrl: ModalController, private actionSheetCntrl: ActionSheetController, private bookingService: BookingService) { }
 
   private place: Place;
   private placeSub: Subscription;
@@ -76,7 +77,9 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
       .then(resultData => {
         console.log(resultData.data, resultData.role);
         if (resultData.role === "confirm") {
-          console.log("Booked.");
+          const data = resultData.data.message;
+          this.bookingService.addBooking(this.place.id, this.place.title, this.place.imageUrl, data.first_name,
+            data.last_name, data.fromDate, data.tillDate, data.guests);
         }
       });
   }
