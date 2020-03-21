@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BookingService } from './booking.service';
 import { Bookable } from './booking.model';
 import { IonItemSliding } from '@ionic/angular';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './bookings.page.html',
   styleUrls: ['./bookings.page.scss'],
 })
-export class BookingsPage implements OnInit {
+export class BookingsPage implements OnInit, OnDestroy {
 
   fetchedBookings: Array<Bookable> = [];
   bookingSub: Subscription;
@@ -28,5 +28,9 @@ export class BookingsPage implements OnInit {
   onDelete(id: string, slidBooking: IonItemSliding) {
     slidBooking.close();
     this.bookingService.cancelBooking(id);
+  }
+
+  ngOnDestroy() {
+    this.bookingSub.unsubscribe();
   }
 }

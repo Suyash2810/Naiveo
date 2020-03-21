@@ -22,12 +22,11 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         let id = params['id'];
-        console.log(id);
         if (!id) {
           this.nvCtrl.navigateBack('/places/tabs/offers');
         } else {
           this.place = this.placeService.getPlaceById(id);
-          this.placeService.get_placeById().subscribe(offer => this.place = offer);
+          this.offerSub = this.placeService.get_placeById().subscribe(offer => this.place = offer);
         }
       }
     )
