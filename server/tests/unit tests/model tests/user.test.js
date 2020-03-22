@@ -15,7 +15,6 @@ describe("User Model Test", () => {
             expect(error.errors.name).to.exist;
             expect(error.errors.email).to.exist;
             expect(error.errors.password).to.exist;
-            expect(error.errors.image).to.exist;
         });
 
         done();
