@@ -20,4 +20,12 @@ app.use((request, response, next) => {
 
 app.use(express.static(__dirname + '/public'));
 
+const userController = require('./Model View Controller/userController');
+const bookingController = require('./Model View Controller/bookingController');
+const placeController = require('./Model View Controller/placeController');
+
+// ------------------------------------------User Requests---------------------------------------------
+
+app.post('/register', userController.register);
+
 module.exports = app;
