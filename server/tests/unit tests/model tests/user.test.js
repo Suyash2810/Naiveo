@@ -8,14 +8,14 @@ describe("User Model Test", () => {
 
     it("it should not create the instance for invalid data", (done) => {
 
-        const user = new user();
+        const user = new User();
 
         user.validate((error) => {
 
             expect(error.errors.name).to.exist;
             expect(error.errors.email).to.exist;
             expect(error.errors.password).to.exist;
-            expect(error.errors.image).to.expect;
+            expect(error.errors.image).to.exist;
         });
 
         done();

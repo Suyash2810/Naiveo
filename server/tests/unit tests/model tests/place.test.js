@@ -22,7 +22,6 @@ describe("Place Model Test", () => {
             expect(error.errors.price).to.exist;
             expect(error.errors.availableFrom).to.exist;
             expect(error.errors.availableTill).to.exist;
-            expect(error.errors.user).to.exist;
         });
 
         done();
@@ -30,7 +29,7 @@ describe("Place Model Test", () => {
 
     it("should create the instance for valid data", (done) => {
 
-        let place = {
+        let data = {
             title: "foo",
             description: "foofoo",
             imageUrl: "/images",
@@ -40,15 +39,14 @@ describe("Place Model Test", () => {
             user: new ObjectId()
         };
 
-        const place = new Place(place);
+        const place = new Place(data);
 
         expect(place).to.have.property('title').to.be.equal('foo');
         expect(place).to.have.property('description').to.be.equal('foofoo');
         expect(place).to.have.property('imageUrl').to.be.equal('/images');
         expect(place).to.have.property('price').to.be.equal(124.23);
-        expect(place).to.have.property('availableFrom').to.be.equal(place.availableFrom);
-        expect(place).to.have.property('availableTill').to.be.equal(place.availableTill);
-        expect(place).to.have.property('user').to.be.equal(place.user);
+        expect(place).to.have.property('availableFrom').to.be.equal(data.availableFrom);
+        expect(place).to.have.property('availableTill').to.be.equal(data.availableTill);
         done();
     });
 });

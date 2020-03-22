@@ -10,13 +10,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true,
-        validate: {
-            validator: (value) => {
-                return validator.isEmail(value);
-            },
-            message: 'Email is not valid.'
-        }
+        unique: true
     },
     password: {
         type: String,

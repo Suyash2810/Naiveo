@@ -10,24 +10,23 @@ const placeSchema = new mongoose.Schema({
         type: String
     },
     imageUrl: {
-        type: String,
-        required: true
+        required: true,
+        type: String
     },
     price: {
-        type: Number,
-        required: true
+        required: true,
+        type: Number
     },
     availableFrom: {
-        type: Date,
-        required: true
+        required: true,
+        type: Date
     },
     availableTill: {
         required: true,
         type: Date
     },
     user: {
-        ref: mongoose.Schema.Types.ObjectId,
-        required: true
+        ref: mongoose.Schema.Types.ObjectId
     }
 });
 
