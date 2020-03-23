@@ -1,0 +1,23 @@
+body {
+    font-size: 10px;
+}
+
+.sign-up-form-grid {
+
+    ion-row {
+        ion-col {
+            ion-list {
+                ion-item {
+                    input[type="file"] {
+                        display: none;
+                    }
+
+                    ion-img {
+                        margin-top: 1.5rem;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

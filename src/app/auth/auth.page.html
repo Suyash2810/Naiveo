@@ -32,10 +32,24 @@
   </form>
 
   <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLogin">
-    <ion-grid>
+    <ion-grid class="sign-up-form-grid">
       <ion-row>
         <ion-col size-md="8" offset-md="2">
           <ion-list>
+            <ion-item>
+              <ion-label position="floating">Full Name</ion-label>
+              <ion-input type="text" id="username" name="username" ngModel #username="ngModel" required></ion-input>
+            </ion-item>
+            <ion-text *ngIf="!username.valid && username.touched">Please enter a valid user name.</ion-text>
+            <ion-item>
+              <ion-img [src]="imagePreview">
+              </ion-img>
+            </ion-item>
+            <ion-item>
+              <ion-label>Upload User Image</ion-label>
+              <input type="file" id="image" (change)="uploadImage($event)" #filepicker>
+              <ion-button type="button" color="secondary" (click)="filepicker.click()">Upload</ion-button>
+            </ion-item>
             <ion-item>
               <ion-label position="floating">Email</ion-label>
               <ion-input type="email" id="email" name="email" ngModel #email="ngModel" required email></ion-input>
