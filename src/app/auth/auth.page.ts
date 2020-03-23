@@ -14,22 +14,15 @@ export class AuthPage implements OnInit {
 
   @ViewChild('f', { static: false }) form: NgForm;
   isLogin: boolean = true;
+  file: File;
   imagePreview: string = "https://images.pexels.com/photos/2947917/pexels-photo-2947917.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-
   constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController) { }
 
   ngOnInit() {
   }
 
   login() {
-    this.authService.login();
-    this.loadingCntrl.create({ keyboardClose: true, message: 'Loading...' }).then(loadController => {
-      loadController.present();
-      setTimeout(() => {
-        loadController.dismiss()
-        this.router.navigateByUrl('/places');
-      }, 2000);
-    });
+
   }
 
   changeSignMode(event: CustomEvent<SegmentChangeEventDetail>) {
@@ -41,17 +34,35 @@ export class AuthPage implements OnInit {
   }
 
   uploadImage(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
+    this.file = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
-
     reader.onload = () => {
       this.imagePreview = (reader.result as string);
     }
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.file);
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    if (this.isLogin == true) {
+      this.authService.login();
+      this.loadingCntrl.create({ keyboardClose: true, message: 'Loading...' }).then(loadController => {
+        loadController.present();
+        setTimeout(() => {
+          loadController.dismiss()
+          this.router.navigateByUrl('/places');
+        }, 2000);
+      });
+    } else {
+      this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 }

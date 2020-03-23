@@ -9,7 +9,7 @@ const {
 const register = async (request, response) => {
 
     try {
-        const data = pick(request.body, ['name', 'email', 'password']);
+        const data = pick(request.body, ['username', 'email', 'password']);
         const user = new User(data);
         const result = await user.save();
         if (result) {
