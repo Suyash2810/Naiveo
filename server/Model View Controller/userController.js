@@ -9,9 +9,18 @@ const {
 const register = async (request, response) => {
 
     try {
-        const data = pick(request.body, ['username', 'email', 'password']);
-        const user = new User(data);
-        const result = await user.save();
+        let body = pick(request.body, ['username', 'email', 'password']);
+        console.log(body);
+        let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
+        let user = new User({
+            name: body.username,
+            email: body.email,
+            password: body.password,
+            image: url
+        });
+        console.log(user);
+        let result = await user.save();
+        console.log(result);
         if (result) {
             response.status(200).send(result);
         } else {
