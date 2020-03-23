@@ -61,7 +61,7 @@
             </ion-item>
             <ion-text *ngIf="!pwd.valid && pwd.touched" color="danger">Please enter a valid password.</ion-text>
           </ion-list>
-          <ion-button type="submit" color="primary" (click)="login()" [disabled]="!f.valid">Sign Up</ion-button>
+          <ion-button type="submit" color="primary" (click)="signup()" [disabled]="!f.valid">Sign Up</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

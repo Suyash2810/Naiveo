@@ -40,7 +40,18 @@ export class AuthPage implements OnInit {
     }
   }
 
+  uploadImage(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagePreview = (reader.result as string);
+    }
+
+    reader.readAsDataURL(file);
+  }
+
   onSubmit() {
-    console.log(this.form);
+    console.log(this.form.value);
   }
 }
