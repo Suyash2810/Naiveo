@@ -45,14 +45,16 @@ export class AuthPage implements OnInit {
 
   onSubmit() {
     if (this.isLogin == true) {
-      this.authService.login();
-      this.loadingCntrl.create({ keyboardClose: true, message: 'Loading...' }).then(loadController => {
-        loadController.present();
-        setTimeout(() => {
-          loadController.dismiss()
-          this.router.navigateByUrl('/places');
-        }, 2000);
-      });
+      // this.authService.login();
+      // this.loadingCntrl.create({ keyboardClose: true, message: 'Loading...' }).then(loadController => {
+      //   loadController.present();
+      //   setTimeout(() => {
+      //     loadController.dismiss()
+      //     this.router.navigateByUrl('/places');
+      //   }, 2000);
+      // });
+
+      this.authService.login(this.form.value.email, this.form.value.password);
     } else {
       this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
       .subscribe(
