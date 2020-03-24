@@ -65,14 +65,11 @@ userSchema.methods.generateAuthToken = function () {
 userSchema.pre('save', function (done) {
 
     var user = this;
-    console.log(user);
     if (user.isModified('password')) {
 
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(user.password, salt, function (err, hash) {
-                console.log(user.password);
                 user.password = hash;
-                console.log(user.password, hash);
                 done();
             });
         });
@@ -84,15 +81,25 @@ userSchema.pre('save', function (done) {
 userSchema.statics.findByCredentials = function (email, password) {
 
     var User = this;
-
-    return User.findOne(email)
+    // console.log(email, password);
+    // return User.find({
+    //     email: email
+    // }).then(user => {
+    //     console.log(user);
+    //     return Promise.resolve(user);
+    // });
+    return User.findOne({
+            email: email
+        })
         .then(user => {
+            console.log(user);
             if (!user) {
                 return Promise.reject("User not found.");
             } else {
                 return new Promise((resolve, reject) => {
+                    console.log("in compare section.", password, user.password);
                     bcrypt.compare(password, user.password, function (err, result) {
-
+                        console.log(result);
                         if (result)
                             return resolve(user);
                         else

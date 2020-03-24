@@ -29,4 +29,6 @@ const imageExtract = require('./middleware/imageExtract');
 
 app.post('/register', imageExtract, userController.register);
 
+app.post('/login', userController.login);
+
 module.exports = app;
