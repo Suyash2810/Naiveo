@@ -38,7 +38,7 @@ const login = async (request, response) => {
 
             response.status(200).send({
                 status: "User successfully logged in.",
-                result: user,
+                user: user,
                 token: token,
                 expireTime: 3600
             });
