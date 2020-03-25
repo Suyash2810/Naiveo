@@ -56,7 +56,7 @@ userSchema.methods.generateAuthToken = function () {
         if (token)
             return resolve(token);
         else
-            reject({
+            return reject({
                 err: "Token could not be created."
             });
     });
@@ -81,25 +81,15 @@ userSchema.pre('save', function (done) {
 userSchema.statics.findByCredentials = function (email, password) {
 
     var User = this;
-    // console.log(email, password);
-    // return User.find({
-    //     email: email
-    // }).then(user => {
-    //     console.log(user);
-    //     return Promise.resolve(user);
-    // });
     return User.findOne({
             email: email
         })
         .then(user => {
-            console.log(user);
             if (!user) {
                 return Promise.reject("User not found.");
             } else {
                 return new Promise((resolve, reject) => {
-                    console.log("in compare section.", password, user.password);
                     bcrypt.compare(password, user.password, function (err, result) {
-                        console.log(result);
                         if (result)
                             return resolve(user);
                         else

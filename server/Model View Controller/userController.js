@@ -32,14 +32,18 @@ const login = async (request, response) => {
 
     try {
         let body = pick(request.body, ['email', 'password']);
-        let result = await User.findByCredentials(body.email, body.password);
-        if (result) {
+        let user = await User.findByCredentials(body.email, body.password);
+        if (user) {
+            let token = await user.generateAuthToken();
+
             response.status(200).send({
                 status: "User successfully logged in.",
-                result: result
+                result: user,
+                token: token,
+                expireTime: 3600
             });
         } else {
-            throw 'Error in loggin.';
+            throw 'Error in logging.';
         }
     } catch (e) {
         response.status(400).send({

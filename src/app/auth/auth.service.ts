@@ -14,7 +14,6 @@ export class AuthService {
 
   login(email: string, password: string) {
 
-    console.log(email, password);
     type responseType = { status: string, result: any };
 
     this.httpClient.post<responseType>("http://localhost:3000/login", { email, password })
