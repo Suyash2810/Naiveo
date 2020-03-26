@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { SegmentChangeEventDetail } from '@ionic/core';
 
@@ -16,7 +16,8 @@ export class AuthPage implements OnInit {
   isLogin: boolean = true;
   file: File;
   imagePreview: string = "https://images.pexels.com/photos/2947917/pexels-photo-2947917.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
-  constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController) { }
+  constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController,
+    private toastController: ToastController) { }
 
   ngOnInit() {
   }
@@ -45,26 +46,36 @@ export class AuthPage implements OnInit {
 
   onSubmit() {
     if (this.isLogin == true) {
-      // this.authService.login();
-      // this.loadingCntrl.create({ keyboardClose: true, message: 'Loading...' }).then(loadController => {
-      //   loadController.present();
-      //   setTimeout(() => {
-      //     loadController.dismiss()
-      //     this.router.navigateByUrl('/places');
-      //   }, 2000);
-      // });
-
       this.authService.login(this.form.value.email, this.form.value.password);
     } else {
-      this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
-        .subscribe(
-          response => {
-            console.log(response);
-          },
-          error => {
-            console.log(error);
-          }
-        );
+      this.loadingCntrl.create({
+        keyboardClose: true,
+        message: "Registering user"
+      }).then(loadingController => {
+        this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
+          .subscribe(
+            response => {
+              loadingController.present();
+              this.toastController.create({
+                message: `${response.result.name}, you have been registered.`,
+                duration: 2000
+              }).then(toastController => {
+                this.router.navigateByUrl('/auth');
+                loadingController.dismiss();
+                toastController.present();
+              });
+            },
+            error => {
+              this.toastController.create({
+                message: error,
+                duration: 2000
+              }).then(toastController => {
+                this.router.navigateByUrl('/auth');
+                toastController.present();
+              });
+            }
+          );
+      });
     }
   }
 }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Subject } from 'rxjs';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class AuthService {
   private _isAuthenticated = new Subject<boolean>();
   authTimer: any;
 
-  constructor(private router: Router, private httpClient: HttpClient, private toastController: ToastController) { }
+  constructor(private router: Router, private httpClient: HttpClient, private toastController: ToastController,
+    private loadingController: LoadingController) { }
 
 
   getToken() {
@@ -53,30 +54,37 @@ export class AuthService {
     this.httpClient.post<responseType>("http://localhost:3000/login", { email, password })
       .subscribe(
         response => {
-          console.log(response);
-          this.token = response.token;
-          const expiresIn = response.expireTime;
-          this.username = response.user.name;
-          this.userID = response.user._id;
+          this.loadingController.create({
+            keyboardClose: true,
+            message: "Loading"
+          }).then(loadingController => {
 
-          if (this.token) {
-            this.setAuthTimer(expiresIn);
+            loadingController.present();
 
-            let currentTime = new Date();
-            let expiryTime = new Date(currentTime.getTime() + expiresIn * 1000);
+            this.token = response.token;
+            const expiresIn = response.expireTime;
+            this.username = response.user.name;
+            this.userID = response.user._id;
 
-            this.setAuthData(this.token, this.userID, this.username, expiryTime);
-            this.isAuthenticated = true;
-            this._isAuthenticated.next(this.isAuthenticated);
-            this.toastController.create({
-              message: `Welcome ${this.username}`,
-              duration: 2000
-            }).then(toast => {
-              toast.present();
-            });
+            if (this.token) {
+              this.setAuthTimer(expiresIn);
 
-            this.router.navigateByUrl('/places');
-          }
+              let currentTime = new Date();
+              let expiryTime = new Date(currentTime.getTime() + expiresIn * 1000);
+
+              this.setAuthData(this.token, this.userID, this.username, expiryTime);
+              this.isAuthenticated = true;
+              this._isAuthenticated.next(this.isAuthenticated);
+              this.toastController.create({
+                message: `Welcome ${this.username}`,
+                duration: 2000
+              }).then(toast => {
+                toast.present();
+              });
+              this.router.navigateByUrl('/places');
+              loadingController.dismiss();
+            }
+          });
         },
         async (error) => {
 
@@ -158,24 +166,33 @@ export class AuthService {
   }
 
   logout() {
-    this.token = null;
-    this.isAuthenticated = false;
-    this._isAuthenticated.next(this.isAuthenticated);
-    this.userID = null;
-    this.user = null;
-    this._user.next(this.user);
 
-    clearTimeout(this.authTimer);
-    this.removeAuthData();
+    this.loadingController.create({
+      keyboardClose: true,
+      message: "Logging out"
+    }).then(loadingController => {
 
-    this.toastController.create({
-      message: "You have been successfully logged out.",
-      duration: 2000
-    }).then(toast => {
-      toast.present();
+      loadingController.present();
+      
+      this.token = null;
+      this.isAuthenticated = false;
+      this._isAuthenticated.next(this.isAuthenticated);
+      this.userID = null;
+      this.user = null;
+      this._user.next(this.user);
+
+      clearTimeout(this.authTimer);
+      this.removeAuthData();
+
+      this.toastController.create({
+        message: "You have been successfully logged out.",
+        duration: 2000
+      }).then(toast => {
+        this.router.navigateByUrl('/auth');
+        loadingController.dismiss();
+        toast.present();
+      });
     });
-
-    this.router.navigateByUrl('/auth');
   }
 
   signup(username: string, email: string, password: string, image: File) {
