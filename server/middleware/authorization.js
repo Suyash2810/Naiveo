@@ -32,7 +32,7 @@ const authorization = (request, response, next) => {
             )
             .catch(
                 err => {
-                    response.statsu(400).send({
+                    response.status(400).send({
                         status: "User not authenticated.",
                         error: err
                     });
