@@ -20,6 +20,34 @@ const getPlaces = async (request, response) => {
     }
 }
 
+const savePlace = async (request, response) => {
+
+    try {
+        let body = pick(request.body, ['title', 'description', 'price', 'availableFrom', 'availableTill', 'user']);
+        let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
+
+        let place = new Place({
+            ...body,
+            imageUrl: url
+        });
+
+        let result = await place.save();
+        if (result) {
+            response.status(200).send({
+                status: "The place has been saved.",
+                result: result
+            });
+        } else {
+            throw "Error: The place could not be saved.";
+        }
+    } catch (e) {
+        response.status(400).send({
+            error: e
+        });
+    }
+}
+
 module.exports = {
-    getPlaces
+    getPlaces,
+    savePlace
 }

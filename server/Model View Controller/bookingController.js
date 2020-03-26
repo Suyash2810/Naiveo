@@ -19,6 +19,37 @@ const getBookings = async (request, response) => {
     }
 }
 
+const saveBooking = async (request, response) => {
+
+    try {
+
+        let data = pick(request.body, ['placeId', 'userId', 'title', 'first_name', 'last_name', 'bookedFrom', 'bookedTill', 'guests']);
+        let url = request.protocol + "://" + request.get('host') + "/images/" + request.file.filename;
+
+        let booking = new Booking({
+            ...data,
+            imageUrl: url
+        });
+
+        let result = await booking.save();
+
+        if (booking) {
+            response.status(200).send({
+                status: "The booking has been saved.",
+                result: result
+            });
+        } else {
+            throw "Error: The booking could not be saved.";
+        }
+    } catch (e) {
+        response.status(400).send({
+            status: "Error.",
+            error: e
+        });
+    }
+}
+
 module.exports = {
-    getBookings
+    getBookings,
+    saveBooking
 }
