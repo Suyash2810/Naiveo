@@ -57,14 +57,14 @@ export class AuthPage implements OnInit {
       this.authService.login(this.form.value.email, this.form.value.password);
     } else {
       this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
-      .subscribe(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );
+        .subscribe(
+          response => {
+            console.log(response);
+          },
+          error => {
+            console.log(error);
+          }
+        );
     }
   }
 }

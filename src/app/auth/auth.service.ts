@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Subject } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   private _isAuthenticated = new Subject<boolean>();
   authTimer: any;
 
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private toastController: ToastController) { }
 
 
   getToken() {
@@ -67,10 +68,24 @@ export class AuthService {
             this.setAuthData(this.token, this.userID, this.username, expiryTime);
             this.isAuthenticated = true;
             this._isAuthenticated.next(this.isAuthenticated);
+            this.toastController.create({
+              message: `Welcome ${this.username}`,
+              duration: 2000
+            }).then(toast => {
+              toast.present();
+            });
+
+            this.router.navigateByUrl('/places');
           }
         },
-        error => {
-          console.log(error);
+        async (error) => {
+
+          const toast = await this.toastController.create({
+            message: error,
+            duration: 2000
+          });
+          toast.present();
+          this.router.navigateByUrl('/auth');
         }
       );
   }
@@ -149,8 +164,17 @@ export class AuthService {
     this.userID = null;
     this.user = null;
     this._user.next(this.user);
+
     clearTimeout(this.authTimer);
     this.removeAuthData();
+
+    this.toastController.create({
+      message: "You have been successfully logged out.",
+      duration: 2000
+    }).then(toast => {
+      toast.present();
+    });
+
     this.router.navigateByUrl('/auth');
   }
 
