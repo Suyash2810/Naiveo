@@ -12,7 +12,7 @@
     <ion-segment-button value="all">All Places</ion-segment-button>
     <ion-segment-button value="bookable">Bookable Places</ion-segment-button>
   </ion-segment>
-  <ion-grid *ngIf="!filterPlaces || filterPlaces.length <= 0">
+  <ion-grid *ngIf="!filterPlaces || filterPlaces.length <= 0 && !tab">
     <ion-row>
       <ion-col>
         <ion-card color="danger">
@@ -21,7 +21,25 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="filterPlaces.length > 0">
+  <ion-grid *ngIf="!filterPlaces || filterPlaces.length <= 0 && tab && !isLoading">
+    <ion-row>
+      <ion-col>
+        <ion-card color="danger">
+          <p>Unfortunately, there are no places now.</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col>
+        <div class="ion-spinner-box">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && filterPlaces.length > 0">
     <ion-row>
       <ion-col>
         <ion-card>
