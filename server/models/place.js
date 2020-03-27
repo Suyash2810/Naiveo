@@ -26,7 +26,9 @@ const placeSchema = new mongoose.Schema({
         type: Date
     },
     user: {
-        ref: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 

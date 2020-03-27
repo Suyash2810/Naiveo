@@ -52,6 +52,7 @@ export class PlacesService {
 
     type responseType = { status: string, result: any };
     const userId = this.authService.getUserId();
+    console.log(userId);
 
     const data = new FormData();
     data.append('title', title);

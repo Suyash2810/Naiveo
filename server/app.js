@@ -20,6 +20,10 @@ app.use((request, response, next) => {
 
 app.use(express.static(__dirname + '/public'));
 
+const {
+    authorization
+} = require('./middleware/authorization');
+
 const userController = require('./Model View Controller/userController');
 const bookingController = require('./Model View Controller/bookingController');
 const placeController = require('./Model View Controller/placeController');
@@ -32,6 +36,8 @@ app.post('/login', userController.login);
 
 // ------------------------------------------User Requests--------------------------------------------->
 
-app.post('/place', imageExtract, placeController.savePlace);
+app.post('/place', authorization, imageExtract, placeController.savePlace);
+
+app.get('/place', authorization, placeController.getPlaces);
 
 module.exports = app;

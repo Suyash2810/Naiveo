@@ -6,17 +6,27 @@ const {
     pick
 } = require('lodash');
 
+const {
+    ObjectId
+} = require('mongodb');
+
 const getPlaces = async (request, response) => {
 
     try {
         let places = await Place.find({});
         if (places.length > 0) {
-            response.status(200).send(places);
+            response.status(200).send({
+                status: "Places have been fetched.",
+                result: places
+            });
         } else {
             throw "No places were found!"
         }
     } catch (e) {
-        response.status(404).send(e);
+        response.status(404).send({
+            status: "Error",
+            error: e
+        });
     }
 }
 
@@ -32,12 +42,14 @@ const savePlace = async (request, response) => {
             price: Number(body.price),
             availableFrom: new Date(body.availableFrom),
             availableTill: new Date(body.availableTill),
-            user: body.user,
+            user: new ObjectId(body.user),
             imageUrl: url
         });
 
+
         let result = await place.save();
-        console.log(result);
+
+
         if (result) {
             response.status(200).send({
                 status: "The place has been saved.",
