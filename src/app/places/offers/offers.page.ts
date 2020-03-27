@@ -17,9 +17,13 @@ export class OffersPage implements OnInit, OnDestroy {
 
   constructor(private placeService: PlacesService, private router: Router) { }
 
+  ionViewWillEnter() {
+    this.placeService.fetchPlaces();
+  }
+
   ngOnInit() {
-    this.offers = this.placeService.fetchPlaces();
-    this.offerSub = this.placeService.get_places().subscribe(offers => this.offers = offers);
+    this.offers = this.placeService.get_places();
+    this.offerSub = this.placeService._get_places().subscribe(offers => this.offers = offers);
   }
 
   onEdit(id: number, slidItem: IonItemSliding) {

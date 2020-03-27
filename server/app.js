@@ -18,7 +18,7 @@ app.use((request, response, next) => {
     next();
 });
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/src'));
 
 const {
     authorization
@@ -38,6 +38,6 @@ app.post('/login', userController.login);
 
 app.post('/place', authorization, imageExtract, placeController.savePlace);
 
-app.get('/place', authorization, placeController.getPlaces);
+app.get('/places', authorization, placeController.getPlaces);
 
 module.exports = app;

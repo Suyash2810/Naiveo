@@ -3,24 +3,14 @@ import { Place } from './places.model';
 import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlacesService {
 
-  private places: Place[] = [
-    new Place(1, "Paris", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&h=640&w=426', 149.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc'),
-    new Place(2, "New York", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg?auto=compress&cs=tinysrgb&h=640&w=426', 249.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc'),
-    new Place(3, "Amsterdam", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/1187911/pexels-photo-1187911.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 124.58, new Date('2019-01-01'), new Date('2019-12-31'), 'abc'),
-    new Place(4, "Czech", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/1269788/pexels-photo-1269788.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 147.58, new Date('2019-01-01'), new Date('2019-12-31'), 'bcd'),
-    new Place(5, "Prague", "Nullam ornare finibus lacus. Suspendisse pulvinar aliquam erat id accumsan. Aliquam erat volutpat. Morbi lacinia tortor erat, a posuere justo bibendum eget.",
-      'https://images.pexels.com/photos/126292/pexels-photo-126292.jpeg?auto=compress&cs=tinysrgb&h=640&w=420', 137.58, new Date('2019-01-01'), new Date('2019-12-31'), 'efg')
-  ];
+  private places: Place[] = [];
 
   private _places = new Subject<Place[]>();
   private _place = new Subject<Place>();
@@ -28,11 +18,46 @@ export class PlacesService {
   constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
   fetchPlaces() {
-    this._places.next(this.places);
-    return [...this.places];
+
+    type responseType = { status: string, result: any };
+
+    this.httpClient.get<responseType>("http://localhost:3000/places")
+      .pipe(
+        map(
+          (response) => {
+            const places = response.result;
+            return places.map(place => {
+              return {
+                id: place._id,
+                title: place.title,
+                description: place.description,
+                imageUrl: place.imageUrl,
+                price: place.price,
+                availableFrom: place.availableFrom,
+                availableTill: place.availableTill,
+                userID: place.user
+              }
+            });
+          }
+        )
+      )
+      .subscribe(
+        (places) => {
+          this.places = places;
+          this._places.next(this.places);
+          console.log(this.places);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   get_places() {
+    return this.places;
+  }
+
+  _get_places() {
     return this._places.asObservable();
   }
 
@@ -52,7 +77,6 @@ export class PlacesService {
 
     type responseType = { status: string, result: any };
     const userId = this.authService.getUserId();
-    console.log(userId);
 
     const data = new FormData();
     data.append('title', title);
