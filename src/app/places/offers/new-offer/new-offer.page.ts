@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class NewOfferPage implements OnInit {
 
   form: FormGroup;
+  imagePreview: string = "https://images.pexels.com/photos/1553962/pexels-photo-1553962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 
   constructor(private placeService: PlacesService, private router: Router) { }
 

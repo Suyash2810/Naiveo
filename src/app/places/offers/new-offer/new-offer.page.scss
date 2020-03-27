@@ -1,0 +1,17 @@
+ion-row {
+    ion-col {
+        text-align: center;
+
+        ion-img {
+            display: block;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        ion-button[type="button"] {
+            margin: 5% auto;
+        }
+    }
+}

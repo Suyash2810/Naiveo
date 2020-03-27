@@ -68,6 +68,13 @@
           </ion-text>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col size-sm="12">
+          <ion-img [src]="imagePreview"></ion-img>
+          <input type="file" (change)="uploadImage($event)" #filepicker>
+          <ion-button type="button" color="secondary" (click)="filepicker.click()">Upload</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>
