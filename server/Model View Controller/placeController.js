@@ -27,11 +27,17 @@ const savePlace = async (request, response) => {
         let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
 
         let place = new Place({
-            ...body,
+            title: body.title,
+            description: body.description,
+            price: Number(body.price),
+            availableFrom: new Date(body.availableFrom),
+            availableTill: new Date(body.availableTill),
+            user: body.user,
             imageUrl: url
         });
 
         let result = await place.save();
+        console.log(result);
         if (result) {
             response.status(200).send({
                 status: "The place has been saved.",

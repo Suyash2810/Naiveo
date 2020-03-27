@@ -21,8 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const reqClone = request.clone({
             headers: request.headers.set('authaccess', token)
         });
-        console.log(reqClone);
-        return next.handle(reqClone);
 
+        return next.handle(reqClone);
     }
 }

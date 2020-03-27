@@ -13,7 +13,7 @@ app.use(bodyparser.urlencoded({
 app.use((request, response, next) => {
 
     response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept", "authaccess");
+    response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authaccess");
     response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
     next();
 });
@@ -25,10 +25,13 @@ const bookingController = require('./Model View Controller/bookingController');
 const placeController = require('./Model View Controller/placeController');
 const imageExtract = require('./middleware/imageExtract');
 
-// ------------------------------------------User Requests---------------------------------------------
+// ------------------------------------------User Requests--------------------------------------------->
 
 app.post('/register', imageExtract, userController.register);
-
 app.post('/login', userController.login);
+
+// ------------------------------------------User Requests--------------------------------------------->
+
+app.post('/place', imageExtract, placeController.savePlace);
 
 module.exports = app;

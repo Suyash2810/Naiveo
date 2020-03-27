@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Place } from './places.model';
 import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class PlacesService {
   private _places = new Subject<Place[]>();
   private _place = new Subject<Place>();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private httpClient: HttpClient) { }
 
   fetchPlaces() {
     this._places.next(this.places);
@@ -47,11 +48,26 @@ export class PlacesService {
     return this._place.asObservable();
   }
 
-  addPlace(title, description, price, dateFrom, dateTill) {
+  addPlace(title: string, description: string, price: number, dateFrom: Date, dateTill: Date, image: File) {
 
-    const place: Place = new Place(Math.random().toString(), title, description, 'https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&h=640&w=426', price, dateFrom, dateTill, this.authService.getUserId());
-    this.places.push(place);
-    this._places.next(this.places);
+    type responseType = { status: string, result: any };
+    const userId = this.authService.getUserId();
+
+    const data = new FormData();
+    data.append('title', title);
+    data.append('description', description);
+    data.append('price', price.toString());
+    data.append('availableFrom', dateFrom.toISOString());
+    data.append('availableTill', dateTill.toISOString());
+    data.append('image', image);
+    data.append('user', userId);
+
+    this.httpClient.post<responseType>("http://localhost:3000/place", data)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
+      });
   }
 
   updatePlace(id: string, title: string, description: string, price: number) {

@@ -22,8 +22,22 @@ export class NewOfferPage implements OnInit {
       description: new FormControl(null, { validators: [Validators.required, Validators.maxLength(180)] }),
       price: new FormControl(0, { validators: [Validators.required, Validators.minLength(1)] }),
       dateFrom: new FormControl(null, { validators: [Validators.required] }),
-      dateTill: new FormControl(null, { validators: Validators.required })
+      dateTill: new FormControl(null, { validators: Validators.required }),
+      image: new FormControl(null, { validators: Validators.required })
     });
+  }
+
+  uploadImage(event: Event) {
+
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({ image: file });
+    this.form.get('image').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = (reader.result as string);
+    }
+
+    reader.readAsDataURL(file);
   }
 
   onSubmit() {
@@ -32,7 +46,7 @@ export class NewOfferPage implements OnInit {
       return;
     }
 
-    this.placeService.addPlace(this.form.value.title, this.form.value.description, +this.form.value.price, new Date(this.form.value.dateFrom), new Date(this.form.value.dateTill));
+    this.placeService.addPlace(this.form.value.title, this.form.value.description, +this.form.value.price, new Date(this.form.value.dateFrom), new Date(this.form.value.dateTill), this.form.value.image);
     this.form.reset();
     this.router.navigate(['/', 'places', 'tabs', 'offers']);
   }
