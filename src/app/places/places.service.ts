@@ -47,11 +47,13 @@ export class PlacesService {
           this.places = places;
           this._places.next(this.places);
         },
-        error => {
-          this.toastController.create({
+        async error => {
+          const toast = await this.toastController.create({
             message: error,
             duration: 2000
           });
+
+          toast.present();
         }
       );
   }
@@ -88,11 +90,13 @@ export class PlacesService {
       .subscribe((place: Place) => {
         this.place = place;
         this._place.next(this.place);
-      }, error => {
-        this.toastController.create({
+      }, async error => {
+        const toast = await this.toastController.create({
           message: error,
           duration: 2000
         });
+
+        toast.present();
       });
   }
 
@@ -119,18 +123,22 @@ export class PlacesService {
     data.append('user', userId);
 
     this.httpClient.post<responseType>("http://localhost:3000/place", data)
-      .subscribe(response => {
+      .subscribe(async (response) => {
         if (response) {
-          this.toastController.create({
+          const toast = await this.toastController.create({
             message: response.status,
             duration: 2000
           });
+
+          toast.present();
         }
-      }, error => {
-        this.toastController.create({
+      }, async error => {
+        const toast = await this.toastController.create({
           message: error,
           duration: 2000
         });
+
+        toast.present();
       });
   }
 
@@ -172,13 +180,14 @@ export class PlacesService {
           this.toastController.create({
             message: "The place has been updated.",
             duration: 3000
-          });
+          }).then(toast => toast.present());
         },
-        error => {
-          this.toastController.create({
+        async error => {
+          const toast = await this.toastController.create({
             message: error,
             duration: 2000
           });
+          toast.present();
         }
       );
   }
