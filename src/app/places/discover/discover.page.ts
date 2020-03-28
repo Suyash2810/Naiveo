@@ -32,7 +32,6 @@ export class DiscoverPage implements OnInit, OnDestroy {
       (places) => {
         this.fetchedPlaces = places;
         this.filterPlaces = this.fetchedPlaces;
-        console.log(this.filterPlaces);
         this.isLoading = false;
       }
     )

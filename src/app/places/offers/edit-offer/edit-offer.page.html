@@ -10,7 +10,16 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="form">
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col>
+        <div class="ion-spinner-box">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <form [formGroup]="form" *ngIf="!isLoading">
     <ion-grid>
       <ion-row>
         <ion-col size-sm="10" offset-sm="1">

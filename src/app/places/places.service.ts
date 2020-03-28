@@ -150,7 +150,6 @@ export class PlacesService {
         map(
           response => {
             const place = response.result;
-            console.log(place);
 
             return {
               id: place._id,
@@ -170,11 +169,16 @@ export class PlacesService {
           this.places = this.places.filter(p => p.id != place.id);
           this.places.push(place);
           this._places.next(this.places);
-          console.log(place);
-          console.log(this.places);
+          this.toastController.create({
+            message: "The place has been updated.",
+            duration: 3000
+          });
         },
         error => {
-          console.log(error);
+          this.toastController.create({
+            message: error,
+            duration: 2000
+          });
         }
       );
   }
