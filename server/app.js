@@ -37,7 +37,7 @@ app.post('/login', userController.login);
 // ------------------------------------------User Requests--------------------------------------------->
 
 app.post('/place', authorization, imageExtract, placeController.savePlace);
-
 app.get('/places', authorization, placeController.getPlaces);
+app.get('/place/:id', authorization, placeController.getPlace);
 
 module.exports = app;

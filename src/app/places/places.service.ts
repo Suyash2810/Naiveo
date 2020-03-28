@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ import { map } from 'rxjs/operators';
 export class PlacesService {
 
   private places: Place[] = [];
-
+  private place: Place;
   private _places = new Subject<Place[]>();
   private _place = new Subject<Place>();
 
-  constructor(private authService: AuthService, private httpClient: HttpClient) { }
+  constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController) { }
 
   fetchPlaces() {
 
@@ -42,13 +43,15 @@ export class PlacesService {
         )
       )
       .subscribe(
-        (places) => {
+        (places: Place[]) => {
           this.places = places;
           this._places.next(this.places);
-          console.log(this.places);
         },
         error => {
-          console.log(error);
+          this.toastController.create({
+            message: error,
+            duration: 2000
+          });
         }
       );
   }
@@ -62,14 +65,43 @@ export class PlacesService {
   }
 
   getPlaceById(id: string) {
-    let place = this.places.find(p => p.id == id);
-    this._place.next(place);
-    return {
-      ...place
-    }
+
+    type responseType = { status: string, result: any };
+
+    this.httpClient.get<responseType>(`http://localhost:3000/place/${id}`)
+      .pipe(
+        map(response => {
+
+          const place = response.result;
+
+          return {
+            id: place._id,
+            title: place.title,
+            description: place.description,
+            imageUrl: place.imageUrl,
+            price: place.price,
+            availableFrom: place.availableFrom,
+            availableTill: place.availableTill,
+            userID: place.user
+          }
+        })
+      )
+      .subscribe((place: Place) => {
+        this.place = place;
+        this._place.next(this.place);
+      }, error => {
+        this.toastController.create({
+          message: error,
+          duration: 2000
+        });
+      });
   }
 
-  get_placeById() {
+  get_place() {
+    return this.place;
+  }
+
+  _get_place() {
     return this._place.asObservable();
   }
 
@@ -89,9 +121,17 @@ export class PlacesService {
 
     this.httpClient.post<responseType>("http://localhost:3000/place", data)
       .subscribe(response => {
-        console.log(response);
+        if (response) {
+          this.toastController.create({
+            message: response.status,
+            duration: 2000
+          });
+        }
       }, error => {
-        console.log(error);
+        this.toastController.create({
+          message: error,
+          duration: 2000
+        });
       });
   }
 

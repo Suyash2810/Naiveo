@@ -65,7 +65,28 @@ const savePlace = async (request, response) => {
     }
 }
 
+const getPlace = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const place = await Place.findById(id);
+        if (place.length > 0) {
+            response.status(200).send({
+                status: "Place has been fetched.",
+                result: place
+            });
+        } else {
+            throw "Error: Place not found.";
+        }
+    } catch (e) {
+        response.status(404).send({
+            error: e
+        })
+    }
+}
+
 module.exports = {
     getPlaces,
-    savePlace
+    savePlace,
+    getPlace
 }
