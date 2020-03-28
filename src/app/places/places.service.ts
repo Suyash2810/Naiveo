@@ -136,17 +136,46 @@ export class PlacesService {
 
   updatePlace(id: string, title: string, description: string, price: number) {
 
-    let offer = this.places.find(place => place.id == id);
-    offer = {
-      ...offer,
-      title: title,
-      description: description,
-      price: price
+    type responseType = { status: string, result: any };
+
+    const data = {
+      id,
+      title,
+      description,
+      price
     }
 
-    this.places = this.places.filter(place => place.id != id);
+    this.httpClient.patch<responseType>("http://localhost:3000/place", data)
+      .pipe(
+        map(
+          response => {
+            const place = response.result;
+            console.log(place);
 
-    this.places.push(offer);
-    this._places.next(this.places);
+            return {
+              id: place._id,
+              title: place.title,
+              description: place.description,
+              imageUrl: place.imageUrl,
+              price: place.price,
+              availableFrom: place.availableFrom,
+              availableTill: place.availableTill,
+              userID: place.user
+            }
+          }
+        )
+      )
+      .subscribe(
+        place => {
+          this.places = this.places.filter(p => p.id != place.id);
+          this.places.push(place);
+          this._places.next(this.places);
+          console.log(place);
+          console.log(this.places);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 }
