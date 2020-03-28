@@ -39,5 +39,6 @@ app.post('/login', userController.login);
 app.post('/place', authorization, imageExtract, placeController.savePlace);
 app.get('/places', authorization, placeController.getPlaces);
 app.get('/place/:id', authorization, placeController.getPlace);
+app.patch('/place', authorization, placeController.updatePlace);
 
 module.exports = app;

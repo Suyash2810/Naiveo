@@ -87,8 +87,41 @@ const getPlace = async (request, response) => {
     }
 }
 
+const updatePlace = async (request, response) => {
+
+    try {
+        const body = pick(request.body, ['id', 'title', 'description', 'price']);
+
+        const result = await Place.findOneAndUpdate({
+            _id: body.id
+        }, {
+            $set: {
+                title: body.title,
+                description: body.description,
+                price: body.price
+            }
+        }, {
+            new: true
+        });
+
+        if (result) {
+            response.status(200).send({
+                status: "Place has been updated.",
+                result: result
+            })
+        } else {
+            throw "Error: Place could not be updated.";
+        }
+    } catch (e) {
+        response.status(400).send({
+            error: e
+        });
+    }
+}
+
 module.exports = {
     getPlaces,
     savePlace,
-    getPlace
+    getPlace,
+    updatePlace
 }
