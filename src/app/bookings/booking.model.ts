@@ -8,15 +8,17 @@ export interface Bookable {
     last_name: string;
     bookedFrom: Date;
     bookedTill: Date;
-    guestNumber: number;
+    guests: number;
 }
 
-export class Booking implements Bookable {
+export class Booking {
 
-    constructor(public id: string,
-        public placeId: string, public userId: string, public title: string, public imageUrl: string, public first_name, public last_name, public bookedFrom: Date, public bookedTill: Date,
-        public guestNumber: number) {
-        this.id = id;
+    constructor(
+        public placeId: string, public userId: string, public title: string,
+        public imageUrl: string, public first_name, public last_name, public bookedFrom: Date,
+        public bookedTill: Date,
+        public guests: number) {
+
         this.placeId = placeId;
         this.userId = userId;
         this.title = title;
@@ -25,6 +27,6 @@ export class Booking implements Bookable {
         this.last_name = last_name;
         this.bookedFrom = bookedFrom;
         this.bookedTill = bookedTill;
-        this.guestNumber = guestNumber;
+        this.guests = guests;
     }
 }
