@@ -1,0 +1,15 @@
+ion-grid {
+    ion-row {
+        ion-col {
+            text-align: center;
+
+            .ion-spinner-box {
+                margin-top: 20%;
+
+                ion-spinner {
+                    transform: scale(2);
+                }
+            }
+        }
+    }
+}

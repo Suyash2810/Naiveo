@@ -14,6 +14,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
 
   place: Place;
   offerSub: Subscription;
+  isLoading: boolean = false;
 
   constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService) { }
 
@@ -21,13 +22,14 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
 
     this.route.params.subscribe(
       (params: Params) => {
+        this.isLoading = true;
         let id = params['id'];
         if (!id) {
           this.nvCtrl.navigateBack('/places/tabs/offers');
         } else {
           this.placeService.getPlaceById(id);
           this.place = this.placeService.get_place();
-          this.offerSub = this.placeService._get_place().subscribe(offer => this.place = offer);
+          this.offerSub = this.placeService._get_place().subscribe(offer => { this.place = offer; this.isLoading = false; });
         }
       }
     )
