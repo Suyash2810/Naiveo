@@ -69,7 +69,9 @@ const getPlace = async (request, response) => {
 
     try {
         const id = request.params.id;
-        const place = await Place.findById(id);
+        const place = await Place.find({
+            _id: id
+        });
         if (place.length > 0) {
             response.status(200).send({
                 status: "Place has been fetched.",

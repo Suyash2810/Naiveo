@@ -1,21 +1,30 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/places/tabs/discover"></ion-back-button>
+      <ion-back-button (click)="navigateBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{place.title}} Detail</ion-title>
+    <ion-title>{{place?.title}} Detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <img src="{{place.imageUrl}}" />
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col>
+        <div class="ion-spinner-box">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card *ngIf="!isLoading">
+    <img src="{{place?.imageUrl}}" />
     <ion-card-header>
-      <ion-card-subtitle>{{place.price | currency}}</ion-card-subtitle>
-      <ion-card-title>{{place.title}}</ion-card-title>
+      <ion-card-subtitle>{{place?.price | currency}}</ion-card-subtitle>
+      <ion-card-title>{{place?.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      {{place.description}}
+      {{place?.description}}
     </ion-card-content>
   </ion-card>
   <div text-center>

@@ -24,8 +24,9 @@ export class EditOfferPage implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['offerID'];
-        this.offer = this.placeService.getPlaceById(this.id);
-        this.offerSub = this.placeService.get_placeById().subscribe(offer => this.offer = offer);
+        this.placeService.getPlaceById(this.id);
+        this.offer = this.placeService.get_place();
+        this.offerSub = this.placeService._get_place().subscribe(offer => this.offer = offer);
         this.form = new FormGroup({
           title: new FormControl(this.offer.title, { validators: Validators.required }),
           description: new FormControl(this.offer.description, { validators: Validators.maxLength(180) }),

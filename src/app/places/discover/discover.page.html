@@ -62,8 +62,8 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let place of filterPlaces" [routerLink]="['/','places','tabs','discover', place.id]" detail
-            lines="none">
+          <ion-item *ngFor="let place of filterPlaces.slice(1)"
+            [routerLink]="['/','places','tabs','discover', place.id]" detail lines="none">
             <ion-avatar slot="start">
               <img src="{{place.imageUrl}}">
             </ion-avatar>

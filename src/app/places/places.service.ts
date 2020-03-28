@@ -71,8 +71,7 @@ export class PlacesService {
     this.httpClient.get<responseType>(`http://localhost:3000/place/${id}`)
       .pipe(
         map(response => {
-
-          const place = response.result;
+          const place = response.result[0];
 
           return {
             id: place._id,
