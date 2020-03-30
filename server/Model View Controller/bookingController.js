@@ -9,15 +9,23 @@ const {
 const getBookings = async (request, response) => {
 
     try {
-        let result = await Booking.find({
-            userId: request.user._id
+        let data = await Booking.find({}).populate({
+            path: "userId",
+            match: {
+                name: {
+                    $eq: request.user.name
+                }
+            }
         });
-        if (result.length > 0)
+
+        const result = data.filter(doc => doc.userId != null);
+
+        if (result.length > 0) {
             response.status(200).send({
                 status: "Bookings have been fetched.",
                 result: result
             });
-        else
+        } else
             throw "No bookings found!";
     } catch (e) {
         response.status(404).send(e);

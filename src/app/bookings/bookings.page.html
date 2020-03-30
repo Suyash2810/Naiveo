@@ -8,7 +8,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid *ngIf="isLoading">
+    <ion-row>
+      <ion-col>
+        <div class="ion-spinner-box">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col *ngIf="!fetchedBookings || fetchedBookings.length <= 0" class="ion-text-center">
         <ion-text color="danger" class="ion-text-center">

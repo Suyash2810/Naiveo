@@ -13,10 +13,12 @@ export class BookingsPage implements OnInit, OnDestroy {
 
   fetchedBookings: Array<Bookable> = [];
   bookingSub: Subscription;
+  isLoading: boolean = false;
 
   constructor(private bookingService: BookingService) { }
 
   ionViewWillEnter() {
+    this.isLoading = true;
     this.bookingService.fetchBookings();
   }
 
@@ -25,6 +27,7 @@ export class BookingsPage implements OnInit, OnDestroy {
     this.bookingSub = this.bookingService._getBookings().subscribe(
       bookings => {
         this.fetchedBookings = bookings;
+        this.isLoading = false;
       }
     );
   }
