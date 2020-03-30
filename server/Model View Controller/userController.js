@@ -19,7 +19,10 @@ const register = async (request, response) => {
         });
         let result = await user.save();
         if (result) {
-            response.status(200).send(result);
+            response.status(200).send({
+                status: `${result.name}, you have been registered.`,
+                result: result
+            });
         } else {
             throw "Couldn\'t register the user.";
         }

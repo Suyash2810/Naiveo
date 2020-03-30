@@ -57,10 +57,11 @@ export class AuthPage implements OnInit {
             response => {
               loadingController.present();
               this.toastController.create({
-                message: `${response.result.name}, you have been registered.`,
+                message: response.status,
                 duration: 2000
               }).then(toastController => {
                 this.router.navigateByUrl('/auth');
+                this.form.reset();
                 loadingController.dismiss();
                 toastController.present();
               });
