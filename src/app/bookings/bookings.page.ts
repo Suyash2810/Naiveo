@@ -16,6 +16,10 @@ export class BookingsPage implements OnInit, OnDestroy {
 
   constructor(private bookingService: BookingService) { }
 
+  ionViewWillEnter() {
+    this.bookingService.fetchBookings();
+  }
+
   ngOnInit() {
     this.fetchedBookings = this.bookingService.getBookings();
     this.bookingSub = this.bookingService._getBookings().subscribe(

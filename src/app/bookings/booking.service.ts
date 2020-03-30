@@ -17,6 +17,49 @@ export class BookingService {
 
     }
 
+    fetchBookings() {
+
+        type responseType = { status: string, result: any };
+
+        this.httpClient.get<responseType>("http://localhost:3000/bookings")
+            .pipe(
+                map(
+                    response => {
+                        const bookings = response.result;
+
+                        return bookings.map(booking => {
+                            return {
+                                id: booking._id,
+                                placeId: booking.placeId,
+                                userId: booking.userId,
+                                title: booking.title,
+                                imageUrl: booking.imageUrl,
+                                first_name: booking.first_name,
+                                last_name: booking.last_name,
+                                bookedFrom: booking.bookedFrom,
+                                bookedTill: booking.bookedTill,
+                                guests: booking.guests
+                            }
+                        })
+                    }
+                )
+            )
+            .subscribe(
+                bookings => {
+                    this.bookings = bookings;
+                    this._bookings.next(this.bookings);
+                },
+                error => {
+                    this.toastController.create({
+                        message: error,
+                        duration: 2000
+                    }).then(toast => {
+                        toast.present();
+                    });
+                }
+            );
+    }
+
     getBookings() {
         return this.bookings;
     }
