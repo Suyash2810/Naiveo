@@ -34,11 +34,17 @@ const imageExtract = require('./middleware/imageExtract');
 app.post('/register', imageExtract, userController.register);
 app.post('/login', userController.login);
 
-// ------------------------------------------User Requests--------------------------------------------->
+// ------------------------------------------Place Requests--------------------------------------------->
 
 app.post('/place', authorization, imageExtract, placeController.savePlace);
 app.get('/places', authorization, placeController.getPlaces);
 app.get('/place/:id', authorization, placeController.getPlace);
 app.patch('/place', authorization, placeController.updatePlace);
+
+// ------------------------------------------Booking Requests------------------------------------------->
+
+app.post('/booking', authorization, bookingController.saveBooking);
+
+app.get('/bookings', authorization, bookingController.getBookings);
 
 module.exports = app;

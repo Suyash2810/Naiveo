@@ -75,28 +75,14 @@ export class BookingService {
         type responseType = { status: string, result: any };
 
         this.httpClient.post<responseType>("http://localhost:3000/booking", booking)
-            .pipe(
-                map(response => {
-                    const booking = response.result[0];
-
-                    return {
-                        id: booking._id,
-                        placeId: booking.placeId,
-                        userId: booking.userId,
-                        title: booking.title,
-                        imageUrl: booking.imageUrl,
-                        first_name: booking.first_name,
-                        last_name: booking.last_name,
-                        bookedFrom: booking.bookedFrom,
-                        bookedTill: booking.bookedTill,
-                        guests: booking.guests
-                    }
-                })
-            )
             .subscribe(
-                (booking: Bookable) => {
-                    this.bookings.push(booking);
-                    this._bookings.next(this.bookings);
+                async (response) => {
+                    const toast = await this.toastController.create({
+                        message: response.status,
+                        duration: 2000
+                    });
+
+                    toast.present();
                 },
                 async error => {
                     const toast = await this.toastController.create({

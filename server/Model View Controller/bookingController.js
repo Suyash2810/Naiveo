@@ -9,9 +9,14 @@ const {
 const getBookings = async (request, response) => {
 
     try {
-        let result = await Booking.find({});
+        let result = await Booking.find({
+            userId: request.user._id
+        });
         if (result.length > 0)
-            response.status(200).send(result);
+            response.status(200).send({
+                status: "Bookings have been fetched.",
+                result: result
+            });
         else
             throw "No bookings found!";
     } catch (e) {
@@ -23,13 +28,9 @@ const saveBooking = async (request, response) => {
 
     try {
 
-        let data = pick(request.body, ['placeId', 'userId', 'title', 'first_name', 'last_name', 'bookedFrom', 'bookedTill', 'guests']);
-        let url = request.protocol + "://" + request.get('host') + "/images/" + request.file.filename;
+        let data = pick(request.body, ['placeId', 'userId', 'title', 'imageUrl', 'first_name', 'last_name', 'bookedFrom', 'bookedTill', 'guests']);
 
-        let booking = new Booking({
-            ...data,
-            imageUrl: url
-        });
+        let booking = new Booking(data);
 
         let result = await booking.save();
 

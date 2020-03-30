@@ -21,6 +21,7 @@ export class CreateBookingComponent implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
+    console.log(this.selectedPlace);
     const availableFrom = new Date(this.selectedPlace.availableFrom);
     const availableTill = new Date(this.selectedPlace.availableTill);
 

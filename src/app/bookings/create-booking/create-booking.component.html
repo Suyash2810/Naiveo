@@ -44,17 +44,16 @@
         <ion-col size-sm="6">
           <ion-item>
             <ion-label position="floating">From Date</ion-label>
-            <ion-datetime display-format="MMM DD YYYY" picker-format="YY MMM DD"
-              [min]="selectedPlace.availableFrom.toISOString()" [max]="selectedPlace.availableTill.toISOString()"
-              name="fromDate" [ngModel]="startDate" required #fromDate="ngModel"></ion-datetime>
+            <ion-datetime display-format="MMM DD YYYY" picker-format="YY MMM DD" [min]="selectedPlace.availableFrom"
+              [max]="selectedPlace.availableTill" name="fromDate" [ngModel]="startDate" required #fromDate="ngModel">
+            </ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size-sm="6">
           <ion-item>
             <ion-label position="floating">Till Date</ion-label>
             <ion-datetime display-format="MMM DD YYYY" picker-format="YY MMM DD" [min]="fromDate.value"
-              [max]="selectedPlace.availableTill.toISOString()" name="tillDate" [ngModel]="endDate" required
-              #tillDate="ngModel">
+              [max]="selectedPlace.availableTill" name="tillDate" [ngModel]="endDate" required #tillDate="ngModel">
             </ion-datetime>
           </ion-item>
         </ion-col>
