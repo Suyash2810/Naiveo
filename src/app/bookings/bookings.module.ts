@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BookingsPageRoutingModule } from './bookings-routing.module';
 
 import { BookingsPage } from './bookings.page';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { BookingsPage } from './bookings.page';
     IonicModule,
     BookingsPageRoutingModule
   ],
-  declarations: [BookingsPage]
+  declarations: [BookingsPage, LoadingSpinnerComponent]
 })
-export class BookingsPageModule {}
+export class BookingsPageModule { }
