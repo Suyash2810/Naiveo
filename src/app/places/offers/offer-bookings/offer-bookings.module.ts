@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { OfferBookingsPageRoutingModule } from './offer-bookings-routing.module';
 
 import { OfferBookingsPage } from './offer-bookings.page';
+import { LoadingSpinnerModule } from 'src/app/bookings/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    LoadingSpinnerModule,
     OfferBookingsPageRoutingModule
   ],
   declarations: [OfferBookingsPage]
 })
-export class OfferBookingsPageModule {}
+export class OfferBookingsPageModule { }
