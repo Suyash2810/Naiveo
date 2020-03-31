@@ -12,7 +12,8 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-button color="primary" [routerLink]="['/', 'places', 'tabs', 'offers', 'edit', place?.id]">Edit
+        <ion-button color="primary" [disabled]="place.userID != userId"
+          [routerLink]="['/', 'places', 'tabs', 'offers', 'edit', place?.id]">Edit
         </ion-button>
       </ion-col>
     </ion-row>

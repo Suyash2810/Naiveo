@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -15,8 +16,10 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   place: Place;
   offerSub: Subscription;
   isLoading: boolean = false;
+  userId: string;
 
-  constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService) { }
+  constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService,
+    private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -29,7 +32,11 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
         } else {
           this.placeService.getPlaceById(id);
           this.place = this.placeService.get_place();
-          this.offerSub = this.placeService._get_place().subscribe(offer => { this.place = offer; this.isLoading = false; });
+          this.offerSub = this.placeService._get_place().subscribe(offer => { 
+            this.place = offer; 
+            this.userId = this.authService.getUserId();
+            this.isLoading = false;
+          });
         }
       }
     )
