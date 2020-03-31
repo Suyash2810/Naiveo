@@ -4,7 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class PlacesService {
   private _places = new Subject<Place[]>();
   private _place = new Subject<Place>();
 
-  constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController) { }
+  constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController,
+    private alertController: AlertController) { }
 
   fetchPlaces() {
 
@@ -48,12 +49,14 @@ export class PlacesService {
           this._places.next(this.places);
         },
         async error => {
-          const toast = await this.toastController.create({
+          const alert = await this.alertController.create({
+            header: 'Error',
+            subHeader: 'An error has occured.',
             message: error,
-            duration: 2000
+            buttons: ['OK']
           });
 
-          toast.present();
+          await alert.present();
         }
       );
   }
@@ -91,12 +94,14 @@ export class PlacesService {
         this.place = place;
         this._place.next(this.place);
       }, async error => {
-        const toast = await this.toastController.create({
+        const alert = await this.alertController.create({
+          header: 'Error',
+          subHeader: 'An error has occured.',
           message: error,
-          duration: 2000
+          buttons: ['OK']
         });
 
-        toast.present();
+        await alert.present();
       });
   }
 
@@ -133,12 +138,14 @@ export class PlacesService {
           toast.present();
         }
       }, async error => {
-        const toast = await this.toastController.create({
+        const alert = await this.alertController.create({
+          header: 'Error',
+          subHeader: 'An error has occured.',
           message: error,
-          duration: 2000
+          buttons: ['OK']
         });
 
-        toast.present();
+        await alert.present();
       });
   }
 
@@ -183,11 +190,14 @@ export class PlacesService {
           }).then(toast => toast.present());
         },
         async error => {
-          const toast = await this.toastController.create({
+          const alert = await this.alertController.create({
+            header: 'Error',
+            subHeader: 'An error has occured.',
             message: error,
-            duration: 2000
+            buttons: ['OK']
           });
-          toast.present();
+
+          await alert.present();
         }
       );
   }

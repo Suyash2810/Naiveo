@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from "rxjs/operators";
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Injectable({ providedIn: 'root' })
 
@@ -13,7 +13,8 @@ export class BookingService {
     private bookings: Bookable[] = [];
     private _bookings = new Subject<Bookable[]>();
 
-    constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController) {
+    constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController,
+        private alertController: AlertController) {
 
     }
 
@@ -49,13 +50,15 @@ export class BookingService {
                     this.bookings = bookings;
                     this._bookings.next(this.bookings);
                 },
-                error => {
-                    this.toastController.create({
+                async error => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        subHeader: 'An error has occured.',
                         message: error,
-                        duration: 2000
-                    }).then(toast => {
-                        toast.present();
+                        buttons: ['OK']
                     });
+
+                    await alert.present();
                 }
             );
     }
@@ -85,12 +88,14 @@ export class BookingService {
                     toast.present();
                 },
                 async error => {
-                    const toast = await this.toastController.create({
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        subHeader: 'An error has occured.',
                         message: error,
-                        duration: 2000
+                        buttons: ['OK']
                     });
 
-                    toast.present();
+                    await alert.present();
                 }
             );
     }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Subject } from 'rxjs';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController, AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
   authTimer: any;
 
   constructor(private router: Router, private httpClient: HttpClient, private toastController: ToastController,
-    private loadingController: LoadingController) { }
+    private loadingController: LoadingController, private alertController: AlertController) { }
 
 
   getToken() {
@@ -88,11 +88,14 @@ export class AuthService {
         },
         async (error) => {
 
-          const toast = await this.toastController.create({
+          const alert = await this.alertController.create({
+            header: 'Error',
+            subHeader: 'An error has occured.',
             message: error,
-            duration: 2000
+            buttons: ['OK']
           });
-          toast.present();
+
+          await alert.present();
           this.router.navigateByUrl('/auth');
         }
       );
@@ -173,7 +176,7 @@ export class AuthService {
     }).then(loadingController => {
 
       loadingController.present();
-      
+
       this.token = null;
       this.isAuthenticated = false;
       this._isAuthenticated.next(this.isAuthenticated);
