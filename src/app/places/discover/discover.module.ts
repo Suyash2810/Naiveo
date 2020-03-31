@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { DiscoverPageRoutingModule } from './discover-routing.module';
 
 import { DiscoverPage } from './discover.page';
+import { LoadingSpinnerModule } from 'src/app/bookings/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    LoadingSpinnerModule,
     DiscoverPageRoutingModule
   ],
   declarations: [DiscoverPage]

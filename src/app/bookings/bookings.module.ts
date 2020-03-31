@@ -7,15 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { BookingsPageRoutingModule } from './bookings-routing.module';
 
 import { BookingsPage } from './bookings.page';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { LoadingSpinnerModule } from './loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    LoadingSpinnerModule,
     BookingsPageRoutingModule
   ],
-  declarations: [BookingsPage, LoadingSpinnerComponent]
+  declarations: [BookingsPage]
 })
 export class BookingsPageModule { }

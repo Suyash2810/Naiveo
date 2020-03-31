@@ -30,15 +30,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid *ngIf="isLoading">
-    <ion-row>
-      <ion-col>
-        <div class="ion-spinner-box">
-          <ion-spinner name="crescent" color="primary"></ion-spinner>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <ion-grid *ngIf="!isLoading && filterPlaces.length > 0">
     <ion-row>
       <ion-col>
