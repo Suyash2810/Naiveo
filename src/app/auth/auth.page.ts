@@ -19,6 +19,12 @@ export class AuthPage implements OnInit {
   constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController,
     private toastController: ToastController) { }
 
+  ionViewWillEnter() {
+    if (this.authService.getAuthenticated() && this.authService.getToken() != null) {
+      this.router.navigateByUrl('/places');
+    }
+  }
+
   ngOnInit() {
   }
 

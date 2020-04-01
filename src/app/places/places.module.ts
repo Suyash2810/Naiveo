@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlacesPageRoutingModule } from './places-routing.module';
 
 import { PlacesPage } from './places.page';
+import { EditGuard } from './offers/edit-offer/edit.guard';
 
 @NgModule({
   imports: [
@@ -17,4 +18,4 @@ import { PlacesPage } from './places.page';
   ],
   declarations: [PlacesPage]
 })
-export class PlacesPageModule {}
+export class PlacesPageModule { }

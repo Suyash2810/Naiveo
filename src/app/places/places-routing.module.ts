@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PlacesPage } from './places.page';
+import { EditGuard } from './offers/edit-offer/edit.guard';
 
 const routes: Routes = [
   {
