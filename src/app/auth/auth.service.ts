@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Subject } from 'rxjs';
 import { ToastController, LoadingController, AlertController } from '@ionic/angular';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -208,5 +209,37 @@ export class AuthService {
     data.append('image', image);
 
     return this.httpClient.post<responseType>("http://localhost:3000/register", data);
+  }
+
+  fetchUser() {
+
+    type responseType = { status: string, result: any };
+
+    this.httpClient.get<responseType>("http://localhost:3000/user")
+      .pipe(
+        map(
+          response => {
+            const user = response.result;
+            console.log(user);
+            return new User(user._id, user.name, user.email);
+          }
+        )
+      )
+      .subscribe(
+        (user: User) => {
+          this.user = user;
+          this._user.next(this.user);
+        },
+        async error => {
+          const alert = await this.alertController.create({
+            header: 'Error',
+            subHeader: 'Cannot fetch user data.',
+            message: error,
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        }
+      )
   }
 }
