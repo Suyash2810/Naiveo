@@ -33,6 +33,7 @@ const imageExtract = require('./middleware/imageExtract');
 
 app.post('/register', imageExtract, userController.register);
 app.post('/login', userController.login);
+app.get('/user', authorization, userController.fetchUserData);
 
 // ------------------------------------------Place Requests--------------------------------------------->
 
@@ -44,7 +45,6 @@ app.patch('/place', authorization, placeController.updatePlace);
 // ------------------------------------------Booking Requests------------------------------------------->
 
 app.post('/booking', authorization, bookingController.saveBooking);
-
 app.get('/bookings', authorization, bookingController.getBookings);
 
 module.exports = app;

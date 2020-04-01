@@ -56,7 +56,32 @@ const login = async (request, response) => {
     }
 }
 
+const fetchUserData = async (request, response) => {
+
+    try {
+        if(request.user){
+            const id = request.user._id;
+            const user = await User.findOne({_id: id});
+            if(user){
+                response.status(200).send({
+                    status: "The user data has been fetched.",
+                    result: user
+                });
+            }else{
+                throw "Data could not be fetched.";
+            }
+        }else {
+            throw "User not authenticated.";
+        }
+    }catch(e) {
+        response.status(404).send({
+            error: e
+        });
+    }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    fetchUserData
 }
