@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
@@ -8,22 +8,31 @@ import { Subscription } from 'rxjs';
   templateUrl: './user-profile.page.html',
   styleUrls: ['./user-profile.page.scss'],
 })
-export class UserProfilePage implements OnInit {
+export class UserProfilePage implements OnInit, OnDestroy {
 
   user: User;
-  userSub: Subscription;
   isLoading: boolean = false;
+  userSub: Subscription;
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.isLoading = true;
+    this.authService.fetchUser();
+  }
+
+  ngOnInit() {
+
     this.user = this.authService.getUser();
-    console.log(this.user);
-    this.userSub = this.authService._getUser().subscribe(user => {
-      this.user = user;
-      console.log(this.user);
-      this.isLoading = false;
-    });
+    this.userSub = this.authService._getUser().subscribe(
+      (user) => {
+        this.user = user;
+        this.isLoading = false;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 }

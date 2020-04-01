@@ -220,8 +220,11 @@ export class AuthService {
         map(
           response => {
             const user = response.result;
-            console.log(user);
-            return new User(user._id, user.name, user.email);
+            return {
+              id: user._id,
+              name: user.name,
+              email: user.email
+            }
           }
         )
       )

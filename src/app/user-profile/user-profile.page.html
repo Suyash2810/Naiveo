@@ -1,14 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <ion-title *ngIf="isLoading">Profile Section.</ion-title>
-    <ion-title *ngIf="!isLoading">{{user.name}}</ion-title>
+    <ion-title *ngIf="!isLoading">{{user?.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
-
-  <ion-buttons slot="start">
-    <ion-back-button default-href="/places"></ion-back-button>
-  </ion-buttons>
 </ion-header>
 
 <ion-content>
-
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col>
+        Hello {{user?.name}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
