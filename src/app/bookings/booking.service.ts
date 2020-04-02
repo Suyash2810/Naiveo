@@ -54,7 +54,7 @@ export class BookingService {
                     const alert = await this.alertController.create({
                         header: 'Error',
                         subHeader: 'An error has occured.',
-                        message: error,
+                        message: error.error,
                         buttons: ['OK']
                     });
 
@@ -101,7 +101,30 @@ export class BookingService {
     }
 
     cancelBooking(id: string) {
-        this.bookings = this.bookings.filter(b => b.id != id);
-        this._bookings.next(this.bookings);
+
+        type responseType = { status: string };
+
+        this.httpClient.delete<responseType>(`http://localhost:3000/booking/${id}`)
+            .subscribe(
+                response => {
+                    this.fetchBookings();
+                    this.toastController.create({
+                        message: response.status,
+                        duration: 2000
+                    }).then(toast => {
+                        toast.present();
+                    });
+                },
+                async error => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        subHeader: 'An error has occured.',
+                        message: error.status,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
+                }
+            )
     }
 }

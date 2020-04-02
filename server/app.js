@@ -46,5 +46,6 @@ app.patch('/place', authorization, placeController.updatePlace);
 
 app.post('/booking', authorization, bookingController.saveBooking);
 app.get('/bookings', authorization, bookingController.getBookings);
+app.delete("/booking/:id", authorization, bookingController.deleteBooking);
 
 module.exports = app;

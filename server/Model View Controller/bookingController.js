@@ -20,13 +20,13 @@ const getBookings = async (request, response) => {
 
         const result = data.filter(doc => doc.userId != null);
 
-        if (result.length > 0) {
+        if (result.length >= 0) {
             response.status(200).send({
                 status: "Bookings have been fetched.",
                 result: result
             });
         } else
-            throw "No bookings found!";
+            throw "Bookings could not be fetched!";
     } catch (e) {
         response.status(404).send(e);
     }
@@ -58,7 +58,29 @@ const saveBooking = async (request, response) => {
     }
 }
 
+const deleteBooking = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const result = await Booking.findOneAndDelete({
+            _id: id
+        });
+        if (result) {
+            response.status(200).send({
+                status: "Booking has been deleted."
+            });
+        } else {
+            throw "Booking was not deleted";
+        }
+    } catch (e) {
+        response.statsu(400).send({
+            status: e
+        });
+    }
+}
+
 module.exports = {
     getBookings,
-    saveBooking
+    saveBooking,
+    deleteBooking
 }
