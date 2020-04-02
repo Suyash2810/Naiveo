@@ -201,4 +201,30 @@ export class PlacesService {
         }
       );
   }
+
+  deletePlace(id: string) {
+
+    type responseType = { status: string };
+
+    this.httpClient.delete<responseType>(`http://localhost:3000/place/${id}`)
+      .subscribe(
+        response => {
+          this.fetchPlaces();
+          this.toastController.create({
+            message: response.status,
+            duration: 2000
+          }).then(toast => toast.present());
+        },
+        async error => {
+          const alert = await this.alertController.create({
+            header: 'Error',
+            subHeader: 'An error has occured.',
+            message: error.error,
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        }
+      );
+  }
 }

@@ -119,9 +119,34 @@ const updatePlace = async (request, response) => {
     }
 }
 
+const deletePlace = async (request, response) => {
+
+    try {
+        if (request.user) {
+
+            const id = request.params.id;
+            const result = await Place.findOneAndDelete({
+                _id: id
+            });
+            if (result) {
+                response.status(200).send({
+                    status: "The place has been deleted."
+                });
+            } else {
+                throw "The place couldn\'t be deleted.";
+            }
+        } else {
+            throw "The user isn\'t authenticated.";
+        }
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 module.exports = {
     getPlaces,
     savePlace,
     getPlace,
-    updatePlace
+    updatePlace,
+    deletePlace
 }

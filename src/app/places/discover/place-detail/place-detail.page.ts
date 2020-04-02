@@ -22,10 +22,12 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   private place: Place;
   private placeSub: Subscription;
   private isBookable: boolean;
+  private userId: string;
   isLoading: boolean = false;
 
   ngOnInit() {
     this.isLoading = true;
+    this.userId = this.authService.getUserId();
     this.route.params.subscribe(
       (params: Params) => {
         let id = params['placeID'];
@@ -95,6 +97,11 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
 
   navigateBack() {
     this.nvCntrl.navigateBack('/places/tabs/discover');
+  }
+
+  deletePlace(id: string) {
+    this.placeService.deletePlace(id);
+    this.navigateBack();
   }
 
   ngOnDestroy() {
