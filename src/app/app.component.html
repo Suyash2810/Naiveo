@@ -3,9 +3,14 @@
     <ion-content>
       <ion-list>
         <ion-list-header>
-          <ion-label>
-            Naiveo
-          </ion-label>
+          <div class="search">
+            <div class="search__bar">
+              <ion-searchbar animated debounce="500" color="secondary"></ion-searchbar>
+            </div>
+            <div class="search__settings">
+              <ion-icon name="settings" slot="icon-only"></ion-icon>
+            </div>
+          </div>
         </ion-list-header>
         <ion-menu-toggle menu="m1">
           <ion-item lines="none" routerLink="/places/tabs/discover">

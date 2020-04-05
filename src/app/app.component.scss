@@ -1,18 +1,8 @@
-// ion-menu {
-//     --background: url('./public/src/img/green-fields-2108707.jpg');
-
-//     ion-content {
-//         --background: transparent;
-
-//         .list-md {
-//             --background: transparent;
-//         }
-//     }
-// }
-
+$blue: rgb(35, 36, 63);
 
 ion-menu {
-    --background: rgba(0, 0, 0, .3) !important;
+    --background: linear-gradient(to top, rgba(35, 36, 63, 0.9), rgba(35, 36, 63, 0.8)),
+        url('./public/src/img/mountain-and-trees-reflection-1097491.jpg') no-repeat center fixed !important;
     --width: 100vw;
 
     ion-content {
@@ -21,6 +11,30 @@ ion-menu {
         ion-list-header {
             --background: transparent !important;
             --color: #FFFFFF !important;
+
+            .search {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height: 100%;
+
+                &__bar {
+                    display: inline-block;
+                    width: 80%;
+                }
+
+                &__settings {
+                    align-self: center;
+                    display: inline-block;
+
+                    ion-icon {
+                        width: 25px;
+                        height: 25px;
+                        margin-right: 10px;
+                        color: lighten($blue, 40%);
+                    }
+                }
+            }
         }
 
         ion-list {
