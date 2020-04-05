@@ -70,9 +70,6 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
       .then(sheet => {
         sheet.present();
       });
-
-
-
   }
 
   openBookingModal(data: 'select' | 'random') {
@@ -100,8 +97,23 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   }
 
   deletePlace(id: string) {
-    this.placeService.deletePlace(id);
-    this.navigateBack();
+
+    this.actionSheetCntrl.create({
+      header: 'Places',
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.placeService.deletePlace(id);
+          this.navigateBack();
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel'
+      }]
+    }).then(sheet => sheet.present());
   }
 
   ngOnDestroy() {
