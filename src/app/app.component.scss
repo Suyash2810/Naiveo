@@ -1,0 +1,40 @@
+// ion-menu {
+//     --background: url('./public/src/img/green-fields-2108707.jpg');
+
+//     ion-content {
+//         --background: transparent;
+
+//         .list-md {
+//             --background: transparent;
+//         }
+//     }
+// }
+
+
+ion-menu {
+    --background: rgba(0, 0, 0, .3) !important;
+    --width: 100vw;
+
+    ion-content {
+        --background: transparent !important;
+
+        ion-list-header {
+            --background: transparent !important;
+            --color: #FFFFFF !important;
+        }
+
+        ion-list {
+            background: transparent !important;
+        }
+
+        ion-item {
+            --background: transparent !important;
+            --color: #FFFFFF !important;
+
+            ion-icon {
+                padding-right: 10px !important;
+                color: white;
+            }
+        }
+    }
+}
