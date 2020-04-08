@@ -1,7 +1,15 @@
 $blue: rgb(35, 36, 63);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+$serif: 'Open Sans',
+sans-serif;
 
 %transparent-backround {
     --background: transparent !important;
+}
+
+%font-light {
+    font-family: $serif !important;
+    font-weight: 100 !important;
 }
 
 ion-menu {
@@ -56,6 +64,20 @@ ion-menu {
                                 border-radius: 15%;
                             }
                         }
+
+                        &__status {
+                            text-align: center;
+                        }
+
+                        &__text {
+                            font-size: 1.5rem;
+                            font-weight: 600 !important;
+                            display: inline-block;
+                            background-image: linear-gradient(to right, rgb(30, 144, 255), rgb(153, 50, 204));
+                            background-clip: text;
+                            color: transparent !important;
+                            @extend %font-light;
+                        }
                     }
                 }
             }
@@ -73,11 +95,13 @@ ion-menu {
 
             ion-icon {
                 color: white;
+                @extend %font-light;
             }
 
             ion-label {
                 font-size: 1.0rem;
                 color: white;
+                @extend %font-light;
             }
         }
     }
