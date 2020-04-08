@@ -1,17 +1,29 @@
 <ion-app>
   <ion-menu side="start" menuId="m1">
     <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="search">
+              <div class="search__bar">
+                <ion-searchbar animated debounce="500" color="secondary"></ion-searchbar>
+              </div>
+              <div class="search__settings">
+                <ion-icon name="settings" slot="icon-only"></ion-icon>
+              </div>
+            </div>
+            <div class="user">
+              <div class="user__image">
+                <img class="user__image-profile" [src]="user?.image" alt="{{user?.name}}">
+              </div>
+              <div class="user__status">
+                <span>&nbsp;</span>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-list>
-        <ion-list-header>
-          <div class="search">
-            <div class="search__bar">
-              <ion-searchbar animated debounce="500" color="secondary"></ion-searchbar>
-            </div>
-            <div class="search__settings">
-              <ion-icon name="settings" slot="icon-only"></ion-icon>
-            </div>
-          </div>
-        </ion-list-header>
         <ion-menu-toggle menu="m1">
           <ion-item lines="none" routerLink="/places/tabs/discover">
             <ion-icon name="business" slot="start"></ion-icon>

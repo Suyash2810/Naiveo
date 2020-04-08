@@ -4,13 +4,16 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './auth/auth.service';
-
+import { User } from './auth/user.model';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  private user: User;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -22,6 +25,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.autoUpdateAuthData();
+    this.authService.fetchUser();
+    this.authService._getUser().subscribe(user => this.user = user);
   }
 
   initializeApp() {

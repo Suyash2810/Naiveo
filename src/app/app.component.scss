@@ -1,37 +1,61 @@
 $blue: rgb(35, 36, 63);
 
+%transparent-backround {
+    --background: transparent !important;
+}
+
 ion-menu {
     --background: linear-gradient(to top, rgba(35, 36, 63, 0.9), rgba(35, 36, 63, 0.8)),
         url('./../assets/img/mountain-and-trees-reflection-1097491.jpg') no-repeat center fixed !important;
     --width: 100vw;
 
     ion-content {
-        --background: transparent !important;
+        @extend %transparent-backround;
 
-        ion-list-header {
-            --background: transparent !important;
-            --color: #FFFFFF !important;
+        ion-grid {
+            @extend %transparent-backround;
 
-            .search {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                height: 100%;
+            ion-row {
+                @extend %transparent-backround;
 
-                &__bar {
-                    display: inline-block;
-                    width: 80%;
-                }
+                ion-col {
+                    @extend %transparent-backround;
 
-                &__settings {
-                    align-self: center;
-                    display: inline-block;
+                    .search {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        height: 20%;
 
-                    ion-icon {
-                        width: 25px;
-                        height: 25px;
-                        margin-right: 10px;
-                        color: lighten($blue, 40%);
+                        &__bar {
+                            display: inline-block;
+                            width: 80%;
+                        }
+
+                        &__settings {
+                            align-self: center;
+                            display: inline-block;
+
+                            ion-icon {
+                                width: 25px;
+                                height: 25px;
+                                margin-right: 10px;
+                                color: lighten($blue, 40%);
+                            }
+                        }
+                    }
+
+                    .user {
+                        margin-top: 10%;
+
+                        &__image {
+                            width: 60%;
+                            margin: 0 auto;
+
+                            &-profile {
+                                border-radius: 15%;
+                            }
+                        }
                     }
                 }
             }
@@ -45,8 +69,14 @@ ion-menu {
             --background: transparent !important;
             --color: #FFFFFF !important;
 
+            margin-top: 0.5rem !important;
+
             ion-icon {
-                padding-right: 10px !important;
+                color: white;
+            }
+
+            ion-label {
+                font-size: 1.0rem;
                 color: white;
             }
         }
