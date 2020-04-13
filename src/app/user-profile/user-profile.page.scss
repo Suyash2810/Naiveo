@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+$serif: 'Open Sans',
+sans-serif;
+
+%font-light {
+    font-family: $serif !important;
+    font-weight: 100 !important;
+}
+
+ion-header {
+    --background: transparent !important;
+
+    ion-toolbar {
+        --background: transparent !important;
+    }
+}
+
+ion-content {
+    --background: linear-gradient(to top, rgba(35, 36, 63, 0.9), rgba(35, 36, 63, 0.8)), url("../../assets/img/mountain-and-trees-reflection-1097491.jpg") no-repeat center fixed !important;
+
+    ion-grid {
+        ion-row {
+            ion-col {
+                .profile {
+                    margin: 0 auto;
+                    margin-top: 6%;
+                    width: 12rem;
+                    height: 12rem;
+                    background-color: var(--ion-color-primary);
+                    clip-path: circle(50% at 50% 50%);
+                    -webkit-clip-path: circle(50% at 50% 50%);
+
+                    &__content {
+                        height: 100%;
+                    }
+
+                    &-text {
+                        text-align: center;
+
+                        &__name {
+                            text-align: center;
+                            font-size: 2rem;
+                            color: white;
+                            margin-top: 6%;
+                            @extend %font-light;
+                        }
+
+                        &__location {
+                            margin: 0;
+                            font-size: 1rem;
+                            @extend %font-light;
+                            display: inline-block;
+                            background-image: linear-gradient(to right, rgb(30, 144, 255), rgb(153, 50, 204));
+                            background-clip: text;
+                            -webkit-background-clip: text;
+                            color: transparent !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

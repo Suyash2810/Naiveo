@@ -233,17 +233,7 @@ export class AuthService {
         (user: User) => {
           this.user = user;
           this._user.next(this.user);
-        },
-        async error => {
-          const alert = await this.alertController.create({
-            header: 'Error',
-            subHeader: 'Cannot fetch user data.',
-            message: error,
-            buttons: ['OK']
-          });
-
-          await alert.present();
         }
-      )
+      );
   }
 }

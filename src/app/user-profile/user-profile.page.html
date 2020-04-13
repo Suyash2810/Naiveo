@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title *ngIf="isLoading">Profile Section.</ion-title>
     <ion-title *ngIf="!isLoading">{{user?.name}}</ion-title>
     <ion-buttons slot="start">
@@ -13,7 +13,13 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-img [src]="user?.image"></ion-img>
+        <div class="profile">
+          <img class="profile__content" [src]="user?.image" alt="user?.name">
+        </div>
+        <div class="profile-text">
+          <h6 class="profile-text__name">{{user?.name}}</h6>
+          <h6 class="profile-text__location">San Francisco</h6>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
