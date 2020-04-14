@@ -20,7 +20,34 @@
           <h6 class="profile-text__name">{{user?.name}}</h6>
           <h6 class="profile-text__location">San Francisco</h6>
         </div>
+        <div class="profile-data">
+          <div class="profile-data__item profile-data__item--1">&nbsp;</div>
+          <div class="profile-data__item profile-data__item--2">
+            <ion-chip outline color="tertiary">
+              <ion-icon name="people"></ion-icon>
+              <ion-label>Followers</ion-label>
+              <ion-icon name="arrow-forward"></ion-icon>
+            </ion-chip>
+          </div>
+          <div class="profile-data__item profile-data__item--3">&nbsp;</div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-dropleft-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="light">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

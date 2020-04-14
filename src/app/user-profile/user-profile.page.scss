@@ -56,6 +56,30 @@ ion-content {
                             color: transparent !important;
                         }
                     }
+
+                    &-data {
+                        margin-top: 8%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-around;
+
+                        &__item {
+
+                            &--2 {
+                                ion-chip {
+                                    padding: 1.5rem;
+
+                                    ion-icon {
+                                        font-size: 1.2rem;
+                                    }
+
+                                    ion-label {
+                                        font-size: 1.2rem !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
