@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.authService.autoUpdateAuthData();
     this.authService.fetchUser();
+    this.user = this.authService.getUser();
     this.authService._getUser().subscribe(user => this.user = user);
   }
 

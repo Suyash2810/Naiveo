@@ -21,9 +21,11 @@ export class UserProfilePage implements OnInit, OnDestroy {
     this.authService.fetchUser();
   }
 
-  ngOnInit() {
-
+  ionViewDidEnter() {
     this.user = this.authService.getUser();
+  }
+
+  ngOnInit() {
     this.userSub = this.authService._getUser().subscribe(
       (user) => {
         this.user = user;

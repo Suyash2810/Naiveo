@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { PlacesService } from '../places.service';
 import { Place } from '../places.model';
 import { SegmentChangeEventDetail } from '@ionic/core';
@@ -46,6 +46,10 @@ export class DiscoverPage implements OnInit, OnDestroy {
       this.tab = false;
       this.filterPlaces = this.fetchedPlaces.filter(place => place.userID != this.authService.getUserId());
     }
+  }
+
+  sideMenuOpen() {
+    this.authService.fetchUser();
   }
 
   ngOnDestroy() {
