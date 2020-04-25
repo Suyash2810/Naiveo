@@ -35,28 +35,28 @@
     <ion-grid class="sign-up-form-grid">
       <ion-row>
         <ion-col size-md="8" offset-md="2">
+          <div class="image-block">
+            <ion-img [src]="imagePreview">
+            </ion-img>
+            <input type="file" id="image" (change)="uploadImage($event)" #filepicker>
+            <span class="image-block__image_button" (click)="filepicker.click()">
+              <ion-icon name="camera" color="tertiary"></ion-icon>
+            </span>
+          </div>
+
+          <div class="toggle-block">
+            <ion-toggle color="tertiary" (ionChange)="toggleValue()"></ion-toggle>
+            <ion-chip outline color="tertiary">
+              <ion-label *ngIf="asUser">User</ion-label>
+              <ion-label *ngIf="!asUser">Tour Guide</ion-label>
+            </ion-chip>
+          </div>
           <ion-list>
-            <ion-item>
-              <ion-toggle color="primary" (ionChange)="toggleValue()"></ion-toggle>
-              <ion-chip outline color="tertiary">
-                <ion-label *ngIf="asUser">User</ion-label>
-                <ion-label *ngIf="!asUser">Tour Guide</ion-label>
-              </ion-chip>
-            </ion-item>
             <ion-item>
               <ion-label position="floating">Full Name</ion-label>
               <ion-input type="text" id="username" name="username" ngModel #username="ngModel" required></ion-input>
             </ion-item>
             <ion-text *ngIf="!username.valid && username.touched">Please enter a valid user name.</ion-text>
-            <ion-item>
-              <ion-img [src]="imagePreview">
-              </ion-img>
-            </ion-item>
-            <ion-item>
-              <ion-label>Upload User Image</ion-label>
-              <input type="file" id="image" (change)="uploadImage($event)" #filepicker>
-              <ion-button type="button" color="secondary" (click)="filepicker.click()">Upload</ion-button>
-            </ion-item>
             <ion-item>
               <ion-label position="floating">Email</ion-label>
               <ion-input type="email" id="email" name="email" ngModel #email="ngModel" required email></ion-input>
@@ -68,7 +68,7 @@
             </ion-item>
             <ion-text *ngIf="!pwd.valid && pwd.touched" color="danger">Please enter a valid password.</ion-text>
           </ion-list>
-          <ion-button type="submit" color="primary" [disabled]="!f.valid">Sign Up</ion-button>
+          <ion-button type="submit" color="tertiary" [disabled]="!f.valid" expand="full">Sign Up</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
