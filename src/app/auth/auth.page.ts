@@ -16,6 +16,8 @@ export class AuthPage implements OnInit {
   isLogin: boolean = true;
   file: File;
   imagePreview: string = "https://images.pexels.com/photos/2947917/pexels-photo-2947917.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+  asUser: boolean = true;
+
   constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController,
     private toastController: ToastController) { }
 
@@ -48,6 +50,11 @@ export class AuthPage implements OnInit {
     }
 
     reader.readAsDataURL(this.file);
+  }
+
+  toggleValue() {
+    this.asUser = !this.asUser;
+    console.log(this.asUser);
   }
 
   onSubmit() {

@@ -37,6 +37,13 @@
         <ion-col size-md="8" offset-md="2">
           <ion-list>
             <ion-item>
+              <ion-toggle color="primary" (ionChange)="toggleValue()"></ion-toggle>
+              <ion-chip outline color="tertiary">
+                <ion-label *ngIf="asUser">User</ion-label>
+                <ion-label *ngIf="!asUser">Tour Guide</ion-label>
+              </ion-chip>
+            </ion-item>
+            <ion-item>
               <ion-label position="floating">Full Name</ion-label>
               <ion-input type="text" id="username" name="username" ngModel #username="ngModel" required></ion-input>
             </ion-item>
