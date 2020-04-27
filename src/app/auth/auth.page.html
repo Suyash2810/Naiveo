@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
+<ion-content class="ion-text-center">
   <ion-segment value="sign-in" (ionChange)="changeSignMode($event)">
     <ion-segment-button value="sign-in">Sign In</ion-segment-button>
     <ion-segment-button value="sign-up">Sign Up</ion-segment-button>
@@ -31,10 +31,11 @@
     </ion-grid>
   </form>
 
-  <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLogin">
-    <ion-grid class="sign-up-form-grid">
-      <ion-row>
-        <ion-col size-md="8" offset-md="2">
+
+  <ion-grid class="sign-up-form-grid">
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLogin">
           <div class="image-block">
             <ion-img [src]="imagePreview">
             </ion-img>
@@ -69,8 +70,8 @@
             <ion-text *ngIf="!pwd.valid && pwd.touched" color="danger">Please enter a valid password.</ion-text>
           </ion-list>
           <ion-button type="submit" color="tertiary" [disabled]="!f.valid" expand="full">Sign Up</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
