@@ -16,7 +16,7 @@ const register = async (request, response) => {
             email: body.email,
             password: body.password,
             image: url,
-            identity: identity
+            identity: body.identity
         });
         let result = await user.save();
         if (result) {
