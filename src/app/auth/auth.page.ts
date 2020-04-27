@@ -54,7 +54,6 @@ export class AuthPage implements OnInit {
 
   toggleValue() {
     this.asUser = !this.asUser;
-    console.log(this.asUser);
   }
 
   onSubmit() {
@@ -65,7 +64,7 @@ export class AuthPage implements OnInit {
         keyboardClose: true,
         message: "Registering user"
       }).then(loadingController => {
-        this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file)
+        this.authService.signup(this.form.value.username, this.form.value.email, this.form.value.password, this.file, this.asUser)
           .subscribe(
             response => {
               loadingController.present();

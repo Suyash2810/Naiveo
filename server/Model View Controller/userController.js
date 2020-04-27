@@ -9,13 +9,14 @@ const {
 const register = async (request, response) => {
 
     try {
-        let body = pick(request.body, ['username', 'email', 'password']);
+        let body = pick(request.body, ['username', 'email', 'password', 'identity']);
         let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
         let user = new User({
             name: body.username,
             email: body.email,
             password: body.password,
-            image: url
+            image: url,
+            identity: identity
         });
         let result = await user.save();
         if (result) {
@@ -59,21 +60,23 @@ const login = async (request, response) => {
 const fetchUserData = async (request, response) => {
 
     try {
-        if(request.user){
+        if (request.user) {
             const id = request.user._id;
-            const user = await User.findOne({_id: id});
-            if(user){
+            const user = await User.findOne({
+                _id: id
+            });
+            if (user) {
                 response.status(200).send({
                     status: "The user data has been fetched.",
                     result: user
                 });
-            }else{
+            } else {
                 throw "Data could not be fetched.";
             }
-        }else {
+        } else {
             throw "User not authenticated.";
         }
-    }catch(e) {
+    } catch (e) {
         response.status(404).send({
             error: e
         });

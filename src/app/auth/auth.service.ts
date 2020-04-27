@@ -199,14 +199,17 @@ export class AuthService {
     });
   }
 
-  signup(username: string, email: string, password: string, image: File) {
+  signup(username: string, email: string, password: string, image: File, identity: boolean) {
 
     type responseType = { status: string, result: any };
+    let identify: string = identity == true ? "user": "tour guide";
+
     const data = new FormData();
     data.append('username', username);
     data.append('email', email);
     data.append('password', password);
     data.append('image', image);
+    data.append('identity', identify);
 
     return this.httpClient.post<responseType>("http://localhost:3000/register", data);
   }

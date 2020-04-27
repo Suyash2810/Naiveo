@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String
+    },
+    identity: {
+        required: true,
+        type: String
     }
 });
 
@@ -37,7 +41,7 @@ userSchema.methods.toJSON = function () {
 
     var user = this;
     let obj = user.toObject();
-    let data = pick(obj, ['_id', 'name', 'email', 'image']);
+    let data = pick(obj, ['_id', 'name', 'email', 'image', 'identity']);
     return data;
 }
 
