@@ -202,7 +202,7 @@ export class AuthService {
   signup(username: string, email: string, password: string, image: File, identity: boolean) {
 
     type responseType = { status: string, result: any };
-    let identify: string = identity == true ? "user": "tour guide";
+    let identify: string = identity == true ? "user" : "tour guide";
 
     const data = new FormData();
     data.append('username', username);
@@ -227,7 +227,8 @@ export class AuthService {
               id: user._id,
               name: user.name,
               email: user.email,
-              image: user.image
+              image: user.image,
+              identity: user.identity
             }
           }
         )
