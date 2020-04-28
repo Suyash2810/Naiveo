@@ -52,24 +52,47 @@ export class UserProfilePage implements OnInit, OnDestroy {
         }, {
           text: 'Okay',
           handler: () => {
-            this.loadingController.create({
-              message: 'Deleting...',
-              keyboardClose: true
-            }).then(loader => {
-              loader.present();
-              this.authService.deleteAccount().subscribe(
-                result => {
-                  this.toastController.create({
-                    message: result.status,
-                    duration: 2000
-                  }).then(toast => {
-                    toast.present();
-                    loader.dismiss();
-                    this.authService.logout();
-                  });
+            this.alertController.create({
+              header: "Deactivate!",
+              message: "You can deactivate your account instead!",
+              buttons: [
+                {
+                  text: 'Cancel',
+                  role: 'cancel'
+                },
+                {
+                  text: 'Okay',
+                  handler: () => {
+                    console.log("Deactivating Account.");
+                  }
+                },
+                {
+                  text: 'Delete',
+                  handler: () => {
+                    this.loadingController.create({
+                      message: 'Deleting...',
+                      keyboardClose: true
+                    }).then(loader => {
+                      loader.present();
+                      this.authService.deleteAccount().subscribe(
+                        result => {
+                          this.toastController.create({
+                            message: result.status,
+                            duration: 2000
+                          }).then(toast => {
+                            toast.present();
+                            loader.dismiss();
+                            this.authService.logout();
+                          });
+                        }
+                      )
+                    });
+                  }
                 }
-              )
-            });
+              ]
+            }).then(alert => {
+              alert.present();
+            })
           }
         }
       ]

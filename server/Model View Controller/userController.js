@@ -1,6 +1,4 @@
-const {
-    User
-} = require('../models/user');
+const models = require('../models/index');
 
 const {
     pick
@@ -11,7 +9,7 @@ const register = async (request, response) => {
     try {
         let body = pick(request.body, ['username', 'email', 'password', 'identity']);
         let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
-        let user = new User({
+        let user = new models.User({
             name: body.username,
             email: body.email,
             password: body.password,
@@ -36,7 +34,7 @@ const login = async (request, response) => {
 
     try {
         let body = pick(request.body, ['email', 'password']);
-        let user = await User.findByCredentials(body.email, body.password);
+        let user = await models.User.findByCredentials(body.email, body.password);
         if (user) {
             let token = await user.generateAuthToken();
 
@@ -61,7 +59,7 @@ const fetchUserData = async (request, response) => {
 
     try {
         if (request.user) {
-            const user = await User.findOne({
+            const user = await models.User.findOne({
                 _id: request.user._id
             });
             if (user) {
@@ -87,8 +85,15 @@ const deleteAccount = async (request, response) => {
     try {
         if (request.user) {
 
-            const result = User.findOneAndDelete({
+            const result = models.User.findOneAndDelete({
                 _id: request.user._id
+            });
+
+            await models.Place.deleteMany({
+                user: request.user._id
+            });
+            await models.Booking.deleteMany({
+                userId: request.user._id
             });
 
             if (result) {
