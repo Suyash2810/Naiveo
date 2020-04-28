@@ -34,6 +34,7 @@ const imageExtract = require('./middleware/imageExtract');
 app.post('/register', imageExtract, userController.register);
 app.post('/login', userController.login);
 app.get('/user', authorization, userController.fetchUserData);
+app.delete('/user', authorization, userController.deleteAccount);
 
 // ------------------------------------------Place Requests--------------------------------------------->
 

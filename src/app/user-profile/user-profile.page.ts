@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,8 +15,11 @@ export class UserProfilePage implements OnInit, OnDestroy {
   user: User;
   isLoading: boolean = false;
   userSub: Subscription;
+  deleteSub: Subscription;
 
-  constructor(private authService: AuthService, private alertController: AlertController) { }
+  constructor(private authService: AuthService, private alertController: AlertController,
+    private loadingController: LoadingController, private toastController: ToastController,
+    private router: Router) { }
 
   ionViewWillEnter() {
     this.isLoading = true;
@@ -48,7 +52,24 @@ export class UserProfilePage implements OnInit, OnDestroy {
         }, {
           text: 'Okay',
           handler: () => {
-            console.log('Confirm Okay');
+            this.loadingController.create({
+              message: 'Deleting...',
+              keyboardClose: true
+            }).then(loader => {
+              loader.present();
+              this.authService.deleteAccount().subscribe(
+                result => {
+                  this.toastController.create({
+                    message: result.status,
+                    duration: 2000
+                  }).then(toast => {
+                    toast.present();
+                    loader.dismiss();
+                    this.authService.logout();
+                  });
+                }
+              )
+            });
           }
         }
       ]

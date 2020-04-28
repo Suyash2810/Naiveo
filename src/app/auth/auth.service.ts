@@ -17,7 +17,7 @@ export class AuthService {
   private username: string;
   private user: User;
   private _user = new Subject<User>();
-  fetchUserData = new EventEmitter<{user: User}>();
+  fetchUserData = new EventEmitter<{ user: User }>();
   private _isAuthenticated = new Subject<boolean>();
   authTimer: any;
 
@@ -240,5 +240,10 @@ export class AuthService {
           this._user.next(this.user);
         }
       );
+  }
+
+  deleteAccount() {
+    type responseType = { status: string };
+    return this.httpClient.delete<responseType>("http://localhost:3000/user");
   }
 }

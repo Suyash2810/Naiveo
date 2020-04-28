@@ -61,9 +61,8 @@ const fetchUserData = async (request, response) => {
 
     try {
         if (request.user) {
-            const id = request.user._id;
             const user = await User.findOne({
-                _id: id
+                _id: request.user._id
             });
             if (user) {
                 response.status(200).send({
@@ -74,7 +73,7 @@ const fetchUserData = async (request, response) => {
                 throw "Data could not be fetched.";
             }
         } else {
-            throw "User not authenticated.";
+            throw "User is not authenticated.";
         }
     } catch (e) {
         response.status(404).send({
@@ -83,8 +82,32 @@ const fetchUserData = async (request, response) => {
     }
 }
 
+const deleteAccount = async (request, response) => {
+
+    try {
+        if (request.user) {
+
+            const result = User.findOneAndDelete({
+                _id: request.user._id
+            });
+
+            if (result) {
+                response.status(200).send({
+                    status: "Your account has been deleted."
+                });
+            } else {
+                throw "Accoutn couldn\'t be deleted.";
+            }
+        }
+    } catch (e) {
+        response.status(400).send({
+            error: e
+        });
+    }
+}
 module.exports = {
     register,
     login,
-    fetchUserData
+    fetchUserData,
+    deleteAccount
 }
