@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
@@ -17,6 +17,7 @@ export class AuthService {
   private username: string;
   private user: User;
   private _user = new Subject<User>();
+  fetchUserData = new EventEmitter<{user: User}>();
   private _isAuthenticated = new Subject<boolean>();
   authTimer: any;
 
@@ -92,7 +93,7 @@ export class AuthService {
           const alert = await this.alertController.create({
             header: 'Error',
             subHeader: 'An error has occured.',
-            message: error,
+            message: "The user couldn\'t be logged in.",
             buttons: ['OK']
           });
 

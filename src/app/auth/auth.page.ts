@@ -30,10 +30,6 @@ export class AuthPage implements OnInit {
   ngOnInit() {
   }
 
-  login() {
-
-  }
-
   changeSignMode(event: CustomEvent<SegmentChangeEventDetail>) {
     if (event.detail.value === "sign-in") {
       this.isLogin = true
