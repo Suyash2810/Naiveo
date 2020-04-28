@@ -59,9 +59,18 @@ ion-menu {
                         &__image {
                             width: 60%;
                             margin: 0 auto;
+                            position: relative;
 
                             &-profile {
                                 border-radius: 15%;
+                            }
+
+                            ion-icon {
+                                position: absolute;
+                                bottom: 0;
+                                right: 0;
+                                color: var(--ion-color-tertiary);
+                                transform: scale(1.8);
                             }
                         }
 

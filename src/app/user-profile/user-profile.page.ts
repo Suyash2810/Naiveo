@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +15,7 @@ export class UserProfilePage implements OnInit, OnDestroy {
   isLoading: boolean = false;
   userSub: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertController: AlertController) { }
 
   ionViewWillEnter() {
     this.isLoading = true;
@@ -32,6 +33,28 @@ export class UserProfilePage implements OnInit, OnDestroy {
         this.isLoading = false;
       }
     );
+  }
+
+  async deleteAccount() {
+
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you <strong>sure</strong>?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   ngOnDestroy() {

@@ -15,6 +15,7 @@
             <div class="user">
               <div class="user__image">
                 <img class="user__image-profile" [src]="user?.image" alt="{{user?.name}}">
+                <ion-icon *ngIf="user?.identity == 'tour guide'" name="checkmark-circle-outline"></ion-icon>
               </div>
               <br>
               <div class="user__status">
