@@ -49,10 +49,10 @@ export class PlacesService {
           this._places.next(this.places);
         },
         async error => {
+
           const alert = await this.alertController.create({
             header: 'Error',
-            subHeader: 'An error has occured.',
-            message: error,
+            message: error.error.error,
             buttons: ['OK']
           });
 

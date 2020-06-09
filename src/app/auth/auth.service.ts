@@ -89,11 +89,11 @@ export class AuthService {
           });
         },
         async (error) => {
-
+          console.log(error.error);
           const alert = await this.alertController.create({
             header: 'Error',
-            subHeader: 'An error has occured.',
-            message: "The user couldn\'t be logged in.",
+            subHeader: error.error.status,
+            message: "Email or password is incorrect.",
             buttons: ['OK']
           });
 
