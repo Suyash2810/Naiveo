@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserProfilePageRoutingModule } from './user-profile-routing.module';
 
 import { UserProfilePage } from './user-profile.page';
-import { LoadingSpinnerModule } from '../bookings/loading-spinner/loading-spinner.module';
+import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [

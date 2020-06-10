@@ -8,7 +8,7 @@ import { OffersPageRoutingModule } from './offers-routing.module';
 
 import { OffersPage } from './offers.page';
 import { OfferItemComponent } from './offer-item/offer-item.component';
-import { LoadingSpinnerModule } from 'src/app/bookings/loading-spinner/loading-spinner.module';
+import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [

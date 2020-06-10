@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DiscoverPageRoutingModule } from './discover-routing.module';
 
 import { DiscoverPage } from './discover.page';
-import { LoadingSpinnerModule } from 'src/app/bookings/loading-spinner/loading-spinner.module';
+import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [

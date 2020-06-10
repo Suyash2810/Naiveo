@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { LoadingSpinnerModule } from './bookings/loading-spinner/loading-spinner.module';
+import { LoadingSpinnerModule } from './shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   declarations: [AppComponent],
