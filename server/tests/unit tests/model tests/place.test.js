@@ -36,7 +36,18 @@ describe("Place Model Test", () => {
             price: 124.23,
             availableFrom: new Date(),
             availableTill: new Date(),
-            user: new ObjectId()
+            user: new ObjectId(),
+            visit: [
+                {
+                    name: "xyz",
+                    price: 12
+                },
+                {
+                    name: "abc",
+                    price: 10
+                }
+            ],
+            ratings: [1, 5, 3, 2, 4, 5, 1, 2, 3, 4, 5, 5, 5]
         };
 
         const place = new Place(data);

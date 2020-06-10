@@ -74,9 +74,9 @@ export class AuthPage implements OnInit {
                 toastController.present();
               });
             },
-            error => {
+            () => {
               this.toastController.create({
-                message: error,
+                message: "Not registered. Try again!",
                 duration: 2000
               }).then(toastController => {
                 this.router.navigateByUrl('/auth');
