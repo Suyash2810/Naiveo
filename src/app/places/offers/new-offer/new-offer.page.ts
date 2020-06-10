@@ -57,7 +57,7 @@ export class NewOfferPage implements OnInit {
       return;
     }
 
-    this.placeService.addPlace(this.form.value.title, this.form.value.description, +this.form.value.price, new Date(this.form.value.dateFrom), new Date(this.form.value.dateTill), this.form.value.image);
+    this.placeService.addPlace(this.form.value.title, this.form.value.description, +this.form.value.price, new Date(this.form.value.dateFrom), new Date(this.form.value.dateTill), this.form.value.image, this.form.value.visit);
     this.form.reset();
     this.router.navigate(['/', 'places', 'tabs', 'offers']);
   }

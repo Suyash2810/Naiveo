@@ -83,9 +83,9 @@
             <ion-item *ngFor="let location of form.get('visit').controls; let i = index">
               <ng-container [formGroup]="location">
                 <ion-label position="floating">Name</ion-label>
-                <ion-input [formControlName]="'name'"></ion-input>
+                <ion-input type="text" [formControlName]="'name'"></ion-input>
                 <ion-label position="floating">Price</ion-label>
-                <ion-input [formControlName]="'price'"></ion-input>
+                <ion-input type="number" [formControlName]="'price'"></ion-input>
               </ng-container>
             </ion-item>
           </ion-list>

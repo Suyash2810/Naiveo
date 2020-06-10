@@ -33,8 +33,10 @@ const getPlaces = async (request, response) => {
 const savePlace = async (request, response) => {
 
     try {
-        let body = pick(request.body, ['title', 'description', 'price', 'availableFrom', 'availableTill', 'user']);
+        let body = pick(request.body, ['title', 'description', 'price', 'availableFrom', 'availableTill', 'user', 'visit']);
         let url = request.protocol + "://" + request.get('host') + '/images/' + request.file.filename;
+
+        let visit = JSON.parse(body.visit);
 
         let place = new Place({
             title: body.title,
@@ -43,12 +45,11 @@ const savePlace = async (request, response) => {
             availableFrom: new Date(body.availableFrom),
             availableTill: new Date(body.availableTill),
             user: new ObjectId(body.user),
-            imageUrl: url
+            imageUrl: url,
+            visit: visit
         });
 
-
         let result = await place.save();
-
 
         if (result) {
             response.status(200).send({

@@ -115,11 +115,11 @@ export class PlacesService {
     return this._place.asObservable();
   }
 
-  addPlace(title: string, description: string, price: number, dateFrom: Date, dateTill: Date, image: File) {
+  addPlace(title: string, description: string, price: number, dateFrom: Date, dateTill: Date, image: File, visit: Array<any>) {
 
     type responseType = { status: string, result: any };
     const userId = this.authService.getUserId();
-
+    const locations = JSON.stringify(visit);
     const data = new FormData();
     data.append('title', title);
     data.append('description', description);
@@ -128,6 +128,8 @@ export class PlacesService {
     data.append('availableTill', dateTill.toISOString());
     data.append('image', image);
     data.append('user', userId);
+    data.append('visit', locations);
+
 
     this.httpClient.post<responseType>("http://localhost:3000/place", data)
       .subscribe(async (response) => {
