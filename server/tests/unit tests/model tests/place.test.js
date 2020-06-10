@@ -46,8 +46,7 @@ describe("Place Model Test", () => {
                     name: "abc",
                     price: 10
                 }
-            ],
-            ratings: [1, 5, 3, 2, 4, 5, 1, 2, 3, 4, 5, 5, 5]
+            ]
         };
 
         const place = new Place(data);

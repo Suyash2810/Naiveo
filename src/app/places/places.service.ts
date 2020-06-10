@@ -37,7 +37,8 @@ export class PlacesService {
                 price: place.price,
                 availableFrom: place.availableFrom,
                 availableTill: place.availableTill,
-                userID: place.user
+                userID: place.user,
+                visit: place.visit
               }
             });
           }
@@ -86,7 +87,8 @@ export class PlacesService {
             price: place.price,
             availableFrom: place.availableFrom,
             availableTill: place.availableTill,
-            userID: place.user
+            userID: place.user,
+            visit: place.visit
           }
         })
       )
@@ -174,7 +176,8 @@ export class PlacesService {
               price: place.price,
               availableFrom: place.availableFrom,
               availableTill: place.availableTill,
-              userID: place.user
+              userID: place.user,
+              visit: place.visit
             }
           }
         )

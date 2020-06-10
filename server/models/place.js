@@ -41,12 +41,6 @@ const placeSchema = new mongoose.Schema({
                 required: true
             } 
         }
-    ],
-    ratings: [
-        {
-            required: true,
-            type: Number
-        }
     ]
 });
 
