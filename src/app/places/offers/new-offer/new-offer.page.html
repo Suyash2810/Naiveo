@@ -72,7 +72,23 @@
         <ion-col size-sm="12">
           <ion-img [src]="imagePreview"></ion-img>
           <input type="file" (change)="uploadImage($event)" #filepicker>
-          <ion-button type="button" color="secondary" (click)="filepicker.click()">Upload</ion-button>
+          <ion-button type="button" class="uploadbtn" color="secondary" (click)="filepicker.click()">Upload</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row formArrayName="visit">
+        <ion-col>
+          <ion-text>Tour Locations</ion-text>
+          <ion-button class="" type="button" color="secondary" (click)="onAddControl()">Add</ion-button>
+          <ion-list>
+            <ion-item *ngFor="let location of form.get('visit').controls; let i = index">
+              <ng-container [formGroup]="location">
+                <ion-label position="floating">Name</ion-label>
+                <ion-input [formControlName]="'name'"></ion-input>
+                <ion-label position="floating">Price</ion-label>
+                <ion-input [formControlName]="'price'"></ion-input>
+              </ng-container>
+            </ion-item>
+          </ion-list>
         </ion-col>
       </ion-row>
     </ion-grid>

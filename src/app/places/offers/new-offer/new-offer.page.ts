@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { PlacesService } from '../../places.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,8 @@ export class NewOfferPage implements OnInit {
       price: new FormControl(0, { validators: [Validators.required, Validators.minLength(1)] }),
       dateFrom: new FormControl(null, { validators: [Validators.required] }),
       dateTill: new FormControl(null, { validators: Validators.required }),
-      image: new FormControl(null, { validators: Validators.required })
+      image: new FormControl(null, { validators: Validators.required }),
+      visit: new FormArray([])
     });
   }
 
@@ -38,6 +39,16 @@ export class NewOfferPage implements OnInit {
     }
 
     reader.readAsDataURL(file);
+  }
+
+  onAddControl() {
+
+    let group = new FormGroup({
+      name: new FormControl(null, { validators: [Validators.required] }),
+      price: new FormControl(null, { validators: [Validators.required] })
+    });
+
+    (<FormArray>this.form.get('visit')).push(group);
   }
 
   onSubmit() {
