@@ -4,6 +4,8 @@ import { Place } from '../places.model';
 import { IonItemSliding } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/auth/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-offers',
@@ -15,8 +17,10 @@ export class OffersPage implements OnInit, OnDestroy {
   offers: Place[] = [];
   offerSub: Subscription;
   isLoading: boolean = false;
+  user: User;
+  userSub: Subscription;
 
-  constructor(private placeService: PlacesService, private router: Router) { }
+  constructor(private placeService: PlacesService, private router: Router, private authService: AuthService) { }
 
   ionViewWillEnter() {
     this.isLoading = true;
@@ -29,6 +33,13 @@ export class OffersPage implements OnInit, OnDestroy {
       this.offers = offers;
       this.isLoading = false;
     });
+
+    this.authService.fetchUser();
+    this.userSub = this.authService._getUser().subscribe(
+      (user: User) => {
+        this.user = user;
+      }
+    );
   }
 
   onEdit(id: string, slidItem: IonItemSliding) {

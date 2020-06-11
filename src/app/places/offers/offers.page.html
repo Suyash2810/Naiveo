@@ -4,7 +4,7 @@
       <ion-menu-button menu="m1"></ion-menu-button>
     </ion-buttons>
     <ion-title>Offers</ion-title>
-    <ion-buttons slot="primary">
+    <ion-buttons slot="primary" *ngIf="user?.identity != 'user'">
       <ion-button routerLink="/places/tabs/offers/new">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
