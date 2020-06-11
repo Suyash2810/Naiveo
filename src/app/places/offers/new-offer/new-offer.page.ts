@@ -51,6 +51,10 @@ export class NewOfferPage implements OnInit {
     (<FormArray>this.form.get('visit')).push(group);
   }
 
+  removeLocation(i: number) {
+    (<FormArray>this.form.get('visit')).removeAt(i);
+  }
+
   onSubmit() {
 
     if (!this.form.valid) {
