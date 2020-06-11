@@ -85,11 +85,11 @@
             <ion-button class="addbtn" type="button" color="tertiary" (click)="onAddControl()">Add</ion-button>
           </div>
           <ion-row>
-            <ion-col size="4">
+            <ion-col size="5">
               <ion-list class="locations__list">
                 <ion-item *ngFor="let location of form.get('visit').controls; let i = index"
                   class="locations__list-item">
-                  <div class="locations__list-item-container locations__list-item-container--1">
+                  <div class="locations__list-item-container">
                     <ng-container [formGroup]="location">
                       <ion-label position="floating">Name</ion-label>
                       <ion-input type="text" [formControlName]="'name'"></ion-input>
@@ -99,16 +99,27 @@
               </ion-list>
             </ion-col>
 
-            <ion-col size="8">
+            <ion-col size="3">
               <ion-list class="locations__list">
                 <ion-item *ngFor="let location of form.get('visit').controls; let i = index"
                   class="locations__list-item">
-                  <div class="locations__list-item-container locations__list-item-container--2">
+                  <div class="locations__list-item-container">
                     <ng-container [formGroup]="location">
                       <ion-label position="floating">Price</ion-label>
                       <ion-input type="text" [formControlName]="'price'"></ion-input>
                     </ng-container>
                   </div>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+
+            <ion-col size="4" class="locations__cancel">
+              <ion-list class="locations__list">
+                <ion-item *ngFor="let location of form.get('visit').controls; let i = index"
+                  class="locations__list-item" lines="none">
+                  <ion-button type="button" color="primary" (click)="removeLocation(i)">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
                 </ion-item>
               </ion-list>
             </ion-col>
