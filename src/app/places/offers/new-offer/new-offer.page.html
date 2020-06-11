@@ -72,23 +72,47 @@
         <ion-col size-sm="12">
           <ion-img [src]="imagePreview"></ion-img>
           <input type="file" (change)="uploadImage($event)" #filepicker>
-          <ion-button type="button" class="uploadbtn" color="secondary" (click)="filepicker.click()">Upload</ion-button>
+          <div class="ion-text-center">
+            <ion-button type="button" class="uploadbtn" color="secondary" (click)="filepicker.click()">Upload
+            </ion-button>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row formArrayName="visit">
-        <ion-col>
-          <ion-text>Tour Locations</ion-text>
-          <ion-button class="" type="button" color="secondary" (click)="onAddControl()">Add</ion-button>
-          <ion-list>
-            <ion-item *ngFor="let location of form.get('visit').controls; let i = index">
-              <ng-container [formGroup]="location">
-                <ion-label position="floating">Name</ion-label>
-                <ion-input type="text" [formControlName]="'name'"></ion-input>
-                <ion-label position="floating">Price</ion-label>
-                <ion-input type="number" [formControlName]="'price'"></ion-input>
-              </ng-container>
-            </ion-item>
-          </ion-list>
+        <ion-col class="locations">
+          <div class="locations__text-box">
+            <ion-text>Tour Locations</ion-text>
+            <ion-button class="addbtn" type="button" color="tertiary" (click)="onAddControl()">Add</ion-button>
+          </div>
+          <ion-row>
+            <ion-col size="4">
+              <ion-list class="locations__list">
+                <ion-item *ngFor="let location of form.get('visit').controls; let i = index"
+                  class="locations__list-item">
+                  <div class="locations__list-item-container locations__list-item-container--1">
+                    <ng-container [formGroup]="location">
+                      <ion-label position="floating">Name</ion-label>
+                      <ion-input type="text" [formControlName]="'name'"></ion-input>
+                    </ng-container>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+
+            <ion-col size="8">
+              <ion-list class="locations__list">
+                <ion-item *ngFor="let location of form.get('visit').controls; let i = index"
+                  class="locations__list-item">
+                  <div class="locations__list-item-container locations__list-item-container--2">
+                    <ng-container [formGroup]="location">
+                      <ion-label position="floating">Price</ion-label>
+                      <ion-input type="text" [formControlName]="'price'"></ion-input>
+                    </ng-container>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-grid>
