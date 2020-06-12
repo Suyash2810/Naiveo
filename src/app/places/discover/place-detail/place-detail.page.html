@@ -19,18 +19,18 @@
     <!-- <ion-card-header>
       <ion-card-subtitle>{{place?.price | currency}}</ion-card-subtitle>
     </ion-card-header> -->
-    <ion-row class="place-detail__header place-detail__header-row">
-      <ion-col class="place-detail__header-col">
+    <ion-row class="place-detail__header">
+      <ion-col>
         <ion-text>{{place?.title}}</ion-text>
       </ion-col>
     </ion-row>
-    <ion-row class="place-detail__chips place-detail__chips-row">
-      <ion-col class="place-detail__chips-col">
+    <ion-row class="place-detail__chips">
+      <ion-col>
         <ion-chip outline color="primary">
           <ion-icon name="cash"></ion-icon>
           <ion-label>Cost</ion-label>
         </ion-chip>
-        <ion-chip outline color="secondary">
+        <ion-chip outline color="warning">
           <ion-icon name="star-half"></ion-icon>
           <ion-label>Rating</ion-label>
         </ion-chip>
@@ -40,9 +40,26 @@
         </ion-chip>
       </ion-col>
     </ion-row>
-    <ion-card-content>
-      {{place?.description}}
-    </ion-card-content>
+    <ion-row class="place-detail__description">
+      <ion-col>
+        <ion-text>
+          {{place?.description}}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="place-detail__locations">
+      <ion-col>
+        <ion-text>Locations</ion-text>
+        <ion-list>
+          <ion-item *ngFor="let location of place.visit" lines="none">
+            <ion-text>{{location?.name}}</ion-text>
+            <ion-chip outline color="primary">
+              <ion-label>{{location?.price}}</ion-label>
+            </ion-chip>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <div class="ion-text-center">
     <ion-button color="primary" [disabled]="!isBookable" (click)="bookPlace()">Book</ion-button>

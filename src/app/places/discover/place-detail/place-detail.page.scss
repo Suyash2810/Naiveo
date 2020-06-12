@@ -7,16 +7,16 @@ ion-content {
 
             ion-col {
                 padding: 0 1rem;
+                margin-top: 5%;
             }
         }
     }
 
     .place-detail {
+
         &__header {
-            &-col {
-                padding: 1rem;
-                margin-top: 5%;
-                margin-bottom: 5%;
+
+            ion-col {
 
                 ion-text {
                     font-size: 1.25rem;
@@ -26,10 +26,53 @@ ion-content {
 
         &__chips {
 
-            &-col {
+            ion-col {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
+            }
+        }
+
+        &__description {
+
+            ion-col {
+
+                margin-top: 5%;
+
+                ion-text {
+                    font-weight: lighter;
+                    font-size: 0.875rem;
+                }
+            }
+        }
+
+        &__locations {
+
+            ion-col {
+
+                ion-text {
+                    font-weight: bold;
+                }
+
+                ion-list {
+                    ion-item {
+
+                        position: relative;
+                        --inner-padding-start: 0 !important;
+                        --padding-start: 0 !important;
+
+                        ion-text {
+                            font-weight: lighter !important;
+                            font-size: 0.8rem;
+                        }
+
+                        ion-chip {
+                            position: absolute;
+                            right: 0;
+                        }
+
+                    }
+                }
             }
         }
     }
