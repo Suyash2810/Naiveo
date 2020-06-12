@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Place } from '../../places.model';
 import { PlacesService } from '../../places.service';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';

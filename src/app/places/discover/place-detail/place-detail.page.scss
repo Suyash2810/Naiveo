@@ -1,0 +1,36 @@
+ion-content {
+
+    ion-grid {
+        padding: 0;
+
+        ion-row {
+
+            ion-col {
+                padding: 0 1rem;
+            }
+        }
+    }
+
+    .place-detail {
+        &__header {
+            &-col {
+                padding: 1rem;
+                margin-top: 5%;
+                margin-bottom: 5%;
+
+                ion-text {
+                    font-size: 1.25rem;
+                }
+            }
+        }
+
+        &__chips {
+
+            &-col {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+    }
+}

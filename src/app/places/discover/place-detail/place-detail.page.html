@@ -14,16 +14,36 @@
 
 <ion-content>
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <ion-card *ngIf="!isLoading">
+  <ion-grid *ngIf="!isLoading" class="place-detail">
     <img src="{{place?.imageUrl}}" />
-    <ion-card-header>
+    <!-- <ion-card-header>
       <ion-card-subtitle>{{place?.price | currency}}</ion-card-subtitle>
-      <ion-card-title>{{place?.title}}</ion-card-title>
-    </ion-card-header>
+    </ion-card-header> -->
+    <ion-row class="place-detail__header place-detail__header-row">
+      <ion-col class="place-detail__header-col">
+        <ion-text>{{place?.title}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="place-detail__chips place-detail__chips-row">
+      <ion-col class="place-detail__chips-col">
+        <ion-chip outline color="primary">
+          <ion-icon name="cash"></ion-icon>
+          <ion-label>Cost</ion-label>
+        </ion-chip>
+        <ion-chip outline color="secondary">
+          <ion-icon name="star-half"></ion-icon>
+          <ion-label>Rating</ion-label>
+        </ion-chip>
+        <ion-chip outline color="tertiary">
+          <ion-icon name="hourglass"></ion-icon>
+          <ion-label>Validity</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
     <ion-card-content>
       {{place?.description}}
     </ion-card-content>
-  </ion-card>
+  </ion-grid>
   <div class="ion-text-center">
     <ion-button color="primary" [disabled]="!isBookable" (click)="bookPlace()">Book</ion-button>
   </div>
