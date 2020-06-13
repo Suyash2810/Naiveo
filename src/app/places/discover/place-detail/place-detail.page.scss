@@ -75,5 +75,18 @@ ion-content {
                 }
             }
         }
+
+        &-buttons {
+            margin-top: 5%;
+            margin-bottom: 10%;
+
+            ion-button:first-child {
+                margin-right: 2.5%;
+            }
+
+            ion-button:last-child {
+                margin-left: 2.5%;
+            }
+        }
     }
 }

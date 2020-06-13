@@ -61,7 +61,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div class="ion-text-center">
-    <ion-button color="primary" [disabled]="!isBookable" (click)="bookPlace()">Book</ion-button>
+  <div class="place-detail-buttons ion-text-center">
+    <ion-button color="tertiary" (click)="review()">
+      <ion-icon name="chatboxes" slot="start"></ion-icon>Review
+    </ion-button>
+    <ion-button color="tertiary" [disabled]="!isBookable" (click)="bookPlace()">
+      <ion-icon name="bookmark" slot="start"></ion-icon> Book
+    </ion-button>
   </div>
 </ion-content>
