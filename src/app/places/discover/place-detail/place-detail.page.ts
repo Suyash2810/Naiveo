@@ -97,7 +97,8 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
     const model = await this.modalCntrl.create({
       component: ReviewsComponent,
       componentProps: {
-        placeId: this.place.id
+        placeId: this.place.id,
+        placeName: this.place.title
       }
     });
 

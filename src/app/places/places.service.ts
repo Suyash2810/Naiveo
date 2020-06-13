@@ -99,7 +99,7 @@ export class PlacesService {
         const alert = await this.alertController.create({
           header: 'Error',
           subHeader: 'An error has occured.',
-          message: error,
+          message: "Place could not be fetched.",
           buttons: ['OK']
         });
 
