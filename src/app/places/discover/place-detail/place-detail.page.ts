@@ -7,6 +7,7 @@ import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-b
 import { Subscription } from 'rxjs';
 import { BookingService } from 'src/app/bookings/booking.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 @Component({
   selector: 'app-place-detail',
@@ -90,6 +91,17 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
             data.last_name, data.fromDate, data.tillDate, data.guests);
         }
       });
+  }
+
+  async openReview() {
+    const model = await this.modalCntrl.create({
+      component: ReviewsComponent,
+      componentProps: {
+        placeId: this.place.id
+      }
+    });
+
+    await model.present();
   }
 
   navigateBack() {

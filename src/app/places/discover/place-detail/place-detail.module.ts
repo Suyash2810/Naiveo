@@ -20,6 +20,6 @@ import { ReviewsComponent } from './reviews/reviews.component';
     PlaceDetailPageRoutingModule
   ],
   declarations: [PlaceDetailPage, CreateBookingComponent, ReviewsComponent],
-  entryComponents: [CreateBookingComponent]
+  entryComponents: [CreateBookingComponent, ReviewsComponent]
 })
 export class PlaceDetailPageModule { }
