@@ -98,7 +98,8 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
       component: ReviewsComponent,
       componentProps: {
         placeId: this.place.id,
-        placeName: this.place.title
+        placeName: this.place.title,
+        userId: this.userId
       }
     });
 

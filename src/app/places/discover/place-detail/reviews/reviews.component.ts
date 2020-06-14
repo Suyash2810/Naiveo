@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ReviewService } from './reviews.service';
 import { Review } from './reviews.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-reviews',
@@ -13,6 +14,8 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
   @Input() placeId: string;
   @Input() placeName: string;
+  @Input() userId: string;
+  @ViewChild('f', { static: false }) form: NgForm;
 
   reviews: Review[] = [];
   reviewSubscription: Subscription;
@@ -27,6 +30,11 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     this.modalController.dismiss({
       dismissed: true
     });
+  }
+
+  onSubmit() {
+    this.reviewService.addReview(this.placeId, this.userId, this.form.value.rating, this.form.value.message);
+    this.form.reset();
   }
 
   ngOnDestroy() {

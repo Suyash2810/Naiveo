@@ -11,7 +11,22 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <ion-text>This is the reviews model.</ion-text>
+      <ion-text>Reviews</ion-text>
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <ion-item>
+          <ion-label position="floating">Your review:</ion-label>
+          <ion-textarea rows="6" cols="20" placeholder="Enter you reviews here." maxlength="140" required
+            spellcheck="true" name="review" ngModel></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-range id="dual-range" pin color="dark" min="1" max="5" step="1" name="rating" ngModel>
+            <ion-icon slot="start" size="small" name="star-half"></ion-icon>
+            <ion-icon slot="end" name="star-half"></ion-icon>
+          </ion-range>
+        </ion-item>
+        <ion-button color="tertiary" type="submit" [disabled]="!f.valid">Submit</ion-button>
+      </form>
     </ion-col>
   </ion-row>
 </ion-grid>
