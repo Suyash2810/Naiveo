@@ -3,7 +3,7 @@ import { Review } from './reviews.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
     providedIn: "root"
@@ -14,7 +14,7 @@ export class ReviewService {
     reviews: Review[] = [];
     _reviews = new Subject<Review[]>();
 
-    constructor(private httpClient: HttpClient, private alertController: AlertController) {
+    constructor(private httpClient: HttpClient, private alertController: AlertController, private toastController: ToastController) {
 
     }
 
@@ -92,5 +92,63 @@ export class ReviewService {
                     await alert.present();
                 }
             );
+    }
+
+    updateReview(reviewId: string, rating: number, message: string, placeId: string) {
+
+        type responseType = { status: string };
+        const data = {
+            rating,
+            message
+        }
+
+        this.httpClient.patch<responseType>(`http://localhost:3000/review/${reviewId}`, data)
+            .subscribe(
+                async (response) => {
+                    const toast = await this.toastController.create({
+                        message: response.status,
+                        duration: 3000
+                    });
+
+                    await toast.present();
+                    this.fetchReviews(placeId);
+                },
+                async error => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        message: error.error.message,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
+                }
+            );
+    }
+
+    deleteReview(reviewId: string, placeId: string) {
+
+        type responseType = { status: string };
+
+        this.httpClient.delete<responseType>(`http://locahost:3000/review/${reviewId}`)
+            .subscribe(
+                async (response) => {
+                    const toast = await this.toastController.create({
+                        message: response.status,
+                        duration: 3000
+                    });
+
+                    await toast.present();
+                    this.fetchReviews(placeId);
+                },
+                async error => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        message: error.error.message,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
+                }
+            )
     }
 }

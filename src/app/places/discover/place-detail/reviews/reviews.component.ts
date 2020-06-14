@@ -29,7 +29,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     this.reviewSubscription = this.reviewService._getReviews().subscribe(
       (reviews: Review[]) => {
         this.reviews = reviews;
-        console.log(this.reviews);
       }
     );
   }

@@ -28,7 +28,7 @@
       <ion-col>
         <ion-chip outline color="primary">
           <ion-icon name="cash"></ion-icon>
-          <ion-label>Cost</ion-label>
+          <ion-label>{{place?.price | currency}}</ion-label>
         </ion-chip>
         <ion-chip outline color="warning">
           <ion-icon name="star-half"></ion-icon>
@@ -36,7 +36,7 @@
         </ion-chip>
         <ion-chip outline color="tertiary">
           <ion-icon name="hourglass"></ion-icon>
-          <ion-label>Validity</ion-label>
+          <ion-label>{{place?.availableTill | date:"d/M/yy"}}</ion-label>
         </ion-chip>
       </ion-col>
     </ion-row>
