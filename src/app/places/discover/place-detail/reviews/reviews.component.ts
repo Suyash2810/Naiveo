@@ -24,6 +24,14 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.reviewService.fetchReviews(this.placeId);
+    this.reviews = this.reviewService.getReviews();
+    this.reviewSubscription = this.reviewService._getReviews().subscribe(
+      (reviews: Review[]) => {
+        this.reviews = reviews;
+        console.log(this.reviews);
+      }
+    );
   }
 
   dismiss() {

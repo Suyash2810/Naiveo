@@ -27,6 +27,7 @@ const {
 const userController = require('./Model View Controller/userController');
 const bookingController = require('./Model View Controller/bookingController');
 const placeController = require('./Model View Controller/placeController');
+const reviewController = require('./Model View Controller/reviewController');
 const imageExtract = require('./middleware/imageExtract');
 
 // ------------------------------------------User Requests--------------------------------------------->
@@ -49,5 +50,10 @@ app.delete('/place/:id', authorization, placeController.deletePlace);
 app.post('/booking', authorization, bookingController.saveBooking);
 app.get('/bookings', authorization, bookingController.getBookings);
 app.delete("/booking/:id", authorization, bookingController.deleteBooking);
+
+// ------------------------------------------Booking Requests------------------------------------------->
+
+app.post('/review', authorization, reviewController.saveReview);
+app.get('/reviews/:placeId', authorization, reviewController.getReviews);
 
 module.exports = app;

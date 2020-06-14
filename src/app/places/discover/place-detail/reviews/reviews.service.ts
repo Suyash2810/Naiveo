@@ -67,13 +67,15 @@ export class ReviewService {
 
     addReview(placeId: string, userId: string, rating: number, message: string) {
 
-        type responseType = { status: string, result: any };
+        type responseType = { status: string };
         const data = {
             placeId,
             userId,
             rating,
             message
         }
+
+        console.log(data);
 
         this.httpClient.post<responseType>("http://localhost:3000/review", data)
             .subscribe(
@@ -83,7 +85,7 @@ export class ReviewService {
                 async () => {
                     const alert = await this.alertController.create({
                         header: 'Error',
-                        message: "Reviews could not be fetched",
+                        message: "Review could not be saved.",
                         buttons: ['OK']
                     });
 
