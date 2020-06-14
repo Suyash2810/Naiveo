@@ -45,6 +45,10 @@ export class AuthService {
     return this._user.asObservable();
   }
 
+  getUsername() {
+    return this.username;
+  }
+
   getUserId() {
     return this.userID;
   }

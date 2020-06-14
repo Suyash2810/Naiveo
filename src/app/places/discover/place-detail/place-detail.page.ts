@@ -24,11 +24,13 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   private placeSub: Subscription;
   private isBookable: boolean;
   private userId: string;
+  private username: string;
   isLoading: boolean = false;
 
   ngOnInit() {
     this.isLoading = true;
     this.userId = this.authService.getUserId();
+    this.username = this.authService.getUsername();
     this.route.params.subscribe(
       (params: Params) => {
         let id = params['placeID'];

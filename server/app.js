@@ -55,5 +55,7 @@ app.delete("/booking/:id", authorization, bookingController.deleteBooking);
 
 app.post('/review', authorization, reviewController.saveReview);
 app.get('/reviews/:placeId', authorization, reviewController.getReviews);
+app.patch('/review/:reviewId', authorization, reviewController.updateReview);
+app.delete('/review/:reviewId', authorization, reviewController.deleteReview);
 
 module.exports = app;

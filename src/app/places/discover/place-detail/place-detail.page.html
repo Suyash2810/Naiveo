@@ -16,9 +16,6 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <ion-grid *ngIf="!isLoading" class="place-detail">
     <img src="{{place?.imageUrl}}" />
-    <!-- <ion-card-header>
-      <ion-card-subtitle>{{place?.price | currency}}</ion-card-subtitle>
-    </ion-card-header> -->
     <ion-row class="place-detail__header">
       <ion-col>
         <ion-text>{{place?.title}}</ion-text>
@@ -61,6 +58,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-text class="guide-name">By - {{username}}</ion-text>
   <div class="place-detail-buttons ion-text-center">
     <ion-button color="tertiary" (click)="openReview()">
       <ion-icon name="chatboxes" slot="start"></ion-icon>Review
