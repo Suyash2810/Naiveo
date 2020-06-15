@@ -12,7 +12,13 @@ const saveReview = async (request, response) => {
 
         let body = pick(request.body, ['placeId', 'userId', 'rating', 'message']);
 
-        let review = new Review(body);
+        let review = new Review({
+            place: body.placeId,
+            user: body.userId,
+            rating: body.rating,
+            message: body.message
+        });
+
         let result = await review.save();
         if (result) {
             response.status(200).send({
@@ -33,9 +39,10 @@ const getReviews = async (request, response) => {
     try {
         let placeId = request.params.placeId;
         let result = await Review.find({
-            placeId
-        });
+            place: placeId
+        }).populate('user');
 
+        console.log(result);
         if (result) {
             response.status(200).send({
                 status: "Reviews have been fetched.",

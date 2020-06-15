@@ -15,8 +15,8 @@ describe("Review Model Tests", () => {
         review.validate((error) => {
 
             expect(error.errors.rating).to.exist;
-            expect(error.errors.placeId).to.exist;
-            expect(error.errors.userId).to.exist;
+            expect(error.errors.place).to.exist;
+            expect(error.errors.user).to.exist;
             expect(error.errors.message).to.exist;
 
             done();
@@ -27,8 +27,8 @@ describe("Review Model Tests", () => {
 
         let data = {
             rating: 5,
-            placeId: new ObjectId(),
-            userId: new ObjectId(),
+            place: new ObjectId(),
+            user: new ObjectId(),
             message: "foo",
             createdAt: "June 10th, 19"
         }
@@ -36,8 +36,8 @@ describe("Review Model Tests", () => {
         let review = new Review(data);
 
         expect(review).to.have.property('rating').to.be.equal(5);
-        expect(review).to.have.property('placeId').to.be.equal(data.placeId);
-        expect(review).to.have.property('userId').to.be.equal(data.userId);
+        expect(review).to.have.property('place').to.be.equal(data.place);
+        expect(review).to.have.property('user').to.be.equal(data.user);
         expect(review).to.have.property('message').to.be.equal(data.message);
         expect(review).to.have.property('createdAt').to.be.equal(data.createdAt);
 
