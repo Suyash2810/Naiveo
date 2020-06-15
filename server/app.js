@@ -57,5 +57,6 @@ app.post('/review', authorization, reviewController.saveReview);
 app.get('/reviews/:placeId', authorization, reviewController.getReviews);
 app.patch('/review/:reviewId', authorization, reviewController.updateReview);
 app.delete('/review/:reviewId', authorization, reviewController.deleteReview);
+app.get('/review/:id', authorization, reviewController.getReview);
 
 module.exports = app;

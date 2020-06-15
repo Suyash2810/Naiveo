@@ -13,7 +13,6 @@ export class ReviewService {
 
     reviews: Review[] = [];
     _reviews = new Subject<Review[]>();
-    review: Review;
     _review = new Subject<Review>();
 
     constructor(private httpClient: HttpClient, private alertController: AlertController, private toastController: ToastController) {
@@ -66,10 +65,6 @@ export class ReviewService {
 
     _getReviews() {
         return this._reviews.asObservable();
-    }
-
-    getReview() {
-        return this.review;
     }
 
     _getReview() {
@@ -167,14 +162,14 @@ export class ReviewService {
 
         type responseType = { status: string, result: any };
 
-        this.httpClient.get<responseType>("http://localhost:3000/review/" + id)
+        this.httpClient.get<responseType>(`http://localhost:3000/review/${id}`)
             .pipe(
                 map(
                     (data) => {
                         const result = data.result;
 
                         return {
-                            id: result.id,
+                            id: result._id,
                             placeId: result.placeId,
                             userId: result.userId,
                             rating: result.rating,
@@ -186,8 +181,7 @@ export class ReviewService {
             )
             .subscribe(
                 (review: Review) => {
-                    this.review = review;
-                    this._review.next(this.review);
+                    this._review.next(review);
                 },
                 async (error) => {
                     const alert = await this.alertController.create({

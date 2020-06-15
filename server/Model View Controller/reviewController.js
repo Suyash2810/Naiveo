@@ -101,9 +101,34 @@ const deleteReview = async (request, response) => {
     }
 }
 
+const getReview = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        console.log(id);
+        let result = await Review.findById({
+            _id: id
+        });
+
+        if (result) {
+            response.status(200).send({
+                status: "Review was fetched.",
+                result: result
+            });
+        } else {
+            throw "Review could not be fetched.";
+        }
+    } catch (e) {
+        response.status(400).send({
+            error: e
+        });
+    }
+}
+
 module.exports = {
     saveReview,
     getReviews,
     updateReview,
-    deleteReview
+    deleteReview,
+    getReview
 }

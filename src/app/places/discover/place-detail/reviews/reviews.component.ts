@@ -19,6 +19,8 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   private editMode: boolean = false;
 
   reviews: Review[] = [];
+  reviewsSubscription: Subscription;
+  review: Review;
   reviewSubscription: Subscription;
 
   constructor(private modalController: ModalController, private reviewService: ReviewService) { }
@@ -41,8 +43,14 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.reviewService.addReview(this.placeId, this.userId, this.form.value.rating, this.form.value.message);
+    if (!this.editMode) {
+      this.reviewService.addReview(this.placeId, this.userId, this.form.value.rating, this.form.value.message);
+    } else {
+      this.reviewService.updateReview(this.review.id, this.form.value.rating, this.form.value.message, this.placeId);
+    }
+
     this.form.reset();
+    this.editMode = false;
   }
 
   onDelete(id: string) {
@@ -50,10 +58,22 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   }
 
   onEdit(id: string) {
+    this.reviewService.getReviewById(id);
     this.editMode = true;
+    this.reviewSubscription = this.reviewService._getReview()
+      .subscribe(
+        (review) => {
+          this.review = review;
+          this.form.setValue({
+            message: this.review.message,
+            rating: this.review.rating
+          });
+        }
+      );
   }
 
   ngOnDestroy() {
-
+    this.reviewsSubscription.unsubscribe();
+    this.reviewSubscription.unsubscribe();
   }
 }
