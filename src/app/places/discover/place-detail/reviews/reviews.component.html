@@ -39,15 +39,15 @@
         <ion-item-sliding *ngFor="let review of reviews; let i = index;">
           <ion-item>
             <ion-avatar slot="start">
-              <img src="../../../../../assets/img/sample_avatar.jpeg">
+              <img [src]="review.user.image">
             </ion-avatar>
             <ion-label>
-              <h2>Finn</h2>
+              <h2>{{review.user.name}}</h2>
               <ion-text>{{review.rating}}/5</ion-text>
               <p>{{review.message}}</p>
             </ion-label>
             <ion-note slot="end">
-              10:45 AM
+              {{review.createdAt}}
             </ion-note>
           </ion-item>
 

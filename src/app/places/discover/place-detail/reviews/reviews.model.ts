@@ -1,7 +1,7 @@
 export interface Review {
     id: string;
-    placeId: string;
-    userId: string;
+    place: string;
+    user: string;
     rating: number;
     message: string;
     createdAt: string

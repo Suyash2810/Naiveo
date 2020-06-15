@@ -18,7 +18,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) form: NgForm;
   private editMode: boolean = false;
 
-  reviews: Review[] = [];
+  reviews: Array<any> = [];
   reviewsSubscription: Subscription;
   review: Review;
   reviewSubscription: Subscription;
@@ -30,8 +30,9 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     this.reviewService.fetchReviews(this.placeId);
     this.reviews = this.reviewService.getReviews();
     this.reviewSubscription = this.reviewService._getReviews().subscribe(
-      (reviews: Review[]) => {
+      (reviews: Array<any>) => {
         this.reviews = reviews;
+        console.log(this.reviews);
       }
     );
   }

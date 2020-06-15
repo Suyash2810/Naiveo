@@ -11,8 +11,8 @@ import { AlertController, ToastController } from '@ionic/angular';
 
 export class ReviewService {
 
-    reviews: Review[] = [];
-    _reviews = new Subject<Review[]>();
+    reviews: Array<any> = [];
+    _reviews = new Subject<Array<any>>();
     _review = new Subject<Review>();
 
     constructor(private httpClient: HttpClient, private alertController: AlertController, private toastController: ToastController) {
@@ -24,27 +24,9 @@ export class ReviewService {
         type responseType = { status: string, result: any };
 
         this.httpClient.get<responseType>(`http://localhost:3000/reviews/${placeId}`)
-            .pipe(
-                map(
-                    (data) => {
-                        return data.result.map(
-                            (review) => {
-                                return {
-                                    id: review._id,
-                                    placeId: review.placeId,
-                                    userId: review.placeId,
-                                    rating: review.rating,
-                                    message: review.message,
-                                    createdAt: review.createdAt
-                                }
-                            }
-                        )
-                    }
-                )
-            )
             .subscribe(
-                (reviews: Review[]) => {
-                    this.reviews = reviews;
+                (response) => {
+                    this.reviews = response.result;
                     this._reviews.next(this.reviews);
                 },
                 async error => {
@@ -80,8 +62,6 @@ export class ReviewService {
             rating,
             message
         }
-
-        console.log(data);
 
         this.httpClient.post<responseType>("http://localhost:3000/review", data)
             .subscribe(
@@ -170,8 +150,8 @@ export class ReviewService {
 
                         return {
                             id: result._id,
-                            placeId: result.placeId,
-                            userId: result.userId,
+                            place: result.place,
+                            user: result.user,
                             rating: result.rating,
                             message: result.message,
                             createdAt: result.createdAt

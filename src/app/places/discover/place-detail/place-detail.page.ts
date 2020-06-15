@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
 import { BookingService } from 'src/app/bookings/booking.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { User } from 'src/app/auth/user.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-place-detail',
@@ -24,13 +26,13 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   private placeSub: Subscription;
   private isBookable: boolean;
   private userId: string;
-  private username: string;
+  private guide: User;
   isLoading: boolean = false;
 
   ngOnInit() {
     this.isLoading = true;
     this.userId = this.authService.getUserId();
-    this.username = this.authService.getUsername();
+
     this.route.params.subscribe(
       (params: Params) => {
         let id = params['placeID'];
@@ -44,10 +46,31 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
               this.place = place;
               this.isLoading = false;
               this.isBookable = this.place.userID != this.authService.getUserId();
+
+              this.authService.fetchGuide(this.place.userID)
+                .pipe(
+                  map(
+                    (response) => {
+                      const guide = response.guide;
+                      return {
+                        id: guide._id,
+                        name: guide.name,
+                        email: guide.email,
+                        image: guide.image,
+                        identity: guide.identity
+                      }
+                    }
+                  )
+                )
+                .subscribe(
+                  (guide: User) => {
+                    this.guide = guide;
+                  }
+                );
             });
         }
       }
-    )
+    );
   }
 
   bookPlace() {
