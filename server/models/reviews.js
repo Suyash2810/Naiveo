@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const reviewSchema = new mongoose.Schema({
     rating: {
@@ -17,6 +18,10 @@ const reviewSchema = new mongoose.Schema({
     },
     message: {
         required: true,
+        type: String
+    },
+    createdAt: {
+        default: moment().format("MMM Do YY").toString(),
         type: String
     }
 });

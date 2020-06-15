@@ -29,4 +29,24 @@
       </form>
     </ion-col>
   </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-list-header>
+          Recent Reviews
+        </ion-list-header>
+
+        <ion-item *ngFor="let review of reviews; let i = index;">
+          <ion-avatar slot="start">
+            <img src="../../../../../assets/img/sample_avatar.jpeg">
+          </ion-avatar>
+          <ion-label>
+            <h2>Finn</h2>
+            <ion-text>{{review.rating}}/5</ion-text>
+            <p>{{review.message}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ion-grid>

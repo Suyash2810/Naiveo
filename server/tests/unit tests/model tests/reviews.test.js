@@ -29,7 +29,8 @@ describe("Review Model Tests", () => {
             rating: 5,
             placeId: new ObjectId(),
             userId: new ObjectId(),
-            message: "foo"
+            message: "foo",
+            createdAt: "June 10th, 19"
         }
 
         let review = new Review(data);
@@ -38,6 +39,7 @@ describe("Review Model Tests", () => {
         expect(review).to.have.property('placeId').to.be.equal(data.placeId);
         expect(review).to.have.property('userId').to.be.equal(data.userId);
         expect(review).to.have.property('message').to.be.equal(data.message);
+        expect(review).to.have.property('createdAt').to.be.equal(data.createdAt);
 
         done();
     });

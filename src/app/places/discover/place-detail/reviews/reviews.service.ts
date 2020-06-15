@@ -33,7 +33,8 @@ export class ReviewService {
                                     placeId: review.placeId,
                                     userId: review.placeId,
                                     rating: review.rating,
-                                    message: review.message
+                                    message: review.message,
+                                    createdAt: review.createdAt
                                 }
                             }
                         )
