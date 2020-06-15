@@ -4,7 +4,6 @@ const {
 const {
     pick
 } = require('lodash');
-const e = require('express');
 
 const saveReview = async (request, response) => {
 
@@ -42,7 +41,6 @@ const getReviews = async (request, response) => {
             place: placeId
         }).populate('user');
 
-        console.log(result);
         if (result) {
             response.status(200).send({
                 status: "Reviews have been fetched.",
@@ -112,7 +110,7 @@ const getReview = async (request, response) => {
 
     try {
         const id = request.params.id;
-        console.log(id);
+
         let result = await Review.findById({
             _id: id
         });
