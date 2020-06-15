@@ -82,6 +82,7 @@ const deleteReview = async (request, response) => {
 
     try {
         const reviewId = request.params.reviewId;
+
         let result = await Review.deleteOne({
             _id: reviewId
         });

@@ -16,6 +16,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   @Input() placeName: string;
   @Input() userId: string;
   @ViewChild('f', { static: false }) form: NgForm;
+  private editMode: boolean = false;
 
   reviews: Review[] = [];
   reviewSubscription: Subscription;
@@ -44,6 +45,15 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     this.form.reset();
   }
 
+  onDelete(id: string) {
+    this.reviewService.deleteReview(id, this.placeId);
+  }
+
+  onEdit(id: string) {
+    this.editMode = true;
+  }
+
   ngOnDestroy() {
+
   }
 }
