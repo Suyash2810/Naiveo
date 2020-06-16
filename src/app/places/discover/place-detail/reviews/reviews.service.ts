@@ -174,4 +174,9 @@ export class ReviewService {
                 }
             );
     }
+
+    getAverageRating(placeId: string) {
+        type responseType = { result: any };
+        return this.httpClient.get<responseType>(`http://localhost:3000/review/rating/${placeId}`);
+    }
 }

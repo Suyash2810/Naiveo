@@ -52,12 +52,13 @@ app.post('/booking', authorization, bookingController.saveBooking);
 app.get('/bookings', authorization, bookingController.getBookings);
 app.delete("/booking/:id", authorization, bookingController.deleteBooking);
 
-// ------------------------------------------Booking Requests------------------------------------------->
+// ------------------------------------------Review Requests------------------------------------------->
 
 app.post('/review', authorization, reviewController.saveReview);
 app.get('/reviews/:placeId', authorization, reviewController.getReviews);
 app.patch('/review/:reviewId', authorization, reviewController.updateReview);
 app.delete('/review/:reviewId', authorization, reviewController.deleteReview);
 app.get('/review/:id', authorization, reviewController.getReview);
+app.get('/review/rating/:placeId', authorization, reviewController.averageRating);
 
 module.exports = app;

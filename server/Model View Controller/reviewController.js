@@ -1,9 +1,14 @@
 const {
     Review
 } = require('../models/reviews');
+
 const {
     pick
 } = require('lodash');
+
+const {
+    ObjectId
+} = require('mongodb');
 
 const saveReview = async (request, response) => {
 
@@ -130,10 +135,43 @@ const getReview = async (request, response) => {
     }
 }
 
+const averageRating = async (request, response) => {
+
+    try {
+        const placeId = request.params.placeId;
+
+        const result = await Review.aggregate([{
+                $match: {
+                    place: ObjectId(placeId)
+                }
+            },
+            {
+                $group: {
+                    _id: "$place",
+                    average: {
+                        $avg: "$rating"
+                    }
+                }
+            }
+        ]);
+
+        if (result) {
+            response.status(200).send({
+                result: result[0]
+            });
+        } else {
+            throw "Could not fetch average rating.";
+        }
+    } catch (e) {
+        response.status(200).send(e);
+    }
+}
+
 module.exports = {
     saveReview,
     getReviews,
     updateReview,
     deleteReview,
-    getReview
+    getReview,
+    averageRating
 }

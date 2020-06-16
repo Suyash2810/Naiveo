@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { User } from 'src/app/auth/user.model';
 import { map } from 'rxjs/operators';
+import { ReviewService } from './reviews/reviews.service';
 
 @Component({
   selector: 'app-place-detail',
@@ -20,7 +21,8 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
 
   constructor(private nvCntrl: NavController, private route: ActivatedRoute, private placeService: PlacesService,
     private modalCntrl: ModalController, private actionSheetCntrl: ActionSheetController,
-    private bookingService: BookingService, private authService: AuthService) { }
+    private bookingService: BookingService, private authService: AuthService,
+    private reviewService: ReviewService) { }
 
   private place: Place;
   private placeSub: Subscription;
@@ -28,6 +30,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
   private userId: string;
   private guide: User;
   isLoading: boolean = false;
+  averageRating: number;
 
   ngOnInit() {
     this.isLoading = true;
@@ -44,9 +47,18 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
           this.placeSub = this.placeService._get_place()
             .subscribe((place: Place) => {
               this.place = place;
+
+              this.reviewService.getAverageRating(this.place.id).subscribe(
+                (response) => {
+                  this.averageRating = response.result.average;
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+
               this.isLoading = false;
               this.isBookable = this.place.userID != this.authService.getUserId();
-
               this.authService.fetchGuide(this.place.userID)
                 .pipe(
                   map(
