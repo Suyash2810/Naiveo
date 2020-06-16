@@ -51,7 +51,7 @@
           <ion-item *ngFor="let location of place.visit" lines="none">
             <ion-text>{{location?.name}}</ion-text>
             <ion-chip outline color="primary">
-              <ion-label>{{location?.price}}</ion-label>
+              <ion-label>{{location?.price | currency}}</ion-label>
             </ion-chip>
           </ion-item>
         </ion-list>

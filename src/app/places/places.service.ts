@@ -38,7 +38,13 @@ export class PlacesService {
                 availableFrom: place.availableFrom,
                 availableTill: place.availableTill,
                 userID: place.user,
-                visit: place.visit
+                visit: place.visit.map(visit => {
+                  return {
+                    id: visit._id,
+                    name: visit.name,
+                    price: visit.price
+                  }
+                })
               }
             });
           }
@@ -88,7 +94,13 @@ export class PlacesService {
             availableFrom: place.availableFrom,
             availableTill: place.availableTill,
             userID: place.user,
-            visit: place.visit
+            visit: place.visit.map(visit => {
+              return {
+                id: visit._id,
+                name: visit.name,
+                price: visit.price
+              }
+            })
           }
         })
       )
@@ -165,30 +177,9 @@ export class PlacesService {
     }
 
     this.httpClient.patch<responseType>("http://localhost:3000/place", data)
-      .pipe(
-        map(
-          response => {
-            const place = response.result;
-
-            return {
-              id: place._id,
-              title: place.title,
-              description: place.description,
-              imageUrl: place.imageUrl,
-              price: place.price,
-              availableFrom: place.availableFrom,
-              availableTill: place.availableTill,
-              userID: place.user,
-              visit: place.visit
-            }
-          }
-        )
-      )
       .subscribe(
-        place => {
-          this.places = this.places.filter(p => p.id != place.id);
-          this.places.push(place);
-          this._places.next(this.places);
+        response => {
+          this.fetchPlaces();
           this.toastController.create({
             message: "The place has been updated.",
             duration: 3000

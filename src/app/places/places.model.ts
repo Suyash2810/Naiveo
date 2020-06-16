@@ -8,5 +8,5 @@ export interface Place {
     availableFrom: Date;
     availableTill: Date;
     userID: string;
-    visit: Array<{name: string, price: number}>;
+    visit: Array<{ id: string, name: string, price: number }>;
 }
