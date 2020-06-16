@@ -17,6 +17,8 @@ export class CreateBookingComponent implements OnInit {
   @ViewChild('tillDate', { static: true }) tillDateCheck;
   startDate: string;
   endDate: string;
+  checkPlaces: Array<any> = [];
+  toVisit: Array<any> = [];
 
   constructor(private modalController: ModalController) { }
 
@@ -38,6 +40,8 @@ export class CreateBookingComponent implements OnInit {
   }
 
   onSubmit() {
+    this.updatePlacesToVisit();
+
     this.modalController.dismiss({
       message: {
         first_name: this.form.value.firstName,
@@ -47,6 +51,14 @@ export class CreateBookingComponent implements OnInit {
         tillDate: this.form.value.tillDate
       }
     }, 'confirm');
+  }
+
+  updatePlacesToVisit() {
+    for (let i = 0; i < this.checkPlaces.length; i++) {
+      if (this.checkPlaces[i] == true) {
+        this.toVisit.push(this.selectedPlace.visit[i]);
+      }
+    }
   }
 
   checkValidDates() {
