@@ -25,7 +25,7 @@
             <ion-icon slot="end" name="star-half"></ion-icon>
           </ion-range>
         </ion-item>
-        <ion-button color="tertiary" type="submit" [disabled]="!f.valid">Submit</ion-button>
+        <ion-button color="tertiary" type="submit" [disabled]="userId==guideId || !f.valid">Submit</ion-button>
       </form>
     </ion-col>
   </ion-row>
@@ -52,13 +52,13 @@
           </ion-item>
 
           <ion-item-options side="start">
-            <ion-item-option (click)="onEdit(review._id)">
+            <ion-item-option (click)="onEdit(review._id)" [disabled]="review.user._id!=userId">
               <ion-icon slot="icon-only" name="create"></ion-icon>
             </ion-item-option>
           </ion-item-options>
 
           <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="onDelete(review._id)">
+            <ion-item-option color="danger" (click)="onDelete(review._id)" [disabled]="review.user._id!=userId">
               <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-item-option>
           </ion-item-options>

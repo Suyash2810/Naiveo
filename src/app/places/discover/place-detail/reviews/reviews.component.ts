@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ReviewService } from './reviews.service';
 import { Review } from './reviews.model';
@@ -15,6 +15,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   @Input() placeId: string;
   @Input() placeName: string;
   @Input() userId: string;
+  @Input() guideId: string;
   @ViewChild('f', { static: false }) form: NgForm;
   private editMode: boolean = false;
 
@@ -23,17 +24,27 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   review: Review;
   reviewSubscription: Subscription;
 
-  constructor(private modalController: ModalController, private reviewService: ReviewService) { }
+  constructor(private modalController: ModalController, private reviewService: ReviewService, private loadingController: LoadingController) { }
 
   ngOnInit() {
 
-    this.reviewService.fetchReviews(this.placeId);
-    this.reviews = this.reviewService.getReviews();
-    this.reviewsSubscription = this.reviewService._getReviews().subscribe(
-      (reviews: Array<any>) => {
-        this.reviews = reviews;
-      }
-    );
+    this.loadingController.create({
+      spinner: null,
+      message: 'Loading reviews.',
+      translucent: true,
+      backdropDismiss: true
+    })
+      .then(loader => {
+        loader.present();
+        this.reviewService.fetchReviews(this.placeId);
+        this.reviews = this.reviewService.getReviews();
+        this.reviewsSubscription = this.reviewService._getReviews().subscribe(
+          (reviews: Array<any>) => {
+            this.reviews = reviews;
+            loader.dismiss();
+          }
+        );
+      });
   }
 
   dismiss() {
