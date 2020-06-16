@@ -37,8 +37,7 @@ describe("Place Model Test", () => {
             availableFrom: new Date(),
             availableTill: new Date(),
             user: new ObjectId(),
-            visit: [
-                {
+            visit: [{
                     name: "xyz",
                     price: 12
                 },
@@ -57,6 +56,7 @@ describe("Place Model Test", () => {
         expect(place).to.have.property('price').to.be.equal(124.23);
         expect(place).to.have.property('availableFrom').to.be.equal(data.availableFrom);
         expect(place).to.have.property('availableTill').to.be.equal(data.availableTill);
+        expect(place.visit.length).to.be.equal(2);
         done();
     });
 });

@@ -39,7 +39,16 @@ describe("Booking Model Test", () => {
             bookedFrom: new Date(),
             bookedTill: new Date(),
             placeId: new ObjectId(),
-            userId: new ObjectId()
+            userId: new ObjectId(),
+            locations: [{
+                    name: "xyz",
+                    price: 12
+                },
+                {
+                    name: "abc",
+                    price: 10
+                }
+            ]
         };
 
         const booking = new Booking(data);
@@ -53,6 +62,7 @@ describe("Booking Model Test", () => {
         expect(booking).to.have.property('bookedTill').to.be.equal(data.bookedTill);
         expect(booking).to.have.property('placeId').to.be.equal(data.placeId);
         expect(booking).to.have.property('userId').to.be.equal(data.userId);
+        expect(booking.locations.length).to.be.equal(2);
         done();
     });
 });

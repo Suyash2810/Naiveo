@@ -36,7 +36,17 @@ const bookingSchema = new mongoose.Schema({
     guests: {
         required: true,
         type: Number
-    }
+    },
+    locations: [{
+        name: {
+            required: true,
+            type: String
+        },
+        price: {
+            type: Number,
+            required: true
+        }
+    }]
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

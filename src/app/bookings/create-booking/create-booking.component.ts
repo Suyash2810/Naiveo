@@ -56,7 +56,12 @@ export class CreateBookingComponent implements OnInit {
   updatePlacesToVisit() {
     for (let i = 0; i < this.checkPlaces.length; i++) {
       if (this.checkPlaces[i] == true) {
-        this.toVisit.push(this.selectedPlace.visit[i]);
+        let place = {
+          name: this.selectedPlace.visit[i].name,
+          price: this.selectedPlace.visit[i].price
+        }
+
+        this.toVisit.push(place);
       }
     }
   }
