@@ -9,7 +9,8 @@ export interface Bookable {
     bookedFrom: Date;
     bookedTill: Date;
     guests: number;
-    locations: Array<{ id: string, name: string, price: number }>
+    locations: Array<{ id: string, name: string, price: number }>;
+    cost: number;
 }
 
 export class Booking {
@@ -18,7 +19,7 @@ export class Booking {
         public placeId: string, public userId: string, public title: string,
         public imageUrl: string, public first_name, public last_name,
         public bookedFrom: Date, public bookedTill: Date, public guests: number,
-        public locations: Array<{ name: string, price: number }>) {
+        public locations: Array<{ name: string, price: number }>, public cost: number) {
 
         this.placeId = placeId;
         this.userId = userId;
@@ -30,5 +31,6 @@ export class Booking {
         this.bookedTill = bookedTill;
         this.guests = guests;
         this.locations = locations;
+        this.cost = cost;
     }
 }

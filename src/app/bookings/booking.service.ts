@@ -48,7 +48,8 @@ export class BookingService {
                                             price: location.price
                                         }
                                     }
-                                )
+                                ),
+                                cost: booking.cost
                             }
                         });
                     }
@@ -80,9 +81,9 @@ export class BookingService {
         return this._bookings.asObservable();
     }
 
-    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number, locations: Array<{ name: string, price: number }>) {
+    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number, locations: Array<{ name: string, price: number }>, cost: number) {
 
-        const booking = new Booking(id, this.authService.getUserId(), title, imageUrl, first_name, last_name, bookedFrom, bookedTill, guests, locations);
+        const booking = new Booking(id, this.authService.getUserId(), title, imageUrl, first_name, last_name, bookedFrom, bookedTill, guests, locations, cost);
 
         type responseType = { status: string, result: any };
 
@@ -135,5 +136,12 @@ export class BookingService {
                     await alert.present();
                 }
             )
+    }
+
+    estimateCost(locations: Array<{ name: string, price: number }>, basic: number) {
+
+        let totalCost = 0;
+        locations.forEach(location => totalCost += location.price);
+        return Promise.resolve(basic > totalCost ? basic : totalCost);
     }
 }
