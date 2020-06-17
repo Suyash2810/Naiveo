@@ -36,7 +36,7 @@ const saveBooking = async (request, response) => {
 
     try {
 
-        let data = pick(request.body, ['placeId', 'userId', 'title', 'imageUrl', 'first_name', 'last_name', 'bookedFrom', 'bookedTill', 'guests']);
+        let data = pick(request.body, ['placeId', 'userId', 'title', 'imageUrl', 'first_name', 'last_name', 'bookedFrom', 'bookedTill', 'guests', 'locations']);
 
         let booking = new Booking(data);
 

@@ -46,7 +46,11 @@ const bookingSchema = new mongoose.Schema({
             type: Number,
             required: true
         }
-    }]
+    }],
+    cost: {
+        required: true,
+        type: Number
+    }
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

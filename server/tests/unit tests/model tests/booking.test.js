@@ -23,6 +23,7 @@ describe("Booking Model Test", () => {
             expect(error.errors.bookedFrom).to.exist;
             expect(error.errors.bookedTill).to.exist;
             expect(error.errors.guests).to.exist;
+            expect(error.errors.cost).to.exist;
         });
 
         done();
@@ -48,7 +49,8 @@ describe("Booking Model Test", () => {
                     name: "abc",
                     price: 10
                 }
-            ]
+            ],
+            cost: 50
         };
 
         const booking = new Booking(data);
@@ -63,6 +65,7 @@ describe("Booking Model Test", () => {
         expect(booking).to.have.property('placeId').to.be.equal(data.placeId);
         expect(booking).to.have.property('userId').to.be.equal(data.userId);
         expect(booking.locations.length).to.be.equal(2);
+        expect(booking).to.have.property('cost').to.be.equal(50);
         done();
     });
 });
