@@ -8,6 +8,7 @@ import { BookingsPageRoutingModule } from './bookings-routing.module';
 
 import { BookingsPage } from './bookings.page';
 import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.module';
+import { PricePipe } from './create-booking/price.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.
     LoadingSpinnerModule,
     BookingsPageRoutingModule
   ],
-  declarations: [BookingsPage]
+  declarations: [BookingsPage, PricePipe]
 })
 export class BookingsPageModule { }

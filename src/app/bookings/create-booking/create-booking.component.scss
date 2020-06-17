@@ -1,0 +1,18 @@
+ion-grid {
+    ion-row {
+        ion-col {
+
+            .cost {
+                padding: 0.5rem 1rem;
+
+                span {
+                    color: var(--ion-color-secondary);
+                }
+
+                &__price {
+                    float: right;
+                }
+            }
+        }
+    }
+}

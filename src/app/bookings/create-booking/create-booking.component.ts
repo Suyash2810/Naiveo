@@ -19,6 +19,7 @@ export class CreateBookingComponent implements OnInit {
   endDate: string;
   checkPlaces: Array<any> = [];
   toVisit: Array<any> = [];
+  totalCost: number = 0;
 
   constructor(private modalController: ModalController) { }
 
@@ -63,6 +64,14 @@ export class CreateBookingComponent implements OnInit {
 
         this.toVisit.push(place);
       }
+    }
+  }
+
+  updateCost(i: number) {
+    if (this.checkPlaces[i] == true) {
+      this.totalCost += this.selectedPlace.visit[i].price;
+    } else if (this.checkPlaces[i] == false) {
+      this.totalCost -= this.selectedPlace.visit[i].price;
     }
   }
 

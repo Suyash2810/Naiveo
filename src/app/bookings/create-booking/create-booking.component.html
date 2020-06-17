@@ -63,7 +63,7 @@
           <ion-list>
             <ion-item *ngFor="let place of selectedPlace.visit; let i = index;">
               <ion-label>{{place.name}} - {{place.price}}</ion-label>
-              <ion-checkbox name="places" [(ngModel)]="checkPlaces[i]" slot="end">
+              <ion-checkbox name="places" [(ngModel)]="checkPlaces[i]" (ionChange)="updateCost(i)" slot="end">
               </ion-checkbox>
             </ion-item>
           </ion-list>
@@ -71,8 +71,15 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <h3>Total Cost</h3>
-
+          <div class="cost">
+            <span class="cost__text">Initial Cost</span>
+            <span class="cost__price">{{selectedPlace.price | currency}}</span>
+          </div>
+          <div class="cost">
+            <span class="cost__text">Final Cost</span>
+            <span class="cost__price" *ngIf="totalCost>selectedPlace.price">{{totalCost | currency}}</span>
+            <span class="cost__price" *ngIf="totalCost<selectedPlace.price">{{selectedPlace.price | currency}}</span>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

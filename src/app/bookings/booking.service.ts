@@ -100,8 +100,8 @@ export class BookingService {
                 async error => {
                     const alert = await this.alertController.create({
                         header: 'Error',
-                        subHeader: 'An error has occured.',
-                        message: error,
+                        subHeader: error.error.error._message,
+                        message: "Please enter valid details. Make sure that all the fields have been filled.",
                         buttons: ['OK']
                     });
 
