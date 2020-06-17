@@ -23,7 +23,6 @@ export class CreateBookingComponent implements OnInit {
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
-    console.log(this.selectedPlace);
     const availableFrom = new Date(this.selectedPlace.availableFrom);
     const availableTill = new Date(this.selectedPlace.availableTill);
 
@@ -48,7 +47,8 @@ export class CreateBookingComponent implements OnInit {
         last_name: this.form.value.lastName,
         guests: this.form.value.guests,
         fromDate: this.form.value.fromDate,
-        tillDate: this.form.value.tillDate
+        tillDate: this.form.value.tillDate,
+        locations: this.toVisit
       }
     }, 'confirm');
   }

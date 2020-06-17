@@ -39,9 +39,18 @@ export class BookingService {
                                 last_name: booking.last_name,
                                 bookedFrom: booking.bookedFrom,
                                 bookedTill: booking.bookedTill,
-                                guests: booking.guests
+                                guests: booking.guests,
+                                locations: booking.locations.map(
+                                    location => {
+                                        return {
+                                            id: location._id,
+                                            name: location.name,
+                                            price: location.price
+                                        }
+                                    }
+                                )
                             }
-                        })
+                        });
                     }
                 )
             )
@@ -71,9 +80,9 @@ export class BookingService {
         return this._bookings.asObservable();
     }
 
-    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number) {
+    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number, locations: Array<{ name: string, price: number }>) {
 
-        const booking = new Booking(id, this.authService.getUserId(), title, imageUrl, first_name, last_name, bookedFrom, bookedTill, guests);
+        const booking = new Booking(id, this.authService.getUserId(), title, imageUrl, first_name, last_name, bookedFrom, bookedTill, guests, locations);
 
         type responseType = { status: string, result: any };
 

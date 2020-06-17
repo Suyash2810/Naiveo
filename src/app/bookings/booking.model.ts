@@ -9,15 +9,16 @@ export interface Bookable {
     bookedFrom: Date;
     bookedTill: Date;
     guests: number;
+    locations: Array<{ id: string, name: string, price: number }>
 }
 
 export class Booking {
 
     constructor(
         public placeId: string, public userId: string, public title: string,
-        public imageUrl: string, public first_name, public last_name, public bookedFrom: Date,
-        public bookedTill: Date,
-        public guests: number) {
+        public imageUrl: string, public first_name, public last_name,
+        public bookedFrom: Date, public bookedTill: Date, public guests: number,
+        public locations: Array<{ name: string, price: number }>) {
 
         this.placeId = placeId;
         this.userId = userId;
@@ -28,5 +29,6 @@ export class Booking {
         this.bookedFrom = bookedFrom;
         this.bookedTill = bookedTill;
         this.guests = guests;
+        this.locations = locations;
     }
 }

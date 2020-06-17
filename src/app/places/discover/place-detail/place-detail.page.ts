@@ -125,7 +125,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
         if (resultData.role === "confirm") {
           const data = resultData.data.message;
           this.bookingService.addBooking(this.place.id, this.place.title, this.place.imageUrl, data.first_name,
-            data.last_name, data.fromDate, data.tillDate, data.guests);
+            data.last_name, data.fromDate, data.tillDate, data.guests, data.locations);
         }
       });
   }
