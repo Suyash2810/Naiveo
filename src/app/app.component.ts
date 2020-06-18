@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './auth/auth.service';
@@ -18,7 +18,9 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private menu: MenuController,
+    private navController: NavController
   ) {
     this.initializeApp();
   }
@@ -33,6 +35,11 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openSettingsPage() {
+    this.menu.toggle();
+    this.navController.navigateForward('settings');
   }
 
   onLogOut() {

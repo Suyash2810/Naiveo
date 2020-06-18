@@ -25,7 +25,8 @@
           <div class="profile-data__item profile-data__item--2">
             <ion-chip outline color="tertiary">
               <ion-icon name="people"></ion-icon>
-              <ion-label>Followers</ion-label>
+              <ion-label *ngIf="user?.identity == 'user'; else guide">Following</ion-label>
+              <ng-template #guide>Followers</ng-template>
               <ion-icon name="arrow-forward"></ion-icon>
             </ion-chip>
           </div>
