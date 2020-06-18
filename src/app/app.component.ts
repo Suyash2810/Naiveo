@@ -13,6 +13,7 @@ import { User } from './auth/user.model';
 export class AppComponent implements OnInit {
 
   private user: User;
+  private search: string;
 
   constructor(
     private platform: Platform,
@@ -44,6 +45,9 @@ export class AppComponent implements OnInit {
 
   onLogOut() {
     this.authService.logout();
+  }
 
+  searchGuide() {
+    console.log(this.search);
   }
 }
