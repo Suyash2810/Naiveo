@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform, MenuController, NavController } from '@ionic/angular';
+import { Platform, MenuController, NavController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user.model';
+import { SearchComponent } from './user-profile/search/search.component';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private authService: AuthService,
     private menu: MenuController,
-    private navController: NavController
+    private navController: NavController,
+    private modalController: ModalController
   ) {
     this.initializeApp();
   }
@@ -49,5 +51,21 @@ export class AppComponent implements OnInit {
 
   searchGuide() {
     console.log(this.search);
+
+    this.modalController.create({
+      component: SearchComponent,
+      componentProps: {
+        search: this.search
+      }
+    }).then(modal => {
+      modal.present();
+
+      return modal.onDidDismiss()
+    }).then(
+      data => {
+        console.log(data);
+      }
+    );
+
   }
 }
