@@ -8,8 +8,18 @@ const {
     Booking
 } = require('./booking');
 
+const {
+    Review
+} = require('./reviews');
+
+const {
+    UserInfo
+} = require('./userinfo');
+
 module.exports = {
     User,
     Place,
-    Booking
+    Booking,
+    UserInfo,
+    Review
 }

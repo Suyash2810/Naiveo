@@ -28,6 +28,8 @@ const userController = require('./Model View Controller/userController');
 const bookingController = require('./Model View Controller/bookingController');
 const placeController = require('./Model View Controller/placeController');
 const reviewController = require('./Model View Controller/reviewController');
+const profileController = require('./Model View Controller/profileController');
+
 const imageExtract = require('./middleware/imageExtract');
 
 // ------------------------------------------User Requests--------------------------------------------->
@@ -60,5 +62,9 @@ app.patch('/review/:reviewId', authorization, reviewController.updateReview);
 app.delete('/review/:reviewId', authorization, reviewController.deleteReview);
 app.get('/review/:id', authorization, reviewController.getReview);
 app.get('/review/rating/:placeId', authorization, reviewController.averageRating);
+
+// ------------------------------------------User Profile Requests------------------------------------------->
+
+app.get('/guides', authorization, profileController.fetchGuides);
 
 module.exports = app;
