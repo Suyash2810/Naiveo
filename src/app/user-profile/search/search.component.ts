@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-search',
@@ -9,6 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class SearchComponent implements OnInit {
 
   @Input() search: string;
+  guides: User[] = [];
 
   constructor(private modalController: ModalController) { }
 
