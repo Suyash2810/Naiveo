@@ -5,7 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user.model';
-import { SearchComponent } from './user-profile/search/search.component';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,7 +15,6 @@ import { SearchComponent } from './user-profile/search/search.component';
 export class AppComponent implements OnInit {
 
   private user: User;
-  private search: string;
 
   constructor(
     private platform: Platform,
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private menu: MenuController,
     private navController: NavController,
-    private modalController: ModalController
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -50,20 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   searchGuide() {
-    this.modalController.create({
-      component: SearchComponent,
-      componentProps: {
-        search: this.search
-      }
-    }).then(modal => {
-      modal.present();
-
-      return modal.onDidDismiss()
-    }).then(
-      data => {
-        console.log(data);
-      }
-    );
-
+    this.menu.close();
+    this.router.navigate(['/', 'user', 'search-page']);
   }
 }

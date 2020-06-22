@@ -11,11 +11,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { LoadingSpinnerModule } from './shared/loading-spinner/loading-spinner.module';
 import { FormsModule } from '@angular/forms';
-import { SearchComponent } from './user-profile/search/search.component';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent],
-  entryComponents: [SearchComponent],
+  declarations: [AppComponent, FilterPipe],
+  entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, LoadingSpinnerModule, FormsModule],
   providers: [
     StatusBar,
