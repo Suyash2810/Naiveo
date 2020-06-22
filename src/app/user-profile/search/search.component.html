@@ -12,9 +12,20 @@
   <ion-grid>
     <ion-row>
       <ion-col>
+        <ion-searchbar placeholder="Search by name" type="text" (ionChange)="searchBar()" [(ngModel)]="name"
+          [debounce]="250" showCancelButton="always"></ion-searchbar>
         <ion-card>
           <ion-card-content>
-            Awesome content
+            <ion-list>
+              <ion-item detail lines="none" *ngFor="let guide of guides; let i = index;" (click)="onClick(guide._id)">
+                <ion-avatar slot="start">
+                  <img src="{{guide.image}}">
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{guide.name}}</h2>
+                </ion-label>
+              </ion-item>
+            </ion-list>
           </ion-card-content>
         </ion-card>
       </ion-col>

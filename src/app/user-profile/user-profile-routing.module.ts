@@ -7,13 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: UserProfilePage
-  },  {
+  },
+  {
     path: 'detail-page',
-    loadChildren: () => import('./detail-page/detail-page.module').then( m => m.DetailPagePageModule)
+    loadChildren: () => import('./detail-page/detail-page.module').then(m => m.DetailPagePageModule)
   },
   {
     path: 'follow-page',
-    loadChildren: () => import('./follow-page/follow-page.module').then( m => m.FollowPagePageModule)
+    loadChildren: () => import('./follow-page/follow-page.module').then(m => m.FollowPagePageModule)
   }
 
 ];
@@ -22,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class UserProfilePageRoutingModule {}
+export class UserProfilePageRoutingModule { }

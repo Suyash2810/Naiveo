@@ -18,6 +18,14 @@ ion-content {
                 height: 92.5vh !important;
                 position: relative;
 
+                ion-searchbar {
+                    --background: transparent;
+                    --ion-color-base: transparent !important;
+                    color: white;
+                    width: 95%;
+                    margin: 5% auto;
+                }
+
                 ion-card {
                     --background: #fff !important;
                     position: absolute;
@@ -28,6 +36,10 @@ ion-content {
                     margin: 0;
                     border-top-left-radius: 8%;
                     border-top-right-radius: 8%;
+
+                    &-content {
+                        margin-top: 10%;
+                    }
                 }
             }
         }

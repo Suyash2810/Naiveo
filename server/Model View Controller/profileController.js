@@ -1,5 +1,6 @@
 const {
-    User
+    User,
+    UserInfo
 } = require('../models/index');
 
 const fetchGuides = async (request, response) => {
@@ -21,6 +22,24 @@ const fetchGuides = async (request, response) => {
     }
 }
 
+const fetchGuide = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const result = await UserInfo.find().populate('user').populate('followers').populate('following').populate('offers').exec();
+        if (result) {
+            response.status(200).send({
+                guide: result
+            });
+        } else {
+            throw "The guide could nto be found.";
+        }
+    } catch (e) {
+        response.status(404).send(e);
+    }
+}
+
 module.exports = {
-    fetchGuides
+    fetchGuides,
+    fetchGuide
 }
