@@ -50,8 +50,6 @@ export class AppComponent implements OnInit {
   }
 
   searchGuide() {
-    console.log(this.search);
-
     this.modalController.create({
       component: SearchComponent,
       componentProps: {

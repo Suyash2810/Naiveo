@@ -8,4 +8,28 @@ ion-header {
 
 ion-content {
     --background: #fff url('../../../assets/img/guide.jpg') no-repeat center center / cover;
+
+    ion-grid {
+        padding: 0;
+
+        ion-row {
+            ion-col {
+                padding: 0;
+                height: 92.5vh !important;
+                position: relative;
+
+                ion-card {
+                    --background: #fff !important;
+                    position: absolute;
+                    bottom: 0;
+                    top: 15%;
+                    min-height: auto;
+                    width: 100%;
+                    margin: 0;
+                    border-top-left-radius: 8%;
+                    border-top-right-radius: 8%;
+                }
+            }
+        }
+    }
 }
