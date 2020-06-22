@@ -1,0 +1,34 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar placeholder="Search by name" type="text" (ionChange)="searchBar()" [(ngModel)]="name"
+          [debounce]="250" showCancelButton="always"></ion-searchbar>
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-item detail lines="none" *ngFor="let guide of guides; let i = index;" (click)="onClick(guide._id)">
+                <ion-avatar slot="start">
+                  <img src="{{guide.image}}">
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{guide.name}}</h2>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
