@@ -41,7 +41,7 @@ export class SearchPagePage implements OnInit {
   }
 
   onClick(id: string) {
-    this.navController.navigateForward('/user/detail-page');
+    this.navController.navigateForward('/user/detail-page/' + id);
   }
 
   ngOnDestroy() {

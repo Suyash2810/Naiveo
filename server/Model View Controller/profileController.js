@@ -26,7 +26,9 @@ const fetchGuide = async (request, response) => {
 
     try {
         const id = request.params.id;
-        const result = await UserInfo.find().populate('user').populate('followers').populate('following').populate('offers').exec();
+        const result = await UserInfo.find({
+            _id: id
+        }).populate('user').populate('followers').populate('following').populate('offers').exec();
         if (result) {
             response.status(200).send({
                 guide: result

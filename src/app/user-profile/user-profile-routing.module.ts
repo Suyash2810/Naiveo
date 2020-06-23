@@ -9,15 +9,16 @@ const routes: Routes = [
     component: UserProfilePage
   },
   {
-    path: 'detail-page',
+    path: 'detail-page/:id',
     loadChildren: () => import('./detail-page/detail-page.module').then(m => m.DetailPagePageModule)
   },
   {
     path: 'follow-page',
     loadChildren: () => import('./follow-page/follow-page.module').then(m => m.FollowPagePageModule)
-  },  {
+  },
+  {
     path: 'search-page',
-    loadChildren: () => import('./search-page/search-page.module').then( m => m.SearchPagePageModule)
+    loadChildren: () => import('./search-page/search-page.module').then(m => m.SearchPagePageModule)
   }
 
 

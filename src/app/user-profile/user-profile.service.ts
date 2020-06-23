@@ -17,9 +17,11 @@ export class UserService {
     }
 
     fetchGuideById(id: string) {
-
         type responseType = { status: string, guide: any };
-        const req = new HttpRequest("GET", "http://localhost:3000/guide/" + id);
-        return this.httpClient.request(req);
+
+        return this.httpClient.get<responseType>("http://localhost:3000/guide/" + id, {
+            observe: 'body',
+            responseType: 'json'
+        });
     }
 }
