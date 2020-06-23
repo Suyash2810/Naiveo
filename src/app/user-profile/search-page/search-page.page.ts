@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/user.model';
 import { ModalController, AlertController, MenuController, NavController } from '@ionic/angular';
 import { UserService } from '../user-profile.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -17,8 +16,7 @@ export class SearchPagePage implements OnInit {
   name: string = "";
 
   constructor(private userService: UserService,
-    private alertController: AlertController,
-    private router: Router, private navController: NavController) { }
+    private alertController: AlertController, private navController: NavController) { }
 
   ngOnInit() {
 

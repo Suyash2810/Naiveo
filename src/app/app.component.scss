@@ -13,7 +13,7 @@ sans-serif;
 }
 
 ion-menu {
-    --background: linear-gradient(to top, rgba(35, 36, 63, 0.9), rgba(35, 36, 63, 0.8)),
+    --background: linear-gradient(to top, var(--ion-color-c1), rgba(35, 36, 63, 0.8)),
         url('./../assets/img/mountain-and-trees-reflection-1097491.jpg') no-repeat center fixed !important;
     --width: 100vw;
 
@@ -35,9 +35,13 @@ ion-menu {
                         justify-content: space-between;
                         height: 20%;
 
-                        &__bar {
+                        &__box {
                             display: inline-block;
                             width: 80%;
+                        }
+
+                        &__btn {
+                            background-color: var(--ion-color-c6);
                         }
 
                         &__settings {
