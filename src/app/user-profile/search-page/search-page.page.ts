@@ -25,7 +25,6 @@ export class SearchPagePage implements OnInit {
     this.guideSubscription = this.userService.fetchGuides().subscribe(
       (response) => {
         this.guides = response.guides;
-        console.log(this.guides);
       },
       async error => {
         const alert = await this.alertController.create({
@@ -45,10 +44,6 @@ export class SearchPagePage implements OnInit {
 
   onClick(id: string) {
     this.navController.navigateForward('/user/detail-page');
-  }
-
-  searchBar() {
-    console.log(this.name);
   }
 
   ngOnDestroy() {

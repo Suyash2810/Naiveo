@@ -6,8 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterPipe implements PipeTransform {
 
   transform(list: Array<any>, key: string, value: string): Array<any> {
+    if (value == "") {
+      return list;
+    }
 
-    let filteredList = list.filter(item => item[key] == value);
+    let filteredList = list.filter((item) => {
+      let name = (item[key]).toLowerCase();
+      return name.indexOf(value) > -1;
+    });
+
     return filteredList;
   }
 

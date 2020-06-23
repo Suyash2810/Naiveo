@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, FilterPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, LoadingSpinnerModule, FormsModule],
   providers: [
