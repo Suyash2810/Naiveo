@@ -3,6 +3,12 @@ ion-header {
     ion-toolbar {
         --background: transparent;
         --ion-color-base: transparent !important;
+
+        ion-title {
+            color: var(--ion-color-light-contrast);
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
     }
 }
 
@@ -18,28 +24,52 @@ ion-content {
                 height: 92.5vh !important;
                 position: relative;
 
-                ion-searchbar {
-                    --background: transparent;
-                    --ion-color-base: transparent !important;
-                    color: white;
-                    width: 95%;
-                    margin: 5% auto;
+                .search_card {
+                    height: 30%;
+                    --background: url("../../../assets/img/search_page.png") no-repeat center center / contain;
+                    margin: 0;
+                    box-shadow: none !important;
                 }
 
-                ion-card {
-                    --background: #fff !important;
+                .guide_list {
+
+                    ion-searchbar {
+                        --background: transparent;
+                        --ion-color-base: transparent !important;
+                        color: var(--ion-color-light-contrast);
+                        width: 95%;
+                        margin: 5% auto;
+                    }
+
                     position: absolute;
                     bottom: 0;
-                    top: 15%;
+                    top: 35%;
                     min-height: auto;
                     width: 100%;
                     margin: 0;
                     border-top-left-radius: 8%;
                     border-top-right-radius: 8%;
+                    z-index: 1000;
 
-                    &-content {
-                        margin-top: 10%;
+                    ion-card-content {
+                        margin-top: 5%;
+
+                        ion-list {
+
+                            ion-item {
+                                ion-avatar {
+
+                                    border: 2px solid var(--ion-color-secondary);
+                                }
+
+                                ion-label {
+
+                                    h2 {}
+                                }
+                            }
+                        }
                     }
+
                 }
             }
         }

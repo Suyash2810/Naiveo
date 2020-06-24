@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="end">
       <ion-button (click)="onDismiss()">
-        <ion-icon name="close"></ion-icon>
+        <ion-icon color="dark" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Search</ion-title>
@@ -12,9 +12,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-searchbar placeholder="Search by name" type="text" [(ngModel)]="name" [debounce]="250"
-          showCancelButton="always"></ion-searchbar>
-        <ion-card>
+        <ion-card class="search_card"></ion-card>
+        <ion-card class="guide_list">
+          <ion-searchbar placeholder="Search by name" type="text" [(ngModel)]="name" [debounce]="250"
+            showCancelButton="always"></ion-searchbar>
           <ion-card-content>
             <ion-list>
               <ion-item detail lines="none" *ngFor="let guide of guides | filter:'name':name; let i = index;"
