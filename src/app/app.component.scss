@@ -13,21 +13,19 @@ sans-serif;
 }
 
 ion-menu {
-    --background: linear-gradient(to top, var(--ion-color-c1), rgba(35, 36, 63, 0.8)),
-        url('./../assets/img/mountain-and-trees-reflection-1097491.jpg') no-repeat center fixed !important;
     --width: 100vw;
 
     ion-content {
-        @extend %transparent-backround;
+        // @extend %transparent-backround;
 
         ion-grid {
-            @extend %transparent-backround;
+            // @extend %transparent-backround;
 
             ion-row {
-                @extend %transparent-backround;
+                // @extend %transparent-backround;
 
                 ion-col {
-                    @extend %transparent-backround;
+                    // @extend %transparent-backround;
 
                     .search {
                         display: flex;
@@ -96,24 +94,21 @@ ion-menu {
             }
         }
 
-        ion-list {
-            background: transparent !important;
-        }
+        // ion-list {}
 
         ion-item {
-            --background: transparent !important;
-            --color: #FFFFFF !important;
+            --color: var(--ion-color-light-contrast) !important;
 
             margin-top: 0.5rem !important;
 
             ion-icon {
-                color: white;
+                color: var(--ion-color-primary);
                 @extend %font-light;
             }
 
             ion-label {
                 font-size: 1.0rem;
-                color: white;
+                color: var(--ion-color-light-contrast) !important;
                 @extend %font-light;
             }
         }
