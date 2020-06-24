@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { UserSettingsPage } from './user-settings.page';
+import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.module';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes), LoadingSpinnerModule],
   exports: [RouterModule],
 })
-export class UserSettingsPageRoutingModule {}
+export class UserSettingsPageRoutingModule { }
