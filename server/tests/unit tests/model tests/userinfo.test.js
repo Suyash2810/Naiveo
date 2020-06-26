@@ -9,14 +9,14 @@ const {
 
 describe("UserInfo Model Tests", () => {
 
-    it("should not create and instance for invalid data", (done) => {
+    it("should not create the instance for invalid data", (done) => {
 
         const userInfo = new UserInfo();
 
         userInfo.validate(
             (error) => {
                 expect(error.errors.user).to.exist;
-                expect(error.errors.age).to.exist;
+                expect(error.errors.dob).to.exist;
                 expect(error.errors.gender).to.exist;
                 expect(error.errors.mobile).to.exist;
                 expect(error.errors.address).to.exist;
@@ -31,7 +31,7 @@ describe("UserInfo Model Tests", () => {
 
         const data = {
             user: new ObjectId(),
-            age: 26,
+            dob: new Date(),
             gender: "Female",
             mobile: "1245",
             address: "foo",
@@ -45,7 +45,7 @@ describe("UserInfo Model Tests", () => {
         const userinfo = new UserInfo(data);
 
         expect(userinfo).to.have.property('user').to.be.equal(data.user);
-        expect(userinfo).to.have.property('age').to.be.equal(data.age);
+        expect(userinfo).to.have.property('dob').to.be.equal(data.dob);
         expect(userinfo).to.have.property('gender').to.be.equal(data.gender);
         expect(userinfo).to.have.property('mobile').to.be.equal(data.mobile);
         expect(userinfo).to.have.property('address').to.be.equal(data.address);

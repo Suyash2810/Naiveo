@@ -14,22 +14,51 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
+  <ion-grid class="header">
+    <ion-row class="header__row header__row--1">
+      <ion-col size="12" class="header__col header__col--1">
         <div class="header_img"></div>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-text color="primary">
-          <h1>User Data</h1>
+    <ion-row class="header__row header__row--2">
+      <ion-col size="12" class="ion-text-center" class="header__col header__col--2">
+        <ion-text color="primary" class="ion-text-center">
+          <h6>Update additional information</h6>
         </ion-text>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        Form
+
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." id="description" name="description"
+              ngModel #description="ngModel"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Mobile</ion-label>
+            <ion-input type="text" id="mobile" name="mobile" ngModel #mobile="ngModel"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Address</ion-label>
+            <ion-input type="text" id="address" name="address" ngModel #address="ngModel"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Gender</ion-label>
+            <ion-select value="brown" okText="Okay" cancelText="Dismiss">
+              <ion-select-option value="male">Male</ion-select-option>
+              <ion-select-option value="female">Female</ion-select-option>
+              <ion-select-option value="other">Other</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Date of Birth</ion-label>
+            <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" name="dob" [ngModel]="todayDate"
+              #dob="ngModel"></ion-datetime>
+          </ion-item>
+
+          <div class="ion-text-center">
+            <ion-button type="submit" [disabled]="!f.valid">Save</ion-button>
+          </div>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

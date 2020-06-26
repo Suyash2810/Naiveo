@@ -6,9 +6,9 @@ const userInfoSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    age: {
+    dob: {
         required: true,
-        type: Number
+        type: Date
     },
     followers: [{
         type: mongoose.Schema.Types.ObjectId,

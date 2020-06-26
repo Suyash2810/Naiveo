@@ -14,6 +14,7 @@ export class UserSettingsPage implements OnInit {
   id: string;
   userData: any;
   userSubscription: Subscription;
+  todayDate: String = new Date().toISOString();
 
   constructor(private authService: AuthService, private profileService: UserService, private navController: NavController,
     private alertController: AlertController) { }
