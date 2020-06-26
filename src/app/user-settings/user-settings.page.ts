@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from '../user-profile/user-profile.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-settings',
@@ -15,6 +16,7 @@ export class UserSettingsPage implements OnInit {
   userData: any;
   userSubscription: Subscription;
   todayDate: String = new Date().toISOString();
+  @ViewChild('f', { static: false }) form: NgForm;
 
   constructor(private authService: AuthService, private profileService: UserService, private navController: NavController,
     private alertController: AlertController) { }
@@ -40,6 +42,10 @@ export class UserSettingsPage implements OnInit {
 
   onDismiss() {
     this.navController.navigateBack('/places');
+  }
+
+  onSubmit() {
+    console.log(this.form);
   }
 
 }

@@ -22,7 +22,7 @@
     </ion-row>
     <ion-row class="header__row header__row--2">
       <ion-col size="12" class="ion-text-center" class="header__col header__col--2">
-        <ion-text color="primary" class="ion-text-center">
+        <ion-text color="primary">
           <h6>Update additional information</h6>
         </ion-text>
 
@@ -31,32 +31,52 @@
           <ion-item>
             <ion-label position="floating">Description</ion-label>
             <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." id="description" name="description"
-              ngModel #description="ngModel"></ion-textarea>
+              ngModel #description="ngModel" required></ion-textarea>
           </ion-item>
+
           <ion-item>
             <ion-label position="floating">Mobile</ion-label>
-            <ion-input type="text" id="mobile" name="mobile" ngModel #mobile="ngModel"></ion-input>
+            <ion-input type="text" id="mobile" name="mobile" ngModel #mobile="ngModel" required></ion-input>
           </ion-item>
+
           <ion-item>
             <ion-label position="floating">Address</ion-label>
-            <ion-input type="text" id="address" name="address" ngModel #address="ngModel"></ion-input>
+            <ion-input type="text" id="address" name="address" ngModel #address="ngModel" required></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label>Gender</ion-label>
-            <ion-select value="brown" okText="Okay" cancelText="Dismiss">
-              <ion-select-option value="male">Male</ion-select-option>
-              <ion-select-option value="female">Female</ion-select-option>
-              <ion-select-option value="other">Other</ion-select-option>
-            </ion-select>
-          </ion-item>
+
+          <ion-list>
+            <ion-radio-group name="gender" ngModel>
+              <ion-list-header>
+                <ion-label>
+                  Gender
+                </ion-label>
+              </ion-list-header>
+
+              <ion-item>
+                <ion-label>Male</ion-label>
+                <ion-radio value="male"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Female</ion-label>
+                <ion-radio value="female"></ion-radio>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Other</ion-label>
+                <ion-radio value="other"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+
           <ion-item>
             <ion-label position="floating">Date of Birth</ion-label>
             <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" name="dob" [ngModel]="todayDate"
-              #dob="ngModel"></ion-datetime>
+              #dob="ngModel" required></ion-datetime>
           </ion-item>
 
-          <div class="ion-text-center">
-            <ion-button type="submit" [disabled]="!f.valid">Save</ion-button>
+          <div class="ion-text-center submitBtn">
+            <ion-button type="submit" [disabled]="!f.valid" expand="block">Save</ion-button>
           </div>
         </form>
       </ion-col>

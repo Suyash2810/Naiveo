@@ -48,6 +48,47 @@ ion-content {
                     }
                 }
             }
+
+            &--2 {
+
+                ion-col {
+                    padding: 1rem 3rem;
+
+                    ion-text {
+                        h6 {
+                            color: var(--ion-color-dark-blue);
+                            font-size: 1.0rem;
+                            font-weight: bold;
+                        }
+                    }
+
+                    form {
+                        margin-top: 10%;
+
+                        ion-item {
+                            --padding-start: 0 !important;
+                        }
+
+                        ion-list {
+                            ion-radio-group {
+                                ion-list-header {
+                                    padding-left: 0 !important;
+
+                                    ion-label {
+                                        font-size: 0.8rem;
+                                        font-weight: bold;
+                                        color: var(--ion-color-dark-blue);
+                                    }
+                                }
+                            }
+                        }
+
+                        .submitBtn {
+                            margin-top: 10%;
+                        }
+                    }
+                }
+            }
         }
 
         &__col {
