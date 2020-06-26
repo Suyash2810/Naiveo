@@ -38,7 +38,6 @@ app.post('/register', imageExtract, userController.register);
 app.post('/login', userController.login);
 app.get('/user', authorization, userController.fetchUserData);
 app.delete('/user', authorization, userController.deleteAccount);
-app.get('/guide/:id', authorization, userController.fetchGuide);
 
 // ------------------------------------------Place Requests--------------------------------------------->
 

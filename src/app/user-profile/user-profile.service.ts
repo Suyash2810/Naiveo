@@ -17,11 +17,9 @@ export class UserService {
     }
 
     fetchGuideById(id: string) {
-        type responseType = { status: string, guide: any };
+        type responseType = { guide: any };
+        console.log("We are fetching guide by id: ", id);
 
-        return this.httpClient.get<responseType>("http://localhost:3000/guide/" + id, {
-            observe: 'body',
-            responseType: 'json'
-        });
+        return this.httpClient.get<responseType>(`http://localhost:3000/guide/${id}`);
     }
 }

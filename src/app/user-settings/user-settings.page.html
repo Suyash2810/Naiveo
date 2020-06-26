@@ -45,7 +45,7 @@
           </ion-item>
 
           <ion-list>
-            <ion-radio-group name="gender" ngModel>
+            <ion-radio-group name="gender" ngModel required>
               <ion-list-header>
                 <ion-label>
                   Gender
@@ -71,7 +71,7 @@
 
           <ion-item>
             <ion-label position="floating">Date of Birth</ion-label>
-            <ion-datetime displayFormat="MM DD YYYY" placeholder="Select Date" name="dob" [ngModel]="todayDate"
+            <ion-datetime displayFormat="MMM DD, YYYY" placeholder="Select Date" name="dob" [ngModel]="todayDate"
               #dob="ngModel" required></ion-datetime>
           </ion-item>
 

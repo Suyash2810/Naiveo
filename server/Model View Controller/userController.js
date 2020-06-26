@@ -114,32 +114,9 @@ const deleteAccount = async (request, response) => {
     }
 }
 
-const fetchGuide = async (request, response) => {
-
-    try {
-        const id = request.params.id;
-        let result = await User.findById({
-            _id: id
-        });
-        if (result) {
-            response.status(200).send({
-                status: "The guide has been fetched.",
-                guide: result
-            });
-        } else {
-            throw "Guide could not be fetched.";
-        }
-    } catch (e) {
-        response.status(404).send({
-            error: e
-        });
-    }
-}
-
 module.exports = {
     register,
     login,
     fetchUserData,
-    deleteAccount,
-    fetchGuide
+    deleteAccount
 }

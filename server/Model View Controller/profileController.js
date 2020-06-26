@@ -29,12 +29,13 @@ const fetchGuide = async (request, response) => {
         const result = await UserInfo.find({
             _id: id
         }).populate('user').populate('followers').populate('following').populate('offers').exec();
+
         if (result) {
             response.status(200).send({
                 guide: result
             });
         } else {
-            throw "The guide could nto be found.";
+            throw "The guide could not be found.";
         }
     } catch (e) {
         response.status(404).send(e);
