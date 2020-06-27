@@ -19,7 +19,7 @@ export class UserSettingsPage implements OnInit, OnDestroy {
   isLoading: boolean = true;
   dataExists: boolean = true;
 
-  @ViewChild('f', { static: false }) form: NgForm;
+  @ViewChild('f', null) form: NgForm;
 
   constructor(private authService: AuthService, private profileService: UserService, private navController: NavController,
     private alertController: AlertController) { }
@@ -32,7 +32,19 @@ export class UserSettingsPage implements OnInit, OnDestroy {
           if (response.guide.length == 0) {
             this.dataExists = false;
           }
+          this.userData = response.guide[0];
           this.isLoading = false;
+          if (response.guide.length != 0) {
+            setTimeout(() => {
+              this.form.setValue({
+                description: this.userData.description,
+                address: this.userData.address,
+                dob: this.userData.dob,
+                mobile: this.userData.mobile,
+                gender: this.userData.gender
+              });
+            });
+          }
         },
         async error => {
           const alert = await this.alertController.create({
@@ -53,6 +65,7 @@ export class UserSettingsPage implements OnInit, OnDestroy {
   onSubmit() {
     if (this.dataExists) {
       console.log("Data Exists");
+      console.log(this.form.value);
     } else {
       this.profileService.saveUserData(this.id, this.form.value.address, this.form.value.description, this.form.value.dob, this.form.value.gender, this.form.value.mobile);
       this.form.reset();

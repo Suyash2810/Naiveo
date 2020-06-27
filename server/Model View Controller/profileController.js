@@ -30,7 +30,7 @@ const fetchGuide = async (request, response) => {
     try {
         const id = request.params.id;
         const result = await UserInfo.find({
-            _id: id
+            user: id
         }).populate('user').populate('followers').populate('following').populate('offers').exec();
 
         if (result) {

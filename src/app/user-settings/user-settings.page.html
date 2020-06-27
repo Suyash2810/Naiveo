@@ -77,7 +77,8 @@
           </ion-item>
 
           <div class="ion-text-center submitBtn">
-            <ion-button type="submit" [disabled]="!f.valid" expand="block">Save</ion-button>
+            <ion-button type="submit" [disabled]="!f.valid" expand="block" *ngIf="!dataExists">Save</ion-button>
+            <ion-button type="submit" [disabled]="!f.valid" expand="block" *ngIf="dataExists">Update</ion-button>
           </div>
         </form>
       </ion-col>
