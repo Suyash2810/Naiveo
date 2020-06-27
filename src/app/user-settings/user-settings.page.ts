@@ -64,8 +64,7 @@ export class UserSettingsPage implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.dataExists) {
-      console.log("Data Exists");
-      console.log(this.form.value);
+      this.profileService.updateUserData(this.id, this.form.value.address, this.form.value.description, this.form.value.dob, this.form.value.gender, this.form.value.mobile);
     } else {
       this.profileService.saveUserData(this.id, this.form.value.address, this.form.value.description, this.form.value.dob, this.form.value.gender, this.form.value.mobile);
       this.form.reset();

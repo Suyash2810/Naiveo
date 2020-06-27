@@ -54,7 +54,7 @@ export class UserService {
             address, description, dob, gender, mobile
         }
 
-        this.httpClient.patch<responseType>("http://localhost:3000/saveUserData/" + id, data)
+        this.httpClient.patch<responseType>("http://localhost:3000/updateUserData/" + id, data)
             .subscribe(
                 async (response) => {
                     const toast = await this.toastController.create({

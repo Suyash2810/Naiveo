@@ -69,8 +69,31 @@ const saveUserData = async (request, response) => {
     }
 }
 
+const updateUserData = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        let body = pick(request.body, ['address', 'description', 'dob', 'gender', 'mobile']);
+        const result = await UserInfo.findOneAndUpdate({
+            user: id
+        }, {
+            $set: body
+        }, {
+            new: true
+        });
+        if (result) {
+            console.log(result);
+            response.status(200).send({
+                status: "Data has been updated."
+            });
+        } else throw "Data could not be updated.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
 module.exports = {
     fetchGuides,
     fetchGuide,
-    saveUserData
+    saveUserData,
+    updateUserData
 }

@@ -31,6 +31,9 @@ const reviewController = require('./Model View Controller/reviewController');
 const profileController = require('./Model View Controller/profileController');
 
 const imageExtract = require('./middleware/imageExtract');
+const {
+    profile
+} = require('console');
 
 // ------------------------------------------User Requests--------------------------------------------->
 
@@ -68,5 +71,6 @@ app.get('/review/rating/:placeId', authorization, reviewController.averageRating
 app.get('/guides', authorization, profileController.fetchGuides);
 app.get('/guide/:id', authorization, profileController.fetchGuide);
 app.post("/saveUserData/:id", authorization, profileController.saveUserData);
+app.patch("/updateUserData/:id", authorization, profileController.updateUserData);
 
 module.exports = app;
