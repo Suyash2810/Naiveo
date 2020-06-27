@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -7,19 +8,65 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 
 export class UserService {
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private toastController: ToastController, private alertController: AlertController) {
 
     }
 
     fetchGuides() {
+
         type responseType = { status: string, guides: any };
         return this.httpClient.get<responseType>("http://localhost:3000/guides");
     }
 
     fetchGuideById(id: string) {
-        type responseType = { guide: any };
-        console.log("We are fetching guide by id: ", id);
 
+        type responseType = { guide: any };
         return this.httpClient.get<responseType>(`http://localhost:3000/guide/${id}`);
+    }
+
+    saveUserData(id: string, address: string, description: string, dob: Date, gender: string, mobile: string) {
+
+        type responseType = { status: string };
+        const data = {
+            address, description, dob, gender, mobile
+        }
+
+        this.httpClient.post<responseType>("http://localhost:3000/saveUserData/" + id, data)
+            .subscribe(
+                async (response) => {
+                    const toast = await this.toastController.create({
+                        duration: 2000,
+                        message: response.status
+                    });
+
+                    await toast.present();
+                },
+                async error => {
+                    console.log(error);
+                }
+            );
+    }
+
+    updateUserData(id: string, address: string, description: string, dob: Date, gender: string, mobile: string) {
+
+        type responseType = { status: string };
+        const data = {
+            address, description, dob, gender, mobile
+        }
+
+        this.httpClient.patch<responseType>("http://localhost:3000/saveUserData/" + id, data)
+            .subscribe(
+                async (response) => {
+                    const toast = await this.toastController.create({
+                        duration: 2000,
+                        message: response.status
+                    });
+
+                    await toast.present();
+                },
+                async error => {
+                    console.log(error);
+                }
+            );
     }
 }

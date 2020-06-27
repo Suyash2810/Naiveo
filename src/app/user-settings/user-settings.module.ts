@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { UserSettingsPageRoutingModule } from './user-settings-routing.module';
 
 import { UserSettingsPage } from './user-settings.page';
+import { LoadingSpinnerModule } from '../shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserSettingsPageRoutingModule
+    UserSettingsPageRoutingModule,
+    LoadingSpinnerModule
   ],
   declarations: [UserSettingsPage]
 })
-export class UserSettingsPageModule {}
+export class UserSettingsPageModule { }

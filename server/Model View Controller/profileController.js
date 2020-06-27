@@ -2,6 +2,9 @@ const {
     User,
     UserInfo
 } = require('../models/index');
+const {
+    pick
+} = require('lodash');
 
 const fetchGuides = async (request, response) => {
 
@@ -42,7 +45,32 @@ const fetchGuide = async (request, response) => {
     }
 }
 
+const saveUserData = async (request, response) => {
+
+    try {
+        let body = pick(request.body, ['address', 'description', 'dob', 'gender', 'mobile']);
+        body = {
+            ...body,
+            user: request.params.id
+        };
+
+        console.log(body);
+        const userinfo = await new UserInfo(body);
+        const result = await userinfo.save();
+        if (result) {
+            response.status(200).send({
+                status: "User data has been saved."
+            });
+        } else {
+            throw "User data could not be saved."
+        }
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 module.exports = {
     fetchGuides,
-    fetchGuide
+    fetchGuide,
+    saveUserData
 }

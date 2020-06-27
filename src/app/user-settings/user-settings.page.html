@@ -14,7 +14,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
-  <ion-grid class="header">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <ion-grid class="header" *ngIf="!isLoading">
     <ion-row class="header__row header__row--1">
       <ion-col size="12" class="header__col header__col--1">
         <div class="header_img"></div>

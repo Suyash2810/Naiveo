@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from '../user-profile/user-profile.service';
 import { NavController, AlertController } from '@ionic/angular';
@@ -10,12 +10,15 @@ import { NgForm } from '@angular/forms';
   templateUrl: './user-settings.page.html',
   styleUrls: ['./user-settings.page.scss'],
 })
-export class UserSettingsPage implements OnInit {
+export class UserSettingsPage implements OnInit, OnDestroy {
 
   id: string;
   userData: any;
   userSubscription: Subscription;
   todayDate: String = new Date().toISOString();
+  isLoading: boolean = true;
+  dataExists: boolean = true;
+
   @ViewChild('f', { static: false }) form: NgForm;
 
   constructor(private authService: AuthService, private profileService: UserService, private navController: NavController,
@@ -26,7 +29,10 @@ export class UserSettingsPage implements OnInit {
     this.userSubscription = this.profileService.fetchGuideById(this.id)
       .subscribe(
         response => {
-          console.log(response);
+          if (response.guide.length == 0) {
+            this.dataExists = false;
+          }
+          this.isLoading = false;
         },
         async error => {
           const alert = await this.alertController.create({
@@ -37,7 +43,7 @@ export class UserSettingsPage implements OnInit {
 
           await alert.present();
         }
-      )
+      );
   }
 
   onDismiss() {
@@ -45,7 +51,15 @@ export class UserSettingsPage implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
+    if (this.dataExists) {
+      console.log("Data Exists");
+    } else {
+      this.profileService.saveUserData(this.id, this.form.value.address, this.form.value.description, this.form.value.dob, this.form.value.gender, this.form.value.mobile);
+      this.form.reset();
+    }
   }
 
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
+  }
 }

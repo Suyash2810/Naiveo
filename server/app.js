@@ -67,5 +67,6 @@ app.get('/review/rating/:placeId', authorization, reviewController.averageRating
 
 app.get('/guides', authorization, profileController.fetchGuides);
 app.get('/guide/:id', authorization, profileController.fetchGuide);
+app.post("/saveUserData/:id", authorization, profileController.saveUserData);
 
 module.exports = app;
