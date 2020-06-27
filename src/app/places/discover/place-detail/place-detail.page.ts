@@ -59,11 +59,11 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
 
               this.isLoading = false;
               this.isBookable = this.place.userID != this.authService.getUserId();
-              this.authService.fetchGuide(this.place.userID)
+              this.authService.fetchUserById(this.place.userID)
                 .pipe(
                   map(
                     (response) => {
-                      const guide = response.guide;
+                      const guide = response.user;
                       return {
                         id: guide._id,
                         name: guide.name,

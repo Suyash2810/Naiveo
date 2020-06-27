@@ -114,9 +114,27 @@ const deleteAccount = async (request, response) => {
     }
 }
 
+const fetchUserById = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const result = await User.findById({
+            _id: id
+        });
+        if (result) {
+            response.status(200).send({
+                user: result
+            });
+        } else throw "Data could not be fetched.";
+    } catch (e) {
+        response.status(404).send(e);
+    }
+}
+
 module.exports = {
     register,
     login,
     fetchUserData,
-    deleteAccount
+    deleteAccount,
+    fetchUserById
 }

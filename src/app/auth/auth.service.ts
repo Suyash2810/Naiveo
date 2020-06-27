@@ -251,8 +251,8 @@ export class AuthService {
     return this.httpClient.delete<responseType>("http://localhost:3000/user");
   }
 
-  fetchGuide(id: string) {
-    type responseType = { status: string, guide: any };
-    return this.httpClient.get<responseType>("http://localhost:3000/guide/" + id);
+  fetchUserById(id: string) {
+    type responseType = { user: any };
+    return this.httpClient.get<responseType>("http://localhost:3000/user/" + id);
   }
 }
