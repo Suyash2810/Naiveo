@@ -72,5 +72,7 @@ app.get('/guides', authorization, profileController.fetchGuides);
 app.get('/guide/:id', authorization, profileController.fetchGuide);
 app.post("/saveUserData/:id", authorization, profileController.saveUserData);
 app.patch("/updateUserData/:id", authorization, profileController.updateUserData);
+app.patch('/follow/:id', authorization, profileController.follow);
+app.patch('/unfollow/:id', authorization, profileController.unfollow);
 
 module.exports = app;

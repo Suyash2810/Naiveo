@@ -6,6 +6,10 @@ const {
     pick
 } = require('lodash');
 
+const {
+    ObjectId
+} = require('mongodb');
+
 const fetchGuides = async (request, response) => {
 
     try {
@@ -91,9 +95,67 @@ const updateUserData = async (request, response) => {
         response.status(400).send(e);
     }
 }
+
+const follow = async (request, response) => {
+
+    try {
+        const activeUserId = request.params.id;
+        const {
+            id
+        } = pick(request.body, ['id']);
+
+        const result = await UserInfo.findOneAndUpdate({
+            user: activeUserId
+        }, {
+            $push: {
+                following: id
+            }
+        }, {
+            new: true
+        });
+        if (result) {
+            response.status(200).send({
+                status: "Followed."
+            });
+        } else throw "Following could not be updated.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
+const unfollow = async (request, response) => {
+
+    try {
+        const activeUserId = request.params.id;
+        const {
+            id
+        } = pick(request.body, ['id']);
+
+        const result = await UserInfo.update({
+            user: activeUserId
+        }, {
+            $pull: {
+                following: ObjectId(id)
+            }
+        }, {
+            new: true
+        });
+
+        if (result) {
+            response.status(200).send({
+                status: "Unfollowed"
+            });
+        } else throw "Following could not be updated.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 module.exports = {
     fetchGuides,
     fetchGuide,
     saveUserData,
-    updateUserData
+    updateUserData,
+    follow,
+    unfollow
 }

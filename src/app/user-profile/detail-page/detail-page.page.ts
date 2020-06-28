@@ -60,9 +60,11 @@ export class DetailPagePage implements OnInit, OnDestroy {
         async error => {
           const alert = await this.alertController.create({
             header: "Error",
-            message: error.errors._message,
+            message: error,
             buttons: ["Ok"]
-          })
+          });
+
+          alert.present();
         }
       );
   }
@@ -81,9 +83,11 @@ export class DetailPagePage implements OnInit, OnDestroy {
         async error => {
           const alert = await this.alertController.create({
             header: "Error",
-            message: error.errors._message,
+            message: error,
             buttons: ["Ok"]
-          })
+          });
+
+          alert.present();
         }
       );
   }

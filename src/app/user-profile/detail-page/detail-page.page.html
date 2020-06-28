@@ -12,6 +12,7 @@
     <ion-row>
       <ion-col size="12">
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
+        <ion-button *ngIf="id != activeUserId" color="primary" (click)="unfollow()">Unfollow</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
