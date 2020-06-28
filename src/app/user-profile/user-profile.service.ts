@@ -42,7 +42,13 @@ export class UserService {
                     await toast.present();
                 },
                 async error => {
-                    console.log(error);
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        message: error.errors._message,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
                 }
             );
     }
@@ -65,7 +71,13 @@ export class UserService {
                     await toast.present();
                 },
                 async error => {
-                    console.log(error);
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        message: error.errors._message,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
                 }
             );
     }

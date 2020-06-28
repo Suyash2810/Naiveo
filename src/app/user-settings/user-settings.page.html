@@ -34,19 +34,34 @@
             <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." id="description" name="description"
               ngModel #description="ngModel" required></ion-textarea>
           </ion-item>
-
+          <p *ngIf="description.touched && !description.valid" class="error_message">
+            <ion-text color="danger">
+              <ion-icon name="alert"></ion-icon>
+              <ion-note>Enter valid description.</ion-note>
+            </ion-text>
+          </p>
           <ion-item>
             <ion-label position="floating">Mobile</ion-label>
             <ion-input type="text" id="mobile" name="mobile" ngModel #mobile="ngModel" required></ion-input>
           </ion-item>
-
+          <p *ngIf="mobile.touched && !mobile.valid" class="error_message">
+            <ion-text color="danger">
+              <ion-icon name="alert"></ion-icon>
+              <ion-note>Enter valid mobile number.</ion-note>
+            </ion-text>
+          </p>
           <ion-item>
             <ion-label position="floating">Address</ion-label>
             <ion-input type="text" id="address" name="address" ngModel #address="ngModel" required></ion-input>
           </ion-item>
-
+          <p *ngIf="address.touched && !address.valid" class="error_message">
+            <ion-text color="danger">
+              <ion-icon name="alert"></ion-icon>
+              <ion-note>Enter valid address.</ion-note>
+            </ion-text>
+          </p>
           <ion-list>
-            <ion-radio-group name="gender" ngModel required>
+            <ion-radio-group name="gender" ngModel required #gender="ngModel">
               <ion-list-header>
                 <ion-label>
                   Gender
@@ -69,13 +84,23 @@
               </ion-item>
             </ion-radio-group>
           </ion-list>
-
+          <p *ngIf="gender.touched && !gender.valid" class="error_message">
+            <ion-text color="danger">
+              <ion-icon name="alert"></ion-icon>
+              <ion-note>Please select your gender.</ion-note>
+            </ion-text>
+          </p>
           <ion-item>
             <ion-label position="floating">Date of Birth</ion-label>
             <ion-datetime displayFormat="MMM DD, YYYY" placeholder="Select Date" name="dob" [ngModel]="todayDate"
               #dob="ngModel" required></ion-datetime>
           </ion-item>
-
+          <p *ngIf="dob.touched && !dob.valid" class="error_message">
+            <ion-text color="danger">
+              <ion-icon name="alert"></ion-icon>
+              <ion-note>Select your date of birth.</ion-note>
+            </ion-text>
+          </p>
           <div class="ion-text-center submitBtn">
             <ion-button type="submit" [disabled]="!f.valid" expand="block" *ngIf="!dataExists">Save</ion-button>
             <ion-button type="submit" [disabled]="!f.valid" expand="block" *ngIf="dataExists">Update</ion-button>
