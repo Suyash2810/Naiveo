@@ -40,8 +40,8 @@
       <ion-icon name="arrow-dropleft-circle"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button color="light">
-        <ion-icon name="expand" [routerLink]="['.', 'detail-page']"></ion-icon>
+      <ion-fab-button color="light" (click)="navigateToDetailPage()">
+        <ion-icon name="expand"></ion-icon>
       </ion-fab-button>
       <ion-fab-button color="light">
         <ion-icon name="logo-twitter"></ion-icon>

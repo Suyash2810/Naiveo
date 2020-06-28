@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
     <ion-title>Detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/user"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        This is the detail page.
+        <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

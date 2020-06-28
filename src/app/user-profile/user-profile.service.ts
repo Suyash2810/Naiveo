@@ -81,4 +81,24 @@ export class UserService {
                 }
             );
     }
+
+    follow(id: string, activeUserId: string) {
+
+        type responseType = { status: string };
+        const data = {
+            id
+        }
+
+        return this.httpClient.patch<responseType>(`http://localhost:3000/follow/${activeUserId}`, data);
+    }
+
+    unfollow(id: string, activeUserId: string) {
+
+        type responseType = { status: string };
+        const data = {
+            id
+        }
+
+        return this.httpClient.patch<responseType>(`http://localhost:3000/unfollow/${activeUserId}`, data);
+    }
 }

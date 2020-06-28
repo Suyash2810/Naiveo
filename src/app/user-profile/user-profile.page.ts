@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,16 +13,15 @@ import { Router } from '@angular/router';
 export class UserProfilePage implements OnInit, OnDestroy {
 
   user: User;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   userSub: Subscription;
   deleteSub: Subscription;
 
   constructor(private authService: AuthService, private alertController: AlertController,
     private loadingController: LoadingController, private toastController: ToastController,
-    private router: Router) { }
+    private navController: NavController) { }
 
   ionViewWillEnter() {
-    this.isLoading = true;
     this.authService.fetchUser();
   }
 
@@ -99,6 +98,10 @@ export class UserProfilePage implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+  navigateToDetailPage() {
+    this.navController.navigateForward('/user/detail-page/' + this.user.id);
   }
 
   ngOnDestroy() {
