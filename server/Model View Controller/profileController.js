@@ -114,9 +114,21 @@ const follow = async (request, response) => {
             new: true
         });
         if (result) {
-            response.status(200).send({
-                status: "Followed."
+            const res = await UserInfo.findOneAndUpdate({
+                user: id
+            }, {
+                $push: {
+                    followers: activeUserId
+                }
+            }, {
+                new: true
             });
+
+            if (res) {
+                response.status(200).send({
+                    status: "Followed."
+                });
+            } else throw "Unknown error.";
         } else throw "Following could not be updated.";
     } catch (e) {
         response.status(400).send(e);
@@ -142,9 +154,21 @@ const unfollow = async (request, response) => {
         });
 
         if (result) {
-            response.status(200).send({
-                status: "Unfollowed"
+            const res = await UserInfo.findOneAndUpdate({
+                user: id
+            }, {
+                $pull: {
+                    followers: activeUserId
+                }
+            }, {
+                new: true
             });
+
+            if (res) {
+                response.status(200).send({
+                    status: "Unfollowed."
+                });
+            } else throw "Unknown error.";
         } else throw "Following could not be updated.";
     } catch (e) {
         response.status(400).send(e);
