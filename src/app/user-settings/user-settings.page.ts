@@ -26,7 +26,7 @@ export class UserSettingsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.id = this.authService.getUserId();
-    this.userSubscription = this.profileService.fetchGuideById(this.id)
+    this.userSubscription = this.profileService.fetchUserInfo(this.id)
       .subscribe(
         response => {
           if (response.guide.length == 0) {

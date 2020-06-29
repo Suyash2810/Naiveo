@@ -12,13 +12,13 @@ export class UserService {
 
     }
 
-    fetchGuides() {
+    fetchUsersInfo() {
 
         type responseType = { status: string, guides: any };
         return this.httpClient.get<responseType>("http://localhost:3000/guides");
     }
 
-    fetchGuideById(id: string) {
+    fetchUserInfo(id: string) {
 
         type responseType = { guide: any };
         return this.httpClient.get<responseType>(`http://localhost:3000/guide/${id}`);

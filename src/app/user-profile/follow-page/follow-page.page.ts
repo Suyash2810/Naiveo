@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SegmentChangeEventDetail } from "@ionic/core";
 import { UserService } from '../user-profile.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-follow-page',
@@ -10,12 +11,14 @@ import { Subscription } from 'rxjs';
 })
 export class FollowPagePage implements OnInit, OnDestroy {
 
+  userId: string;
   userData: any;
   userSubscription: Subscription;
 
-  constructor(private profileService: UserService) { }
+  constructor(private profileService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.userId = this.authService.getUserId();
   }
 
 

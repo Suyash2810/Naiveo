@@ -28,7 +28,7 @@ export class DetailPagePage implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
-        this.guideSubscription = this.profileService.fetchGuideById(this.id).subscribe(
+        this.guideSubscription = this.profileService.fetchUserInfo(this.id).subscribe(
           (response) => {
             this.guide = response.guide;
           },

@@ -20,7 +20,7 @@ export class SearchPagePage implements OnInit {
 
   ngOnInit() {
 
-    this.guideSubscription = this.userService.fetchGuides().subscribe(
+    this.guideSubscription = this.userService.fetchUsersInfo().subscribe(
       (response) => {
         this.guides = response.guides;
       },

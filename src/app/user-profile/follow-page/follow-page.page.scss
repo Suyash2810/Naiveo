@@ -5,3 +5,17 @@ ion-header {
         }
     }
 }
+
+ion-content {
+    ion-grid {
+        ion-row {
+            ion-col {
+                ion-list {
+                    ion-list-header {
+                        color: var(--ion-color-dark-sky-blue);
+                    }
+                }
+            }
+        }
+    }
+}
