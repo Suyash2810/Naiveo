@@ -19,3 +19,23 @@ ion-content {
         }
     }
 }
+
+.not-found {
+    ion-row {
+        ion-col {
+            ion-card {
+                height: 40vh;
+
+                &-header {
+                    --background: url("../../../assets/img/not_found.png") no-repeat center center / contain;
+                    height: 40%;
+                }
+
+                ion-card-content {
+                    color: var(--ion-color-tomato-red);
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
