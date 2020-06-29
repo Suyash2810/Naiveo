@@ -15,7 +15,6 @@ export class UserProfilePage implements OnInit, OnDestroy {
   user: User;
   isLoading: boolean = true;
   userSub: Subscription;
-  deleteSub: Subscription;
 
   constructor(private authService: AuthService, private alertController: AlertController,
     private loadingController: LoadingController, private toastController: ToastController,

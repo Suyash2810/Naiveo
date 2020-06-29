@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title *ngIf="isLoading">Profile Section.</ion-title>
-    <ion-title *ngIf="!isLoading">{{user?.name}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places"></ion-back-button>
     </ion-buttons>
+    <ion-title *ngIf="isLoading">Profile Section.</ion-title>
+    <ion-title *ngIf="!isLoading">{{user?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,8 +25,7 @@
           <div class="profile-data__item profile-data__item--2">
             <ion-chip outline color="tertiary">
               <ion-icon name="people"></ion-icon>
-              <ion-label [routerLink]="['.', 'follow-page']" *ngIf="user?.identity == 'user'">Following</ion-label>
-              <ion-label [routerLink]="['.', 'follow-page']" *ngIf="user?.identity != 'user'">Followers</ion-label>
+              <ion-label [routerLink]="['.', 'follow-page']">Connections</ion-label>
               <ion-icon name="arrow-forward"></ion-icon>
             </ion-chip>
           </div>

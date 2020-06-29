@@ -40,7 +40,7 @@ ion-content {
                         &__name {
                             text-align: center;
                             font-size: 2rem;
-                            color: white;
+                            color: var(--ion-color-dark);
                             margin-top: 6%;
                             @extend %font-light;
                         }
@@ -66,6 +66,8 @@ ion-content {
                         &__item {
 
                             &--2 {
+                                margin-top: 5%;
+
                                 ion-chip {
                                     padding: 1.5rem;
 

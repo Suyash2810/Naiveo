@@ -1,17 +1,25 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/user"></ion-back-button>
     </ion-buttons>
-    <ion-title>Followers</ion-title>
+    <ion-title>Connections</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-segment value="following" (ionChange)="segmentChanged($event)" color="secondary">
+    <ion-segment-button value="following">
+      <ion-label>Following</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="followers">
+      <ion-label>Followers</ion-label>
+    </ion-segment-button>
+  </ion-segment>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        This is the page to display followers and following.
+
       </ion-col>
     </ion-row>
   </ion-grid>
