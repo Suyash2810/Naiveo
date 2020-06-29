@@ -30,7 +30,7 @@ export class DetailPagePage implements OnInit, OnDestroy {
         this.id = params['id'];
         this.guideSubscription = this.profileService.fetchUserInfo(this.id).subscribe(
           (response) => {
-            this.guide = response.guide;
+            this.guide = response.info;
           },
           async error => {
             const alert = await this.alertController.create({

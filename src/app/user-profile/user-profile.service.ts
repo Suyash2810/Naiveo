@@ -14,14 +14,14 @@ export class UserService {
 
     fetchUsersInfo() {
 
-        type responseType = { status: string, guides: any };
-        return this.httpClient.get<responseType>("http://localhost:3000/guides");
+        type responseType = { status: string, infos: any };
+        return this.httpClient.get<responseType>("http://localhost:3000/usersInfo");
     }
 
     fetchUserInfo(id: string) {
 
-        type responseType = { guide: any };
-        return this.httpClient.get<responseType>(`http://localhost:3000/guide/${id}`);
+        type responseType = { info: any };
+        return this.httpClient.get<responseType>(`http://localhost:3000/userInfo/${id}`);
     }
 
     saveUserData(id: string, address: string, description: string, dob: Date, gender: string, mobile: string) {

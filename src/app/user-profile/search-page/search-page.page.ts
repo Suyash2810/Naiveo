@@ -22,7 +22,7 @@ export class SearchPagePage implements OnInit {
 
     this.guideSubscription = this.userService.fetchUsersInfo().subscribe(
       (response) => {
-        this.guides = response.guides;
+        this.guides = response.infos;
       },
       async error => {
         const alert = await this.alertController.create({

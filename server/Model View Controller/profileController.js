@@ -10,7 +10,7 @@ const {
     ObjectId
 } = require('mongodb');
 
-const fetchGuides = async (request, response) => {
+const usersInfo = async (request, response) => {
 
     try {
         let result = await User.find({
@@ -19,7 +19,7 @@ const fetchGuides = async (request, response) => {
         if (result) {
             response.status(200).send({
                 status: "Guides have been fetched",
-                guides: result
+                infos: result
             });
         } else {
             throw "No guides could be found.";
@@ -29,7 +29,7 @@ const fetchGuides = async (request, response) => {
     }
 }
 
-const fetchGuide = async (request, response) => {
+const userInfo = async (request, response) => {
 
     try {
         const id = request.params.id;
@@ -39,7 +39,7 @@ const fetchGuide = async (request, response) => {
 
         if (result) {
             response.status(200).send({
-                guide: result
+                info: result
             });
         } else {
             throw "The guide could not be found.";
@@ -176,8 +176,8 @@ const unfollow = async (request, response) => {
 }
 
 module.exports = {
-    fetchGuides,
-    fetchGuide,
+    usersInfo,
+    userInfo,
     saveUserData,
     updateUserData,
     follow,

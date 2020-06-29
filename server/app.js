@@ -68,8 +68,8 @@ app.get('/review/rating/:placeId', authorization, reviewController.averageRating
 
 // ------------------------------------------User Profile Requests------------------------------------------->
 
-app.get('/guides', authorization, profileController.fetchGuides);
-app.get('/guide/:id', authorization, profileController.fetchGuide);
+app.get('/usersInfo', authorization, profileController.usersInfo);
+app.get('/userInfo/:id', authorization, profileController.userInfo);
 app.post("/saveUserData/:id", authorization, profileController.saveUserData);
 app.patch("/updateUserData/:id", authorization, profileController.updateUserData);
 app.patch('/follow/:id', authorization, profileController.follow);

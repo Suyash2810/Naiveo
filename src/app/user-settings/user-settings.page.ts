@@ -29,12 +29,12 @@ export class UserSettingsPage implements OnInit, OnDestroy {
     this.userSubscription = this.profileService.fetchUserInfo(this.id)
       .subscribe(
         response => {
-          if (response.guide.length == 0) {
+          if (response.info.length == 0) {
             this.dataExists = false;
           }
-          this.userData = response.guide[0];
+          this.userData = response.info[0];
           this.isLoading = false;
-          if (response.guide.length != 0) {
+          if (response.info.length != 0) {
             setTimeout(() => {
               this.form.setValue({
                 description: this.userData.description,
