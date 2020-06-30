@@ -197,7 +197,36 @@ const getFollowing = async (request, response) => {
         });
         if (result) {
             response.status(200).send(result[0]);
-        } else throw "User data could not be found.";
+        } else throw "You do not follow anyone yet.";
+
+    } catch (e) {
+        response.status(404).send(e);
+    }
+}
+
+const getFollowers = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        console.log(id);
+        const result = await UserInfo.aggregate().match({
+            user: ObjectId(id)
+        }).project({
+            followers: 1
+        }).unwind("followers").lookup({
+            from: "users",
+            localField: "followers",
+            foreignField: "_id",
+            as: "followers"
+        }).unwind("followers").group({
+            "_id": null,
+            "followers": {
+                $push: "$followers"
+            }
+        });
+        if (result) {
+            response.status(200).send(result[0]);
+        } else throw "No followers could not be found.";
 
     } catch (e) {
         response.status(404).send(e);
@@ -211,5 +240,6 @@ module.exports = {
     updateUserData,
     follow,
     unfollow,
-    getFollowing
+    getFollowing,
+    getFollowers
 }

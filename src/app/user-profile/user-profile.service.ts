@@ -101,4 +101,16 @@ export class UserService {
 
         return this.httpClient.patch<responseType>(`http://localhost:3000/unfollow/${activeUserId}`, data);
     }
+
+    getFollowers(id: string) {
+
+        type responseType = { data: any };
+        return this.httpClient.get<responseType>("http://localhost:3000/getFollowers/" + id);
+    }
+
+    getFollowing(id: string) {
+
+        type responseType = { data: any };
+        return this.httpClient.get<responseType>("http://localhost:3000/getFollowing/" + id);
+    }
 }
