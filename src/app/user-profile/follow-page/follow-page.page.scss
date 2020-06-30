@@ -28,12 +28,18 @@ ion-content {
 
                 &-header {
                     --background: url("../../../assets/img/not_found.png") no-repeat center center / contain;
-                    height: 40%;
+                    height: 50%;
                 }
 
                 ion-card-content {
                     color: var(--ion-color-tomato-red);
                     text-align: center;
+                    margin-top: 5%;
+
+                    ion-icon {
+                        margin-top: 2%;
+                        margin: 0 auto;
+                    }
                 }
             }
         }

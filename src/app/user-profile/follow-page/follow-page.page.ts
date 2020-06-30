@@ -15,7 +15,7 @@ export class FollowPagePage implements OnInit, OnDestroy {
   userId: string;
   userData: any;
   userSubscription: Subscription;
-  segment: string = "following";
+  segment: boolean = true;
   isLoading: boolean = true;
 
   constructor(private profileService: UserService, private authService: AuthService, private alertController: AlertController) { }
@@ -47,7 +47,11 @@ export class FollowPagePage implements OnInit, OnDestroy {
 
 
   segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
-    console.log(event.detail.value);
+    if (event.detail.value == "following") {
+      this.segment = true;
+    } else {
+      this.segment = false;
+    }
   }
 
   ngOnDestroy() {
