@@ -175,11 +175,41 @@ const unfollow = async (request, response) => {
     }
 }
 
+const getFollowing = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        console.log(id);
+        const result = await UserInfo.aggregate().match({
+            user: ObjectId(id)
+        }).project({
+            following: 1
+        }).unwind("following").lookup({
+            from: "users",
+            localField: "following",
+            foreignField: "_id",
+            as: "following"
+        }).unwind("following").group({
+            "_id": null,
+            "following": {
+                $push: "$following"
+            }
+        });
+        if (result) {
+            response.status(200).send(result[0]);
+        } else throw "User data could not be found.";
+
+    } catch (e) {
+        response.status(404).send(e);
+    }
+}
+
 module.exports = {
     usersInfo,
     userInfo,
     saveUserData,
     updateUserData,
     follow,
-    unfollow
+    unfollow,
+    getFollowing
 }

@@ -74,5 +74,6 @@ app.post("/saveUserData/:id", authorization, profileController.saveUserData);
 app.patch("/updateUserData/:id", authorization, profileController.updateUserData);
 app.patch('/follow/:id', authorization, profileController.follow);
 app.patch('/unfollow/:id', authorization, profileController.unfollow);
+app.get('/getFollowing/:id', profileController.getFollowing);
 
 module.exports = app;

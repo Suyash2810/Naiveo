@@ -40,14 +40,14 @@
             See who you follow!
           </ion-list-header>
 
-          <ion-item lines="none" *ngFor="let info of userData.following">
+          <ion-item lines="none" *ngFor="let info of userData.following"
+            [routerLink]="['/user', 'detail-page', info._id]">
             <ion-avatar slot="start">
               <img src="{{info.image}}">
             </ion-avatar>
             <ion-label>
               <h2>{{info.name}}</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
+              <h6>{{info.email}}</h6>
             </ion-label>
           </ion-item>
         </ion-list>
@@ -61,8 +61,7 @@
             </ion-avatar>
             <ion-label>
               <h2>{{info.name}}</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
+              <h6>{{info.email}}l</h6>
             </ion-label>
           </ion-item>
         </ion-list>
