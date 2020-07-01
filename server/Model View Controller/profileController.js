@@ -179,7 +179,6 @@ const getFollowing = async (request, response) => {
 
     try {
         const id = request.params.id;
-        console.log(id);
         const result = await UserInfo.aggregate().match({
             user: ObjectId(id)
         }).project({
@@ -189,14 +188,20 @@ const getFollowing = async (request, response) => {
             localField: "following",
             foreignField: "_id",
             as: "following"
-        }).unwind("following").group({
+        }).unwind("following").project({
+            "following": {
+                password: 0
+            }
+        }).group({
             "_id": null,
             "following": {
                 $push: "$following"
             }
         });
         if (result) {
-            response.status(200).send(result[0]);
+            response.status(200).send({
+                data: result[0]
+            });
         } else throw "You do not follow anyone yet.";
 
     } catch (e) {
@@ -218,14 +223,20 @@ const getFollowers = async (request, response) => {
             localField: "followers",
             foreignField: "_id",
             as: "followers"
-        }).unwind("followers").group({
+        }).unwind("followers").project({
+            "followers": {
+                password: 0
+            }
+        }).group({
             "_id": null,
             "followers": {
                 $push: "$followers"
             }
         });
         if (result) {
-            response.status(200).send(result[0]);
+            response.status(200).send({
+                data: result[0]
+            });
         } else throw "No followers could not be found.";
 
     } catch (e) {

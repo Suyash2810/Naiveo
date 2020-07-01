@@ -4,6 +4,9 @@ import { UserService } from '../user-profile.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AlertController } from '@ionic/angular';
+import { User } from 'src/app/auth/user.model';
+import { map } from 'rxjs/operators';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-follow-page',
@@ -13,25 +16,77 @@ import { AlertController } from '@ionic/angular';
 export class FollowPagePage implements OnInit, OnDestroy {
 
   userId: string;
-  userData: any;
-  userSubscription: Subscription;
   segment: boolean = true;
   isLoading: boolean = true;
+  followers: Array<User>;
+  following: Array<User>;
+  followerSub: Subscription;
+  followingSub: Subscription;
 
   constructor(private profileService: UserService, private authService: AuthService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.userId = this.authService.getUserId();
-    this.userSubscription = this.profileService.fetchUserInfo(this.userId)
+    this.followingSub = this.profileService.getFollowing(this.userId)
+      .pipe(
+        map(
+          (response) => {
+            if (isUndefined(response.data))
+              return [];
+
+            let following = response.data.following;
+            return following.map(follow => {
+              return {
+                id: follow._id,
+                name: follow.name,
+                email: follow.email,
+                image: follow.image,
+                identity: follow.identity
+              }
+            })
+          }
+        )
+      )
       .subscribe(
         (response) => {
-          if (response.info.length != 0) {
-            this.userData = response.info[0];
-            console.log(this.userData);
-            this.isLoading = false;
-          } else {
-            this.userData = null;
-          }
+          this.following = response;
+
+          this.followerSub = this.profileService.getFollowers(this.userId)
+            .pipe(
+              map(
+                response => {
+                  if (isUndefined(response.data)) {
+                    return [];
+                  }
+
+                  let followers = response.data.followers;
+                  return followers.map(follower => {
+                    return {
+                      id: follower._id,
+                      name: follower.name,
+                      email: follower.email,
+                      image: follower.image,
+                      identity: follower.identity
+                    }
+                  })
+                }
+              )
+            )
+            .subscribe(
+              (response) => {
+                this.followers = response;
+                this.isLoading = false;
+              },
+              async error => {
+                const alert = await this.alertController.create({
+                  header: "Error",
+                  message: error,
+                  buttons: ['Ok']
+                });
+
+                await alert.present();
+              }
+            )
         },
         async error => {
           const alert = await this.alertController.create({
@@ -55,6 +110,7 @@ export class FollowPagePage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    this.followingSub.unsubscribe();
+    this.followerSub.unsubscribe();
   }
 }
