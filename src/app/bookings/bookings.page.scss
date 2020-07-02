@@ -1,0 +1,42 @@
+ion-content {
+    ion-grid {
+        ion-row {
+            ion-col {
+                ion-list {
+                    ion-item-sliding {
+
+                        ion-item {
+
+                            ion-avatar {
+                                border: 2px solid var(--ion-color-tomato-red);
+                            }
+
+                            ion-label {
+                                ion-icon {
+                                    color: var(--ion-color-rose-pink-light);
+                                }
+
+                                ion-text {
+                                    margin-left: 5%;
+                                }
+
+                                h2 {
+                                    ion-text {
+                                        font-weight: bold;
+                                        margin-left: 4% !important;
+                                    }
+                                }
+
+                                h3 {
+                                    ion-text {
+                                        font-size: smaller;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

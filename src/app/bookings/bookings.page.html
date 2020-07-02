@@ -11,6 +11,12 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <ion-grid *ngIf="!isLoading">
     <ion-row>
+      <ion-col size="12">
+        <ion-img [src]="'assets/img/booking.png'"></ion-img>
+        <h4 class="ion-text-center">Your Bookings</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col *ngIf="!fetchedBookings || fetchedBookings.length <= 0" class="ion-text-center">
         <ion-text color="danger" class="ion-text-center">
           There are currently no bookings available.
@@ -20,9 +26,23 @@
         <ion-list>
           <ion-item-sliding *ngFor="let booking of fetchedBookings" #slidBooking>
             <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="booking.imageUrl">
+              </ion-avatar>
               <ion-label>
-                <h5>{{booking.title}}</h5>
-                <p>{{booking.guestNumber}}</p>
+                <h2>
+                  <ion-icon name="pin"></ion-icon>
+                  <ion-text>{{booking.title}}</ion-text>
+                </h2>
+                <h3>
+                  <ion-icon name="pricetag"></ion-icon>
+                  <ion-text>{{booking.cost | currency}}</ion-text>
+                </h3>
+                <p>
+                  <ion-icon name="calendar"></ion-icon>
+                  <ion-text>{{booking.bookedFrom | date:mediumDate}} -
+                    {{booking.bookedTill | date:mediumDate}}</ion-text>
+                </p>
               </ion-label>
             </ion-item>
             <ion-item-options>
