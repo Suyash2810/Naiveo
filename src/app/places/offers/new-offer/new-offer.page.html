@@ -52,7 +52,7 @@
         <ion-col size-sm="6">
           <ion-item>
             <ion-label position="floating">Available From</ion-label>
-            <ion-datetime min="2017-01-01" max="2019-12-31" formControlName="dateFrom"></ion-datetime>
+            <ion-datetime min="{{currentDate}}" max="{{endDate}}" formControlName="dateFrom"></ion-datetime>
           </ion-item>
           <ion-text *ngIf="!form.get('dateFrom').valid && form.get('dateFrom').touched" color="danger">
             Please enter the date from which the offer is valid.
@@ -61,7 +61,7 @@
         <ion-col size-sm="6">
           <ion-item>
             <ion-label position="floating">Available Till</ion-label>
-            <ion-datetime min="2017-01-02" max="2019-12-31" formControlName="dateTill"></ion-datetime>
+            <ion-datetime min="{{currentDate}}" max="{{endDate}}" formControlName="dateTill"></ion-datetime>
           </ion-item>
           <ion-text *ngIf="!form.get('dateTill').valid && form.get('dateTill').touched" color="danger">
             Please enter the date till which the offer is valid.

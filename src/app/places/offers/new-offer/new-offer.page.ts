@@ -11,11 +11,17 @@ import { Router } from '@angular/router';
 export class NewOfferPage implements OnInit {
 
   form: FormGroup;
-  imagePreview: string = "https://images.pexels.com/photos/1553962/pexels-photo-1553962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+  imagePreview: string = "assets/img/offer.png";
+  currentDate: String = new Date().toISOString().substring(0, 10);
+  endDate: String;
 
-  constructor(private placeService: PlacesService, private router: Router) { }
+  constructor(private placeService: PlacesService, private router: Router) {
+
+  }
 
   ngOnInit() {
+
+    this.endDate = (new Date((new Date()).getTime() + (365 * 24 * 60 * 60 * 1000))).toISOString().substring(0, 10);
 
     this.form = new FormGroup({
       title: new FormControl(null, { validators: Validators.required }),
