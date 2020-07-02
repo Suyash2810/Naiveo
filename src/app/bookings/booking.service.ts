@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { ToastController, AlertController } from '@ionic/angular';
+import { UserService } from '../user-profile/user-profile.service';
 
 @Injectable({ providedIn: 'root' })
 
@@ -14,7 +15,7 @@ export class BookingService {
     private _bookings = new Subject<Bookable[]>();
 
     constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController,
-        private alertController: AlertController) {
+        private alertController: AlertController, private profileService: UserService) {
 
     }
 
@@ -81,7 +82,7 @@ export class BookingService {
         return this._bookings.asObservable();
     }
 
-    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number, locations: Array<{ name: string, price: number }>, cost: number) {
+    addBooking(id: string, title: string, imageUrl: string, first_name: string, last_name: string, bookedFrom: Date, bookedTill: Date, guests: number, locations: Array<{ name: string, price: number }>, cost: number, guideId: string) {
 
         const booking = new Booking(id, this.authService.getUserId(), title, imageUrl, first_name, last_name, bookedFrom, bookedTill, guests, locations, cost);
 
@@ -96,6 +97,22 @@ export class BookingService {
                     });
 
                     toast.present();
+
+                    this.profileService.updateTours(guideId, 1)
+                        .subscribe(
+                            response => {
+                                console.log(response.status);
+                            },
+                            async error => {
+                                const alert = await this.alertController.create({
+                                    header: "Error",
+                                    message: "Tours could not be updated for the guide.",
+                                    buttons: ["Ok"]
+                                });
+
+                                await alert.present();
+                            }
+                        );
                 },
                 async error => {
                     const alert = await this.alertController.create({

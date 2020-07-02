@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { NavController, ModalController, ActionSheetController } from '@ionic/angular';
+import { NavController, ModalController, ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { Place } from '../../places.model';
 import { PlacesService } from '../../places.service';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
@@ -12,6 +12,7 @@ import { User } from 'src/app/auth/user.model';
 import { map } from 'rxjs/operators';
 import { ReviewService } from './reviews/reviews.service';
 import { isUndefined } from 'util';
+import { UserService } from 'src/app/user-profile/user-profile.service';
 
 @Component({
   selector: 'app-place-detail',
@@ -131,7 +132,7 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
           this.bookingService.estimateCost(data.locations, this.place.price).then(
             (cost: number) => {
               this.bookingService.addBooking(this.place.id, this.place.title, this.place.imageUrl, data.first_name,
-                data.last_name, data.fromDate, data.tillDate, data.guests, data.locations, cost);
+                data.last_name, data.fromDate, data.tillDate, data.guests, data.locations, cost, this.place.userID);
             }
           );
         }

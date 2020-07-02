@@ -27,7 +27,6 @@ export class BookingsPage implements OnInit, OnDestroy {
     this.bookingSub = this.bookingService._getBookings().subscribe(
       bookings => {
         this.fetchedBookings = bookings;
-        console.log(this.fetchedBookings);
         this.isLoading = false;
       }
     );
