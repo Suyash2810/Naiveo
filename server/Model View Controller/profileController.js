@@ -277,6 +277,32 @@ const toursUpdate = async (request, response) => {
     }
 }
 
+const addOffer = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const {
+            offerId
+        } = pick(request.body, ['offerId']);
+        const result = await UserInfo.findOneAndUpdate({
+            user: id
+        }, {
+            $push: {
+                offers: offerId
+            }
+        }, {
+            new: true
+        });
+        if (result) {
+            response.status(200).send({
+                status: "The offers have been updated."
+            })
+        } else throw "The offers could not be updated.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 module.exports = {
     usersInfo,
     userInfo,
@@ -286,5 +312,6 @@ module.exports = {
     unfollow,
     getFollowing,
     getFollowers,
-    toursUpdate
+    toursUpdate,
+    addOffer
 }

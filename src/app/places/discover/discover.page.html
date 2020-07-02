@@ -50,6 +50,14 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-img [src]="'assets/img/discover.png'"></ion-img>
+        <ion-text color="dark" class="ion-text-center">
+          <h4>Discover Places</h4>
+        </ion-text>
+      </ion-col>
+    </ion-row>
     <!-- routerDirection can be used to specifically assign the navigation direction. -->
     <ion-row>
       <ion-col>
@@ -61,7 +69,7 @@
             </ion-avatar>
             <ion-label>
               <h2>{{place.title}}</h2>
-              <h3>{{place.price}}</h3>
+              <h3>{{place.price | currency}}</h3>
               <p>{{place.description}}</p>
             </ion-label>
           </ion-item>

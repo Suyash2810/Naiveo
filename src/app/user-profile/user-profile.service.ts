@@ -120,4 +120,11 @@ export class UserService {
 
         return this.httpClient.patch<responseType>("http://localhost:3000/tours/" + id, { value });
     }
+
+    addOffer(id: string, offerId: string) {
+
+        type responseType = { status: string };
+
+        return this.httpClient.patch<responseType>("http://localhost:3000/addOffer" + id, { offerId });
+    }
 }
