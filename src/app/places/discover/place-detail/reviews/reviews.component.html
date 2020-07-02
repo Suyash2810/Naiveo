@@ -11,8 +11,7 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <ion-text>Reviews</ion-text>
-
+      <ion-img [src]="'assets/img/rating.png'"></ion-img>
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <ion-item>
           <ion-label position="floating">Your review:</ion-label>
@@ -32,7 +31,7 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        <ion-list-header>
+        <ion-list-header *ngIf="reviews.length>0">
           Recent Reviews
         </ion-list-header>
 

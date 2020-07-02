@@ -11,6 +11,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { User } from 'src/app/auth/user.model';
 import { map } from 'rxjs/operators';
 import { ReviewService } from './reviews/reviews.service';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-place-detail',
@@ -50,7 +51,10 @@ export class PlaceDetailPage implements OnInit, OnDestroy {
 
               this.reviewService.getAverageRating(this.place.id).subscribe(
                 (response) => {
-                  this.averageRating = response.result.average;
+                  if (isUndefined(response.result))
+                    this.averageRating = 0;
+                  else
+                    this.averageRating = response.result.average;
                 },
                 error => {
                   console.log(error);

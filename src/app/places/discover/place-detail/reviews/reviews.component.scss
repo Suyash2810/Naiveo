@@ -8,6 +8,22 @@ ion-grid {
     ion-row {
         ion-col {
             width: 100%;
+
+            form {
+                text-align: center;
+
+                ion-button[type="submit"] {
+                    margin-top: 10%;
+                }
+            }
+
+            ion-list {
+                &-header {
+                    font-weight: bold;
+                    font-size: 0.8rem;
+                    color: var(--ion-color-dark-sky-blue);
+                }
+            }
         }
     }
 }
