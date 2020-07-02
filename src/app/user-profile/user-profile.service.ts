@@ -113,4 +113,11 @@ export class UserService {
         type responseType = { data: any };
         return this.httpClient.get<responseType>("http://localhost:3000/getFollowing/" + id);
     }
+
+    updateTours(id: string, value: number) {
+
+        type responseType = { status: string };
+
+        return this.httpClient.patch<responseType>("http://localhost:3000/tours/" + id, { value });
+    }
 }

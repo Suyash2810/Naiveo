@@ -3,7 +3,9 @@ const {
     UserInfo
 } = require('../models/index');
 const {
-    pick
+    pick,
+    isUndefined,
+    isNull
 } = require('lodash');
 
 const {
@@ -244,6 +246,37 @@ const getFollowers = async (request, response) => {
     }
 }
 
+const toursUpdate = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const {
+            value
+        } = pick(request.body, ['value']);
+
+        if (isUndefined(value) || isNull(value)) {
+            throw "Tours could not be updated. Internal Error.";
+        }
+
+        const result = await UserInfo.findOneAndUpdate({
+            user: id
+        }, {
+            $inc: {
+                tours: value
+            }
+        }, {
+            new: true
+        });
+        if (result) {
+            response.status(200).send({
+                status: "Updated."
+            });
+        } else throw "Tours could not be updated.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 module.exports = {
     usersInfo,
     userInfo,
@@ -252,5 +285,6 @@ module.exports = {
     follow,
     unfollow,
     getFollowing,
-    getFollowers
+    getFollowers,
+    toursUpdate
 }
