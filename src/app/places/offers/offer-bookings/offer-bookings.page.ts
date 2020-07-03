@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Place } from '../../places.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -17,6 +18,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   offerSub: Subscription;
   isLoading: boolean = false;
   userId: string;
+  @ViewChild('f', { static: false }) form: NgForm;
 
   constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService,
     private authService: AuthService) { }
@@ -32,14 +34,18 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
         } else {
           this.placeService.getPlaceById(id);
           this.place = this.placeService.get_place();
-          this.offerSub = this.placeService._get_place().subscribe(offer => { 
-            this.place = offer; 
+          this.offerSub = this.placeService._get_place().subscribe(offer => {
+            this.place = offer;
             this.userId = this.authService.getUserId();
             this.isLoading = false;
           });
         }
       }
     )
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
   }
 
   ngOnDestroy() {
