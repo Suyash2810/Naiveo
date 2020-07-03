@@ -12,7 +12,6 @@ import { User } from 'src/app/auth/user.model';
 import { map } from 'rxjs/operators';
 import { ReviewService } from './reviews/reviews.service';
 import { isUndefined } from 'util';
-import { UserService } from 'src/app/user-profile/user-profile.service';
 
 @Component({
   selector: 'app-place-detail',

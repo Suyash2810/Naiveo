@@ -12,7 +12,21 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-button color="primary" [disabled]="place.userID != userId"
+        <ion-img [src]="'assets/img/offer_edit.png'"></ion-img>
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+          <ion-item>
+            <ion-label position="floating">Confirm Email</ion-label>
+            <ion-input type="text" placeholder="xyz@gmail.com" required ngModel name="email" #email="ngModel" email>
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Your issue:</ion-label>
+            <ion-textarea rows="6" cols="20" placeholder="Enter you issue here." maxlength="250" required
+              spellcheck="true" name="message" ngModel></ion-textarea>
+          </ion-item>
+          <ion-button color="tertiary" type="submit" [disabled]="!f.valid">Submit</ion-button>
+        </form>
+        <ion-button color="primary" *ngIf="place.userID == userId"
           [routerLink]="['/', 'places', 'tabs', 'offers', 'edit', place?.id]">Edit
         </ion-button>
       </ion-col>
