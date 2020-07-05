@@ -16,10 +16,15 @@ const {
     UserInfo
 } = require('./userinfo');
 
+const {
+    Issue
+} = require('./issue');
+
 module.exports = {
     User,
     Place,
     Booking,
     UserInfo,
-    Review
+    Review,
+    issue
 }
