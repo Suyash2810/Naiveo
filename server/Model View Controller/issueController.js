@@ -35,7 +35,8 @@ const getIssues = async (request, response) => {
         });
         if (result) {
             response.status(200).send({
-                status: "Issues have been fetched."
+                status: "Issues have been fetched.",
+                issues: result
             });
         } else throw "Issues could not be fetched.";
     } catch (e) {
