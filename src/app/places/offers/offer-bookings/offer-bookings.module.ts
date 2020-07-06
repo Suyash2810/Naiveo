@@ -8,6 +8,7 @@ import { OfferBookingsPageRoutingModule } from './offer-bookings-routing.module'
 
 import { OfferBookingsPage } from './offer-bookings.page';
 import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spinner.module';
+import { IssueService } from './offer-issues.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spi
     LoadingSpinnerModule,
     OfferBookingsPageRoutingModule
   ],
-  declarations: [OfferBookingsPage]
+  declarations: [OfferBookingsPage],
+  providers: [IssueService]
 })
 export class OfferBookingsPageModule { }

@@ -8,8 +8,13 @@ const {
 const addIssue = async (request, response) => {
 
     try {
-        const data = pick(request.body, ['email', 'message', 'user', 'offer']);
-        const issue = await new Issue(data);
+        const data = pick(request.body, ['email', 'message', 'userId', 'offerId']);
+        const issue = await new Issue({
+            offer: data.offerId,
+            user: data.userId,
+            email: data.email,
+            message: data.message
+        });
         const result = await issue.save();
         if (result) {
             response.status(200).send({

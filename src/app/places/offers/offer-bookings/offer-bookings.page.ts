@@ -6,6 +6,7 @@ import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
+import { IssueService } from './offer-issues.service';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -21,7 +22,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   @ViewChild('f', { static: false }) form: NgForm;
 
   constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService,
-    private authService: AuthService) { }
+    private authService: AuthService, private issueService: IssueService) { }
 
   ngOnInit() {
 
@@ -45,7 +46,9 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    this.issueService.addIssue(this.userId, this.place.id, this.form.value.email, this.form.value.message);
+    this.form.reset();
+    this.nvCtrl.navigateBack('/places/tabs/offers');
   }
 
   ngOnDestroy() {

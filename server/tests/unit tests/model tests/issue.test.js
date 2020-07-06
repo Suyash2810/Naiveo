@@ -5,7 +5,7 @@ const {
 
 const {
     Issue
-} = require("../../../models/issue");
+} = require("../../../models/index");
 
 describe("Issue Model Test", () => {
 

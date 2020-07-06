@@ -29,6 +29,7 @@ const bookingController = require('./Model View Controller/bookingController');
 const placeController = require('./Model View Controller/placeController');
 const reviewController = require('./Model View Controller/reviewController');
 const profileController = require('./Model View Controller/profileController');
+const issueController = require('./Model View Controller/issueController');
 
 const imageExtract = require('./middleware/imageExtract');
 const {
@@ -78,5 +79,10 @@ app.get('/getFollowing/:id', profileController.getFollowing);
 app.get('/getFollowers/:id', profileController.getFollowers);
 app.patch('/tours/:id', authorization, profileController.toursUpdate);
 app.patch("/addOffer/:id", authorization, profileController.addOffer);
+
+// ------------------------------------------User Issue Requests------------------------------------------->
+
+app.post('/issue', authorization, issueController.addIssue);
+app.get('/issues/:id', authorization, issueController.getIssues);
 
 module.exports = app;

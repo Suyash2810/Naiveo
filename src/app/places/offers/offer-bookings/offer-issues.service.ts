@@ -1,5 +1,5 @@
 import { ToastController, AlertController } from '@ionic/angular';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Issue } from './offer-issues.model';
 
@@ -13,8 +13,31 @@ export class IssueService {
 
     addIssue(userId: string, offerId: string, email: string, message: string) {
         const data = { userId, offerId, email, message };
-        const request = new HttpRequest('POST', "http://localhost:3000/issue", data);
-        return this.httpClient.request(request);
+        const request = new HttpRequest('POST', "http://localhost:3000/issue", data, {
+            responseType: 'json'
+        });
+
+        this.httpClient.request(request).subscribe(
+            async (response: HttpResponse<{ status: string }>) => {
+                if (response.body) {
+                    const toast = this.toastController.create({
+                        message: response.body.status,
+                        duration: 2000
+                    });
+
+                    (await toast).present();
+                }
+            },
+            async error => {
+                const alert = this.alertController.create({
+                    header: 'Error',
+                    message: error.error,
+                    buttons: ['Ok']
+                });
+
+                (await alert).present();
+            }
+        );
     }
 
     fetchIssues(placeId: string) {
