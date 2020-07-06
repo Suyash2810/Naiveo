@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Place } from '../../places.model';
 import { ActivatedRoute, Params } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { IssueService } from './offer-issues.service';
+import { Issue } from './offer-issues.model';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -19,10 +20,14 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   offerSub: Subscription;
   isLoading: boolean = false;
   userId: string;
+  issueSubscription: Subscription;
+  issues: Array<Issue> = [];
+
   @ViewChild('f', { static: false }) form: NgForm;
 
   constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService,
-    private authService: AuthService, private issueService: IssueService) { }
+    private authService: AuthService, private issueService: IssueService,
+    private alertController: AlertController) { }
 
   ngOnInit() {
 
@@ -38,7 +43,23 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
           this.offerSub = this.placeService._get_place().subscribe(offer => {
             this.place = offer;
             this.userId = this.authService.getUserId();
-            this.isLoading = false;
+
+            this.issueService.fetchIssues(this.place.id);
+            this.issueSubscription = this.issueService.getIssues().subscribe(
+              (issues: Array<Issue>) => {
+                this.issues = issues;
+                this.isLoading = false;
+              },
+              async () => {
+                const alert = this.alertController.create({
+                  header: 'Error',
+                  message: "Issue could not be fetched.",
+                  buttons: ['Ok']
+                });
+
+                (await alert).present();
+              }
+            )
           });
         }
       }
@@ -55,5 +76,6 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
     if (this.offerSub) {
       this.offerSub.unsubscribe();
     }
+    this.issueSubscription.unsubscribe();
   }
 }
