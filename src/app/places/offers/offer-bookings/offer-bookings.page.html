@@ -3,13 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
     </ion-buttons>
-    <ion-title>Offer Bookings</ion-title>
+    <ion-title>Offer Issues</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding ion-text-center">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <ion-grid *ngIf="!isLoading">
+  <ion-grid *ngIf="!isLoading && place.userID != userId">
     <ion-row>
       <ion-col>
         <ion-img [src]="'assets/img/offer_edit.png'"></ion-img>
@@ -26,6 +26,35 @@
           </ion-item>
           <ion-button color="tertiary" type="submit" [disabled]="!f.valid">Submit</ion-button>
         </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading && user.identity!='user' && place.userID == userId">
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="'assets/img/issues.png'"></ion-img>
+        <ion-text color="dark" class="ion-text-center">
+          <h4>Issues regarding offers!</h4>
+        </ion-text>
+        <ion-list>
+          <ion-item>
+            <ion-avatar slot="start">
+              <img [src]="'assets/img/avatar1.png'" />
+            </ion-avatar>
+            <ion-label>
+              <h2>Name</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro sequi temporibus itaque
+                minus eum aliquid corporis ex consectetur nihil? Assumenda hic exercitationem facere voluptate eos
+                enim voluptatibus excepturi soluta?</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col size="12">
         <ion-button color="primary" *ngIf="place.userID == userId"
           [routerLink]="['/', 'places', 'tabs', 'offers', 'edit', place?.id]">Edit
         </ion-button>

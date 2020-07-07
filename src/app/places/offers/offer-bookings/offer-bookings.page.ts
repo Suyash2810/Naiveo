@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { IssueService } from './offer-issues.service';
 import { Issue } from './offer-issues.model';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -20,6 +21,8 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   offerSub: Subscription;
   isLoading: boolean = false;
   userId: string;
+  user: User;
+  userSubscription: Subscription;
   issueSubscription: Subscription;
   issues: Array<Issue> = [];
 
@@ -48,7 +51,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
             this.issueSubscription = this.issueService.getIssues().subscribe(
               (issues: Array<Issue>) => {
                 this.issues = issues;
-                this.isLoading = false;
+                console.log(this.issues);
               },
               async () => {
                 const alert = this.alertController.create({
@@ -58,6 +61,15 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
                 });
 
                 (await alert).present();
+              }
+            );
+
+            this.authService.fetchUser();
+
+            this.userSubscription = this.authService._getUser().subscribe(
+              (user: User) => {
+                this.user = user;
+                this.isLoading = false;
               }
             )
           });
@@ -77,5 +89,6 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
       this.offerSub.unsubscribe();
     }
     this.issueSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 }
