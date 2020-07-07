@@ -66,9 +66,10 @@ const deleteIssue = async (request, response) => {
 
     try {
         const id = request.params.id;
-        const result = await Issue.find({
+        const result = await Issue.findOneAndDelete({
             _id: id
         });
+
         if (result) {
             response.status(200).send({
                 status: "Issue has been deleted."

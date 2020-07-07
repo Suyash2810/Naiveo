@@ -119,7 +119,7 @@ export class IssueService {
     }
 
     deleteIssue(id: string) {
-        const request = new HttpRequest("DELETE", "http://localhost:3000/issue" + id);
+        const request = new HttpRequest("DELETE", "http://localhost:3000/issue/" + id);
         return this.httpClient.request(request);
     }
 }

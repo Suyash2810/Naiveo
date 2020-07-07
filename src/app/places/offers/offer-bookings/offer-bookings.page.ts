@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Place } from '../../places.model';
 import { ActivatedRoute, Params } from '@angular/router';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ActionSheetController, ToastController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { IssueService } from './offer-issues.service';
 import { User } from 'src/app/auth/user.model';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-offer-bookings',
@@ -29,7 +30,8 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private nvCtrl: NavController, private placeService: PlacesService,
     private authService: AuthService, private issueService: IssueService,
-    private alertController: AlertController) { }
+    private alertController: AlertController, private actionSheetController: ActionSheetController,
+    private toastController: ToastController) { }
 
   ngOnInit() {
 
@@ -81,6 +83,47 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
     this.issueService.addIssue(this.userId, this.place.id, this.form.value.email, this.form.value.message);
     this.form.reset();
     this.nvCtrl.navigateBack('/places/tabs/offers');
+  }
+
+  async handleIssue(id: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Issue',
+      buttons: [{
+        text: 'Resolved',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.issueService.deleteIssue(id).subscribe(
+            async (response: HttpResponse<{ status: string }>) => {
+              if (response.body) {
+
+                const toast = this.toastController.create({
+                  message: response.body.status,
+                  duration: 3000
+                });
+                (await toast).present();
+                this.nvCtrl.navigateBack('/places/tabs/offers');
+              }
+            },
+            async () => {
+              const alert = this.alertController.create({
+                header: 'Error',
+                message: "Issue could not be resolved.",
+                buttons: ['Ok']
+              });
+
+              (await alert).present();
+            }
+          )
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
+
   }
 
   ngOnDestroy() {
