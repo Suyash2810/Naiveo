@@ -44,6 +44,24 @@ const getIssues = async (request, response) => {
     }
 }
 
+const getPopulatedIssues = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const result = await Issue.find({
+            offer: id
+        }).populate('user');
+        if (result) {
+            response.status(200).send({
+                status: "Issues have been fetched.",
+                issues: result
+            });
+        } else throw "Issues could not be fetched.";
+    } catch (e) {
+        response.status(400).send(e);
+    }
+}
+
 const deleteIssue = async (request, response) => {
 
     try {
@@ -64,5 +82,6 @@ const deleteIssue = async (request, response) => {
 module.exports = {
     addIssue,
     getIssues,
-    deleteIssue
+    deleteIssue,
+    getPopulatedIssues
 }

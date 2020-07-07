@@ -37,15 +37,14 @@
           <h4>Issues regarding offers!</h4>
         </ion-text>
         <ion-list>
-          <ion-item>
+          <ion-item *ngFor="let issue of issues" class="issue_item">
             <ion-avatar slot="start">
-              <img [src]="'assets/img/avatar1.png'" />
+              <img [src]="issue.user.image" />
             </ion-avatar>
             <ion-label>
-              <h2>Name</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus porro sequi temporibus itaque
-                minus eum aliquid corporis ex consectetur nihil? Assumenda hic exercitationem facere voluptate eos
-                enim voluptatibus excepturi soluta?</p>
+              <h2>{{issue.user.name}}</h2>
+              <h6>{{issue.email}}</h6>
+              <p>{{issue.message}}</p>
             </ion-label>
           </ion-item>
         </ion-list>

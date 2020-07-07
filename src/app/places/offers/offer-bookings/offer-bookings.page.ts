@@ -7,7 +7,6 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { NgForm } from '@angular/forms';
 import { IssueService } from './offer-issues.service';
-import { Issue } from './offer-issues.model';
 import { User } from 'src/app/auth/user.model';
 
 @Component({
@@ -24,7 +23,7 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
   user: User;
   userSubscription: Subscription;
   issueSubscription: Subscription;
-  issues: Array<Issue> = [];
+  issues: Array<any> = [];
 
   @ViewChild('f', { static: false }) form: NgForm;
 
@@ -47,9 +46,9 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
             this.place = offer;
             this.userId = this.authService.getUserId();
 
-            this.issueService.fetchIssues(this.place.id);
-            this.issueSubscription = this.issueService.getIssues().subscribe(
-              (issues: Array<Issue>) => {
+            this.issueService.fetchPopulatedIssues(this.place.id);
+            this.issueSubscription = this.issueService.getPopulatedIssues().subscribe(
+              (issues: Array<any>) => {
                 this.issues = issues;
                 console.log(this.issues);
               },

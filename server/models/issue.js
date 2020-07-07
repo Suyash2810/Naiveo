@@ -19,12 +19,12 @@ const issueSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "user"
+        ref: "User"
     },
     offer: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "place"
+        ref: "Place"
     }
 });
 

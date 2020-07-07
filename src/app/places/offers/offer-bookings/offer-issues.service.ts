@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 export class IssueService {
 
     issues = new Subject<Issue[]>();
+    populateIssues = new Subject<Array<any>>();
 
     constructor(private toastController: ToastController, private alertController: AlertController, private httpClient: HttpClient) {
 
@@ -87,8 +88,34 @@ export class IssueService {
             );
     }
 
+    fetchPopulatedIssues(placeId: string) {
+
+        const request = new HttpRequest('GET', "http://localhost:3000/populateIssues/" + placeId);
+        this.httpClient.request(request)
+            .subscribe(
+                (response: HttpResponse<{ status: string, issues: any }>) => {
+                    if (response.body) {
+                        this.populateIssues.next(response.body.issues);
+                    }
+                },
+                async () => {
+                    const alert = this.alertController.create({
+                        header: 'Error',
+                        message: "Issues could not be fetched.",
+                        buttons: ['Ok']
+                    });
+
+                    (await alert).present();
+                }
+            );
+    }
+
     getIssues() {
         return this.issues.asObservable();
+    }
+
+    getPopulatedIssues() {
+        return this.populateIssues.asObservable();
     }
 
     deleteIssue(id: string) {

@@ -84,5 +84,6 @@ app.patch("/addOffer/:id", authorization, profileController.addOffer);
 
 app.post('/issue', authorization, issueController.addIssue);
 app.get('/issues/:id', authorization, issueController.getIssues);
+app.get('/populateIssues/:id', authorization, issueController.getPopulatedIssues);
 
 module.exports = app;
