@@ -34,6 +34,8 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12">
+        <ion-img *ngIf="segment && following?.length>0 || !segment && followers?.length>0"
+          [src]="'assets/img/following.png'"></ion-img>
         <ion-list *ngIf="segment">
           <ion-list-header *ngIf="segment && following?.length>0">
             See who you follow!

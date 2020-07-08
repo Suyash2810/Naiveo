@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ToastController, AlertController } from '@ionic/angular';
+import { UserService } from '../user-profile/user-profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class PlacesService {
   private _place = new Subject<Place>();
 
   constructor(private authService: AuthService, private httpClient: HttpClient, private toastController: ToastController,
-    private alertController: AlertController) { }
+    private alertController: AlertController, private profileService: UserService) { }
 
   fetchPlaces() {
 
@@ -152,6 +153,8 @@ export class PlacesService {
           });
 
           toast.present();
+          const userId = this.authService.getUserId();
+          this.profileService.addOffer(userId, response.result._id);
         }
       }, async error => {
         const alert = await this.alertController.create({

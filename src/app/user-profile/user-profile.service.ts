@@ -124,7 +124,27 @@ export class UserService {
     addOffer(id: string, offerId: string) {
 
         type responseType = { status: string };
+        console.log(id, offerId);
 
-        return this.httpClient.patch<responseType>("http://localhost:3000/addOffer" + id, { offerId });
+        this.httpClient.patch<responseType>("http://localhost:3000/addOffer/" + id, { offerId })
+            .subscribe(
+                async response => {
+                    const toast = await this.toastController.create({
+                        duration: 2000,
+                        message: response.status
+                    });
+
+                    await toast.present();
+                },
+                async () => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        message: "Offers list could not be updated.",
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
+                }
+            );
     }
 }
