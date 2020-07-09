@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../user-profile.service';
 import { Subscription } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class DetailPagePage implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private profileService: UserService,
     private alertController: AlertController, private authService: AuthService,
-    private toastController: ToastController) { }
+    private toastController: ToastController, private navController: NavController) { }
 
   ngOnInit() {
     this.activeUserId = this.authService.getUserId();
@@ -90,6 +90,10 @@ export class DetailPagePage implements OnInit, OnDestroy {
           alert.present();
         }
       );
+  }
+
+  navigateBack() {
+    this.navController.navigateBack('/user')
   }
 
   ngOnDestroy() {

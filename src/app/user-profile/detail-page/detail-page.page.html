@@ -1,14 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Detail</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/user"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-grid>
+  <ion-grid class="detail-header">
+    <ion-row>
+      <ion-col size="12">
+        <div class="detail-header__container">
+          <span class="detail-header__back-button" (click)="navigateBack()">
+            <ion-icon slot="start" name="arrow-back"></ion-icon>
+          </span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="detail_data">
     <ion-row>
       <ion-col size="12">
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>

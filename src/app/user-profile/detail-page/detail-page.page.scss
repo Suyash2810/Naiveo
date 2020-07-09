@@ -1,0 +1,40 @@
+ion-content {
+    ion-grid {
+        ion-row {
+            ion-col {}
+        }
+    }
+}
+
+.detail-header {
+    padding: 0 !important;
+    height: 35vh;
+
+    ion-row {
+        height: 100%;
+
+        ion-col {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0 !important;
+            height: 100%;
+        }
+    }
+
+    &__container {
+        background-image: linear-gradient(to right, var(--ion-color-primary), var(--ion-color-tertiary));
+        height: 100%;
+        clip-path: circle(81.5% at 50% -10%);
+    }
+
+    &__back-button {
+        color: white;
+
+        ion-icon {
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+    }
+}
