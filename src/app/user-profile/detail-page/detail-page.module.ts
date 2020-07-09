@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DetailPagePageRoutingModule } from './detail-page-routing.module';
 
 import { DetailPagePage } from './detail-page.page';
+import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spinner.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetailPagePageRoutingModule
+    DetailPagePageRoutingModule,
+    LoadingSpinnerModule
   ],
   declarations: [DetailPagePage]
 })
-export class DetailPagePageModule {}
+export class DetailPagePageModule { }

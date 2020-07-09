@@ -13,10 +13,11 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class DetailPagePage implements OnInit, OnDestroy {
 
-  guide: any;
+  userinfo: any;
   id: string;
   activeUserId: string;
   guideSubscription: Subscription;
+  isLoading: boolean = true;
 
   constructor(private route: ActivatedRoute, private profileService: UserService,
     private alertController: AlertController, private authService: AuthService,
@@ -30,7 +31,9 @@ export class DetailPagePage implements OnInit, OnDestroy {
         this.id = params['id'];
         this.guideSubscription = this.profileService.fetchUserInfo(this.id).subscribe(
           (response) => {
-            this.guide = response.info;
+            this.userinfo = response.info[0];
+            this.isLoading = false;
+            console.log(this.userinfo);
           },
           async error => {
             const alert = await this.alertController.create({

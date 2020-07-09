@@ -1,16 +1,25 @@
 <ion-content>
-  <ion-grid class="detail-header">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <ion-grid class="detail-header" *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12">
         <div class="detail-header__container">
           <span class="detail-header__back-button" (click)="navigateBack()">
             <ion-icon slot="start" name="arrow-back"></ion-icon>
           </span>
+          <span class="detail-header__center-text">
+            <h4>Profile</h4>
+          </span>
+          <span class="detail-header__avatar">
+            <ion-avatar>
+              <img [src]="userinfo.user.image">
+            </ion-avatar>
+          </span>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid class="detail_data">
+  <ion-grid class="detail_data" *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12">
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
