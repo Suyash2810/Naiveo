@@ -31,8 +31,8 @@
 
           <ion-item>
             <ion-label position="floating">Description</ion-label>
-            <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." id="description" name="description"
-              ngModel #description="ngModel" required></ion-textarea>
+            <ion-textarea rows="6" cols="20" placeholder="Tell us about yourself." id="description" name="description"
+              maxLength="60" ngModel #description="ngModel" required></ion-textarea>
           </ion-item>
           <p *ngIf="description.touched && !description.valid" class="error_message">
             <ion-text color="danger">

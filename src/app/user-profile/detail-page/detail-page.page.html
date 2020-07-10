@@ -27,7 +27,7 @@
           <span class="detail-data__email">{{userinfo.user.email}}</span>
         </div>
         <div class="detail-data__description">
-          <span>{{userinfo.description}}</span>
+          <span>{{userinfo.description | limitChars:60}}</span>
         </div>
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="unfollow()">Unfollow</ion-button>

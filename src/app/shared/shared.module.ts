@@ -1,12 +1,15 @@
 import { NgModule } from "@angular/core";
 import { FilterPipe } from './filter.pipe';
+import { LimitCharsPipe } from './limit-chars.pipe';
 
 @NgModule({
     declarations: [
-        FilterPipe
+        FilterPipe,
+        LimitCharsPipe
     ],
     exports: [
-        FilterPipe
+        FilterPipe,
+        LimitCharsPipe
     ]
 })
 
