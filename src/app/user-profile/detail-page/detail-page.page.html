@@ -19,9 +19,16 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-grid class="detail_data" *ngIf="!isLoading">
+  <ion-grid class="detail-data" *ngIf="!isLoading">
     <ion-row>
       <ion-col size="12">
+        <div class="detail-data__header">
+          <span class="detail-data__name">{{userinfo.user.name}}</span>
+          <span class="detail-data__email">{{userinfo.user.email}}</span>
+        </div>
+        <div class="detail-data__description">
+          <span>{{userinfo.description}}</span>
+        </div>
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
         <ion-button *ngIf="id != activeUserId" color="primary" (click)="unfollow()">Unfollow</ion-button>
       </ion-col>
