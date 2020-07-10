@@ -29,8 +29,21 @@
         <div class="detail-data__description">
           <span>{{userinfo.description | limitChars:60}}</span>
         </div>
-        <ion-button *ngIf="id != activeUserId" color="primary" (click)="follow()">Follow</ion-button>
-        <ion-button *ngIf="id != activeUserId" color="primary" (click)="unfollow()">Unfollow</ion-button>
+        <div class="detail-data__buttons">
+          <div *ngIf="id != activeUserId">
+            <ion-chip (click)="follow()" outline color="danger" class="detail-data__chips detail-data__chips--1">
+              <ion-label>Follow</ion-label>
+            </ion-chip>
+            <!-- <ion-chip (click)="unfollow()" outline color="danger" class="detail-data__chips detail-data__chips--2">
+              <ion-label>Unfollow</ion-label>
+            </ion-chip> -->
+          </div>
+          <div>
+            <ion-chip outline color="danger" class="detail-data__chips detail-data__chips--3">
+              <ion-label>Message</ion-label>
+            </ion-chip>
+          </div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
