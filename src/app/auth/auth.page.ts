@@ -15,7 +15,7 @@ export class AuthPage implements OnInit {
   @ViewChild('f', { static: false }) form: NgForm;
   isLogin: boolean = true;
   file: File;
-  imagePreview: string = "https://images.pexels.com/photos/2947917/pexels-photo-2947917.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+  imagePreview: string = "assets/img/upload_image.png";
   asUser: boolean = true;
 
   constructor(private authService: AuthService, private router: Router, private loadingCntrl: LoadingController,

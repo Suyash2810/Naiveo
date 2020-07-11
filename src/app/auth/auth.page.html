@@ -9,6 +9,13 @@
     <ion-segment-button value="sign-in">Sign In</ion-segment-button>
     <ion-segment-button value="sign-up">Sign Up</ion-segment-button>
   </ion-segment>
+  <ion-grid fixed *ngIf="isLogin">
+    <ion-row>
+      <ion-col size="12">
+        <ion-img [src]="'assets/img/login.png'"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="isLogin">
     <ion-grid>
       <ion-row>
@@ -32,10 +39,10 @@
   </form>
 
 
-  <ion-grid class="sign-up-form-grid">
+  <ion-grid class="sign-up-form-grid" *ngIf="!isLogin">
     <ion-row>
       <ion-col size-md="8" offset-md="2">
-        <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLogin">
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
           <div class="image-block">
             <ion-img [src]="imagePreview">
             </ion-img>
