@@ -134,4 +134,26 @@ ion-content {
             color: white;
         }
     }
+
+    &__connections {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 80%;
+        margin: 5% auto;
+
+        .heading,
+        .data {
+            display: block;
+        }
+
+        .heading {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+        }
+
+        .data {
+            text-align: center;
+        }
+    }
 }

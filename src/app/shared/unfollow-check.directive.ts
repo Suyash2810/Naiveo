@@ -11,7 +11,9 @@ export class UnfollowCheckDirective {
   @Input() set appUnfollowCheck(list: Array<any>) {
     const id = this.authService.getUserId();
     list = list.map(item => item._id);
-    if (list.indexOf(id) >= -1) {
+    if (list.length == 0) {
+      this.viewContRef.clear();
+    } else if (list.indexOf(id) > -1) {
       this.viewContRef.createEmbeddedView(this.tempRef);
     } else {
       this.viewContRef.clear();
