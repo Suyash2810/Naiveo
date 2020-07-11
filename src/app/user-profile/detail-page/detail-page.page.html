@@ -31,12 +31,14 @@
         </div>
         <div class="detail-data__buttons">
           <div *ngIf="id != activeUserId">
-            <ion-chip (click)="follow()" outline color="danger" class="detail-data__chips detail-data__chips--1">
+            <ion-chip *appFollowCheck="userinfo.followers" (click)="follow()" outline color="danger"
+              class="detail-data__chips detail-data__chips--1">
               <ion-label>Follow</ion-label>
             </ion-chip>
-            <!-- <ion-chip (click)="unfollow()" outline color="danger" class="detail-data__chips detail-data__chips--2">
+            <ion-chip *appUnfollowCheck="userinfo.followers" (click)="unfollow()" outline color="danger"
+              class="detail-data__chips detail-data__chips--2">
               <ion-label>Unfollow</ion-label>
-            </ion-chip> -->
+            </ion-chip>
           </div>
           <div>
             <ion-chip outline color="danger" class="detail-data__chips detail-data__chips--3">
