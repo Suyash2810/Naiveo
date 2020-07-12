@@ -18,6 +18,7 @@ export class DetailPagePage implements OnInit, OnDestroy {
   activeUserId: string;
   guideSubscription: Subscription;
   isLoading: boolean = true;
+  slideOpts: any;
 
   constructor(private route: ActivatedRoute, private profileService: UserService,
     private alertController: AlertController, private authService: AuthService,

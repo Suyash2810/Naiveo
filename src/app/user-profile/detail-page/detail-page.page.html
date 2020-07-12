@@ -51,6 +51,9 @@
           <div><span class="data">{{userinfo.following.length}}</span><span class="heading">Following</span></div>
           <div><span class="data">{{userinfo.followers.length}}</span><span class="heading">Followers</span></div>
         </div>
+        <div class="detail-data__offers">
+          <app-slides [offers]="userinfo.offers"></app-slides>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

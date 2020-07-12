@@ -9,7 +9,7 @@ import { DetailPagePageRoutingModule } from './detail-page-routing.module';
 import { DetailPagePage } from './detail-page.page';
 import { LoadingSpinnerModule } from 'src/app/shared/loading-spinner/loading-spinner.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { LimitCharsPipe } from 'src/app/shared/limit-chars.pipe';
+import { SlidesComponent } from './slides/slides.component';
 
 @NgModule({
   imports: [
@@ -20,6 +20,6 @@ import { LimitCharsPipe } from 'src/app/shared/limit-chars.pipe';
     LoadingSpinnerModule,
     SharedModule
   ],
-  declarations: [DetailPagePage]
+  declarations: [DetailPagePage, SlidesComponent]
 })
 export class DetailPagePageModule { }
