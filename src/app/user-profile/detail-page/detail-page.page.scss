@@ -156,4 +156,19 @@ ion-content {
             text-align: center;
         }
     }
+
+    &__offers {
+        margin-top: 3%;
+    }
+
+    &__slides-header-box {
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 5%;
+
+        span {
+            font-size: 1rem;
+            color: var(--ion-color-tomato-red);
+        }
+    }
 }

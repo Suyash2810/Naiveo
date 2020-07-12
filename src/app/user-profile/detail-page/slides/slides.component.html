@@ -1,20 +1,10 @@
 <ion-slides pager="true" [options]="slideOpts">
-  <ion-slide>
-    <h1>Slide 1</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 2</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 3</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 4</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 5</h1>
-  </ion-slide>
-  <ion-slide>
-    <h1>Slide 6</h1>
+  <ion-slide *ngFor="let offer of offers">
+    <ion-img [src]="offer.imageUrl"></ion-img>
+    <div class="data-box">
+      <span class="data-box__title">{{offer.title}}</span>
+      <span class="data-box__subtitle">{{offer.availableFrom | date:mediumDate}} -
+        {{offer.availableTill | date:mediumDate}}</span>
+    </div>
   </ion-slide>
 </ion-slides>

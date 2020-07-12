@@ -1,0 +1,28 @@
+ion-slides {
+    width: 90%;
+    position: relative;
+
+    ion-img {
+        width: 100% !important;
+    }
+
+    .data-box {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+
+        span {
+            display: block;
+        }
+
+        &__title {
+            font-weight: bolder;
+        }
+
+        &__subtitle {
+            font-size: 0.7rem;
+        }
+    }
+}

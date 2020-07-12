@@ -51,7 +51,10 @@
           <div><span class="data">{{userinfo.following.length}}</span><span class="heading">Following</span></div>
           <div><span class="data">{{userinfo.followers.length}}</span><span class="heading">Followers</span></div>
         </div>
-        <div class="detail-data__offers">
+        <div class="detail-data__offers" *ngIf="userinfo.user.identity!='user'">
+          <div class="detail-data__slides-header-box">
+            <span>My Offers</span>
+          </div>
           <app-slides [offers]="userinfo.offers"></app-slides>
         </div>
       </ion-col>
