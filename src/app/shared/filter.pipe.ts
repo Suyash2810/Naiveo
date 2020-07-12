@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform {
 
     let filteredList = list.filter((item) => {
       let name = (item[key]).toLowerCase();
-      return name.indexOf(value) > -1;
+      return name.indexOf(value.toLowerCase()) > -1;
     });
 
     return filteredList;

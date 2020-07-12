@@ -57,6 +57,7 @@ app.delete('/place/:id', authorization, placeController.deletePlace);
 app.post('/booking', authorization, bookingController.saveBooking);
 app.get('/bookings', authorization, bookingController.getBookings);
 app.delete("/booking/:id", authorization, bookingController.deleteBooking);
+app.get('/bookings/:id', authorization, bookingController.getBookingsByUserId);
 
 // ------------------------------------------Review Requests------------------------------------------->
 

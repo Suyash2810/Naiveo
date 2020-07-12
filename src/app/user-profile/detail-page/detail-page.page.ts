@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { AlertController, ToastController, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Bookable } from 'src/app/bookings/booking.model';
+import { BookingService } from 'src/app/bookings/booking.service';
 
 @Component({
   selector: 'app-detail-page',
@@ -18,11 +20,13 @@ export class DetailPagePage implements OnInit, OnDestroy {
   activeUserId: string;
   guideSubscription: Subscription;
   isLoading: boolean = true;
-  slideOpts: any;
+  bookings: Array<Bookable> = [];
+  bookingSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private profileService: UserService,
     private alertController: AlertController, private authService: AuthService,
-    private toastController: ToastController, private navController: NavController) { }
+    private toastController: ToastController, private navController: NavController,
+    private bookingService: BookingService) { }
 
   ngOnInit() {
     this.activeUserId = this.authService.getUserId();
@@ -33,8 +37,16 @@ export class DetailPagePage implements OnInit, OnDestroy {
         this.guideSubscription = this.profileService.fetchUserInfo(this.id).subscribe(
           (response) => {
             this.userinfo = response.info[0];
-            this.isLoading = false;
-            console.log(this.userinfo);
+            if (this.userinfo.user.identity == "user") {
+              this.bookingService.getBookingsByUserId(this.id);
+              this.bookingSubscription = this.bookingService._getBookings().subscribe(
+                (bookings: Bookable[]) => {
+                  this.bookings = bookings;
+                  this.isLoading = false;
+                  console.log(this.bookings);
+                }
+              )
+            } else { this.isLoading = false; }
           },
           async error => {
             const alert = await this.alertController.create({
@@ -48,6 +60,8 @@ export class DetailPagePage implements OnInit, OnDestroy {
         )
       }
     );
+
+
   }
 
   follow() {
@@ -102,5 +116,6 @@ export class DetailPagePage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.guideSubscription.unsubscribe();
+    this.bookingSubscription.unsubscribe();
   }
 }

@@ -74,6 +74,60 @@ export class BookingService {
             );
     }
 
+    getBookingsByUserId(id: string) {
+        type responseType = { status: string, result: any };
+
+        this.httpClient.get<responseType>("http://localhost:3000/bookings/" + id)
+            .pipe(
+                map(
+                    response => {
+                        const bookings = response.result;
+
+                        return bookings.map(booking => {
+                            return {
+                                id: booking._id,
+                                placeId: booking.placeId,
+                                userId: booking.userId,
+                                title: booking.title,
+                                imageUrl: booking.imageUrl,
+                                first_name: booking.first_name,
+                                last_name: booking.last_name,
+                                bookedFrom: booking.bookedFrom,
+                                bookedTill: booking.bookedTill,
+                                guests: booking.guests,
+                                locations: booking.locations.map(
+                                    location => {
+                                        return {
+                                            id: location._id,
+                                            name: location.name,
+                                            price: location.price
+                                        }
+                                    }
+                                ),
+                                cost: booking.cost
+                            }
+                        });
+                    }
+                )
+            )
+            .subscribe(
+                bookings => {
+                    this.bookings = bookings;
+                    this._bookings.next(this.bookings);
+                },
+                async error => {
+                    const alert = await this.alertController.create({
+                        header: 'Error',
+                        subHeader: 'An error has occured.',
+                        message: error.error,
+                        buttons: ['OK']
+                    });
+
+                    await alert.present();
+                }
+            );
+    }
+
     getBookings() {
         return this.bookings;
     }

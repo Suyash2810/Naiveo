@@ -32,6 +32,25 @@ const getBookings = async (request, response) => {
     }
 }
 
+const getBookingsByUserId = async (request, response) => {
+
+    try {
+        const id = request.params.id;
+        const result = await Booking.find({
+            userId: id
+        });
+        if (result.length >= 0) {
+            response.status(200).send({
+                status: "Bookings have been fetched.",
+                result: result
+            });
+        } else
+            throw "Bookings could not be fetched!";
+    } catch (e) {
+        response.status(404).send(e);
+    }
+}
+
 const saveBooking = async (request, response) => {
 
     try {
@@ -82,5 +101,6 @@ const deleteBooking = async (request, response) => {
 module.exports = {
     getBookings,
     saveBooking,
-    deleteBooking
+    deleteBooking,
+    getBookingsByUserId
 }
