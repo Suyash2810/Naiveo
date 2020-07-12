@@ -3,8 +3,10 @@
     <ion-img [src]="offer.imageUrl"></ion-img>
     <div class="data-box">
       <span class="data-box__title">{{offer.title}}</span>
-      <span class="data-box__subtitle">{{offer.availableFrom | date:mediumDate}} -
+      <span class="data-box__subtitle" *ngIf="person!='user'">{{offer.availableFrom | date:mediumDate}} -
         {{offer.availableTill | date:mediumDate}}</span>
+      <span class="data-box__subtitle" *ngIf="person=='user'">{{offer.bookedFrom | date:mediumDate}} -
+        {{offer.bookedTill | date:mediumDate}}</span>
     </div>
   </ion-slide>
 </ion-slides>

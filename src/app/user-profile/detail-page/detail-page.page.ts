@@ -43,7 +43,6 @@ export class DetailPagePage implements OnInit, OnDestroy {
                 (bookings: Bookable[]) => {
                   this.bookings = bookings;
                   this.isLoading = false;
-                  console.log(this.bookings);
                 }
               )
             } else { this.isLoading = false; }
@@ -116,6 +115,8 @@ export class DetailPagePage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.guideSubscription.unsubscribe();
-    this.bookingSubscription.unsubscribe();
+    if (this.bookingSubscription) {
+      this.bookingSubscription.unsubscribe();
+    }
   }
 }

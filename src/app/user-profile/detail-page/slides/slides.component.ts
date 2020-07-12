@@ -9,12 +9,13 @@ export class SlidesComponent implements OnInit {
 
   slideOpts: any;
   @Input() offers: any;
+  @Input() person: string;
 
   constructor() { }
 
   ngOnInit() {
 
-    console.log(this.offers);
+    console.log(this.offers, this.person);
 
     this.slideOpts = {
       on: {
