@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Platform, MenuController, NavController, ModalController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Plugins, Capacitor } from '@capacitor/core';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user.model';
 import { Router } from '@angular/router';
@@ -18,8 +17,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     private authService: AuthService,
     private menu: MenuController,
     private navController: NavController,
@@ -35,8 +32,9 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      if (Capacitor.isPluginAvailable('SplashScreen')) {
+        Plugins.SplashScreen.hide();
+      }
     });
   }
 
