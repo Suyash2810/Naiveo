@@ -1,16 +1,51 @@
 # Naiveo
 
-Naiveo is a **Mobile Application** built using *Ionic 5*, *AngularJS*, *NodeJs* and *MongoDB*. It is a _simple_ and _fast_ app with _beautiful_, _user_friendly_ and _responive layout_. 
-
+Naiveo is a **Mobile Application** built using *Ionic 5*, *AngularJS*, *NodeJs* and *MongoDB*. It is a _simple_ and _fast_ app with _beautiful_, _user_friendly_ and _responsive layout_. This app is built with the purpose of connecting the tourists with the tour guides of the place that they are visiting such that the task of searching for a tour guide becomes not only **trouble-free** but also **swift and effortless**.
 
 ## Description
 
-Discover             |  Places
-:-------------------------:|:-------------------------:
-![Home](src/assets/readme_images/main_page_1.png)  |  ![Home](src/assets/readme_images/main_page_2.png)
+Naiveo allows one to create two kinds of accounts. One as a **Guide** and other as a **tourist**. The tour guides can create offers for providing tours of a particular place that are only valid for a specific period of time. The tourists can book these tours and have an **assisted**, **organized** and most importantly **informational** tour of the respective place.
+
+Discover             |  Places             |  Bookable Places
+:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/main_page_1.png)  |  ![Home](src/assets/readme_images/main_page_2.png)  |  ![Home](src/assets/readme_images/bookable.png)
+
+### Ionic Framework
+
+Ionic is an HTML5 mobile app development framework targeted at building hybrid mobile apps. Hybrid apps are essentially small websites running in a browser shell in an app that have access to the native platform layer. Hybrid apps have many benefits over pure native apps, specifically in terms of platform support, speed of development, and access to 3rd party code.
+
+Think of Ionic as the front-end UI framework that handles all of the look and feel and UI interactions your app needs in order to be compelling. Kind of like “Bootstrap for Native,” but with support for a broad range of common native mobile components, slick animations, and beautiful design.
+
+Since Ionic is an HTML5 framework, it needs a native wrapper like Cordova in order to run as a native app. In this project however **Capacitor** is used. Like Cordova, Capacitor also wraps the web app or containerizes the web app and provides consistent access to Native APIs for every platform that app runs on. Ionic apps use Capacitor much like Cordova to seamlessly run your app across a variety of platforms without platform-specific code. Therefore capacitor offers the same cross-platform benefits like Cordova but it provides a more modern approach to mobile application development with access to various native device features taking advantage of the latest Web APIs and native platform capabilities.
+
+
+### Sign-in and Sign-up Page
+
+Authentication and Authorization
+
+To access the features of the app one will need to create an account. Effective measures have been taken to encrypt the user data like passwords. Only the authorized users will only be able to access the various features of this app.
+
+Sign In             |  Sign Up             |  Login            |  Home
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/sign_in.png)  |  ![Home](src/assets/readme_images/sign_up.png)  |  ![Home](src/assets/readme_images/login_info.png)  |  ![Home](src/assets/readme_images/login_redirect.png)
 
 ### Discover Page
 
+This page shows the various places for which the offers have been made and the list of places that are bookable for a particular user based on a set of parameters. 
+
+#### Place Detail and Reviews
+
+On the discover page, we can view the details of a particular place for which the offer was created by a specific guide. Further the user can see the reviews for the place as well as the rating. The user can give his own review for the tour given by the guide for the particular place for which he created the offer.
+
+Place Detail              |  Place Detail              |  Reviews            |  Reviews
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/place_detail1.png)  |  ![Home](src/assets/readme_images/place_detail2.png)  |  ![Home](src/assets/readme_images/reviews1.png)  |  ![Home](src/assets/readme_images/reviews2.png)
+
+One can also edit their own review after it has been posted. Further if needed the review can also be deleted. Ofcourse only personal reviews can be deleted or edited.
+
+Edit Review             |  Edit Review             |  Delete Review
+:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/edit_review1.png)  |  ![Home](src/assets/readme_images/edit_review2.png)  |  ![Home](src/assets/readme_images/delete_review.png)
 
 
 ## Getting Started
