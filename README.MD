@@ -1,6 +1,6 @@
 # Naiveo
 
-Naiveo is a **Mobile Application** built using *Ionic 5*, *AngularJS*, *NodeJs* and *MongoDB*. It is a _simple_ and _fast_ app with _beautiful_, _user_friendly_ and _responsive layout_. This app is built with the purpose of connecting the tourists with the tour guides of the place that they are visiting such that the task of searching for a tour guide becomes not only **trouble-free** but also **swift and effortless**.
+Naiveo is a **Mobile Application** built using *Ionic 5*, *AngularJS*, *NodeJs* and *MongoDB*. It is a _simple_ and _fast_ app with _beautiful_, _user_friendly_ and _responsive layout_. I have independantly built this app with the purpose of connecting the tourists with the tour guides of the place that they are visiting such that the task of searching for a tour guide becomes not only **trouble-free** but also **swift and effortless**.
 
 ## Description
 
@@ -37,9 +37,11 @@ This page shows the various places for which the offers have been made and the l
 
 On the discover page, we can view the details of a particular place for which the offer was created by a specific guide. Further the user can see the reviews for the place as well as the rating. The user can give his own review for the tour given by the guide for the particular place for which he created the offer.
 
-Place Detail              |  Place Detail              |  Reviews            |  Reviews
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![Home](src/assets/readme_images/place_detail1.png)  |  ![Home](src/assets/readme_images/place_detail2.png)  |  ![Home](src/assets/readme_images/reviews1.png)  |  ![Home](src/assets/readme_images/reviews2.png)
+Further the guide can delete their offer that was made if required. 
+
+Place Detail              |  Place Detail              |  Place Delete              |  Reviews            |  Reviews
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/place_detail1.png)  |  ![Home](src/assets/readme_images/place_detail2.png)  |  ![Home](src/assets/readme_images/delete_place.png)  |  ![Home](src/assets/readme_images/reviews1.png)  |  ![Home](src/assets/readme_images/reviews2.png)
 
 One can also edit their own review after it has been posted. Further if needed the review can also be deleted. Ofcourse only personal reviews can be deleted or edited.
 
@@ -47,6 +49,19 @@ Edit Review             |  Edit Review             |  Delete Review
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Home](src/assets/readme_images/edit_review1.png)  |  ![Home](src/assets/readme_images/edit_review2.png)  |  ![Home](src/assets/readme_images/delete_review.png)
 
+#### Book Place
+
+The user can make a booking for a particular offer as can be seen in the images below.
+
+Book Place             |  Action Sheet             |  Enter Info.            |  Choose date for tour
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/book1.png)  |  ![Home](src/assets/readme_images/book2.png)  |  ![Home](src/assets/readme_images/book3.png)  |  ![Home](src/assets/readme_images/book4.png)
+
+All the bookings that are made are accessible through the side menu.
+
+Side Menu              |  Side Menu Slide              |  Booked Places              |  Booked Places            |  Delete Booking
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/sidemenu1.png)  |  ![Home](src/assets/readme_images/sidemenu2.png)  |  ![Home](src/assets/readme_images/booked_places1.png)  |  ![Home](src/assets/readme_images/booked_places2.png)  |  ![Home](src/assets/readme_images/booked_places3.png)
 
 ## Getting Started
 
