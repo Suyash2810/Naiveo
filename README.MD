@@ -74,6 +74,23 @@ Offers            |  Edit Offer             |  New Offer            |  New Offer
 Submit Issue             |  Issues             |  Resolve Issue
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Home](src/assets/readme_images/submit_issue.png)  |  ![Home](src/assets/readme_images/issues.png)  |  ![Home](src/assets/readme_images/issue_resolve.png)
+
+### Profile and other
+
+The user whosoever it is can further set up additional information about them. Through the search page one can search for various guides and follow them. The user can also have a look at their profile which gives detailed information about them. 
+
+Profile              |  Search              |  Filter              |  Following            |  Followers
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/profile_menu.png)  |  ![Home](src/assets/readme_images/search.png)  |  ![Home](src/assets/readme_images/filter.png)  |  ![Home](src/assets/readme_images/following.png)  |  ![Home](src/assets/readme_images/followers.png)
+
+Profile              |  Settings              |  Settings              |  Detail Page            |  Detail Page
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/profile.png)  |  ![Home](src/assets/readme_images/settings1.png)  |  ![Home](src/assets/readme_images/settings2.png)  |  ![Home](src/assets/readme_images/detail_page1.png)  |  ![Home](src/assets/readme_images/detail_page2.png)
+
+Detail Page              |  Detail Page              |  Detail Page              |  Detail Page            |  Detail Page
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/detail_page3.png)  |  ![Home](src/assets/readme_images/detail_page4.png)  |  ![Home](src/assets/readme_images/detail_page5.png)  |  ![Home](src/assets/readme_images/detail_page6.png)  |  ![Home](src/assets/readme_images/detail_page7.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
