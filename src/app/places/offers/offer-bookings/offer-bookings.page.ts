@@ -52,7 +52,6 @@ export class OfferBookingsPage implements OnInit, OnDestroy {
             this.issueSubscription = this.issueService.getPopulatedIssues().subscribe(
               (issues: Array<any>) => {
                 this.issues = issues;
-                console.log(this.issues);
               },
               async () => {
                 const alert = this.alertController.create({

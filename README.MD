@@ -63,6 +63,17 @@ Side Menu              |  Side Menu Slide              |  Booked Places         
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![Home](src/assets/readme_images/sidemenu1.png)  |  ![Home](src/assets/readme_images/sidemenu2.png)  |  ![Home](src/assets/readme_images/booked_places1.png)  |  ![Home](src/assets/readme_images/booked_places2.png)  |  ![Home](src/assets/readme_images/booked_places3.png)
 
+### Offers Page
+
+This Page is displayed differently to guides and tourists. The guides can view all the offers that have been made, create their own offers and also edit them if required. The tourists however can access this page to express issues faced regarding the offers and the guides then can view the issues that have been posted and try to resolve them.
+
+Offers            |  Edit Offer             |  New Offer            |  New Offer
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/offers.png)  |  ![Home](src/assets/readme_images/offers_edit.png)  |  ![Home](src/assets/readme_images/new_offer1.png)  |  ![Home](src/assets/readme_images/new_offer2.png)
+
+Submit Issue             |  Issues             |  Resolve Issue
+:-------------------------:|:-------------------------:|:-------------------------:
+![Home](src/assets/readme_images/submit_issue.png)  |  ![Home](src/assets/readme_images/issues.png)  |  ![Home](src/assets/readme_images/issue_resolve.png)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

@@ -55,6 +55,7 @@ export class AuthPage implements OnInit {
   onSubmit() {
     if (this.isLogin == true) {
       this.authService.login(this.form.value.email, this.form.value.password);
+      this.form.reset();
     } else {
       this.loadingCntrl.create({
         keyboardClose: true,
