@@ -119,16 +119,24 @@ This will install all the dependencies that are required by the project to run. 
 4. Open the browser and open localhost:8100 to open the Ionic App.
 ```
 
+To run the app in an emulator, follow the instructions given below(the instructions below are given for android, for more details visit [here](https://capacitorjs.com/)):
+
+```
+1. Open the command terminal in the directory of the project, and run the command 'ng build' to build the project.
+2. Run the command 'ionic capacitor add android'.
+3. Run the command 'ionic capacitor copy android'
+4. Or instead of the above mentioned steps just run the command 'ionic capacitor run android'. It will do all the work.
+5. Open the android project in Android Studio and run it using an emulator.
+```
 
 ## Built With
 
-* NodeJS 
 * MongoDB
+* Express
 * Angular
+* NodeJS 
 * Ionic 5
 
-## Authors
+## Author
 
 * **Suyash Awasthi** - *Initial work* - [suyash2810](https://github.com/suyash2810)
-
-## License
